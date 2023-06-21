@@ -1,0 +1,16 @@
+# React and Next.js files
+
+.next
+next-env.d.ts
+
+# Vercel files
+
+.vercel
+
+# Jest files
+
+coverage
+
+# Dependency directories
+
+node_modules

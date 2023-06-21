@@ -1,0 +1,43 @@
+{
+  "name": "react-template",
+  "short_name": "react-template",
+  "description": "Description for the webmanifest file.",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#FFFFFF",
+  "lang": "en-EN",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "favicons/nextjs-16x16.svg",
+      "type": "image/svg+xml",
+      "sizes": "16x16"
+    },
+    {
+      "src": "favicons/nextjs-32x32.svg",
+      "type": "image/svg+xml",
+      "sizes": "32x32"
+    },
+    {
+      "src": "favicons/nextjs-32x32.svg",
+      "type": "image/svg+xml",
+      "sizes": "48x48"
+    },
+    {
+      "src": "favicons/nextjs-144x144.svg",
+      "type": "image/svg+xml",
+      "sizes": "144x144"
+    },
+    {
+      "src": "favicons/nextjs-192x192.svg",
+      "type": "image/svg+xml",
+      "sizes": "192x192"
+    },
+    {
+      "src": "favicons/nextjs-512x512.svg",
+      "type": "image/svg+xml",
+      "sizes": "512x512"
+    }
+  ]
+}

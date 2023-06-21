@@ -1,0 +1,40 @@
+{
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "*.d.ts",
+    ".*.ts",
+    "cypress/*.d.ts",
+    ".next/types/**/*.ts",
+    "postcss.config.js"
+  ],
+  "exclude": ["node_modules", ".next"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"],
+      "~/*": ["./*"]
+    },
+    "types": ["node"],
+    "target": "ES5",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "jsx": "preserve"
+  }
+}

@@ -1,0 +1,11 @@
+# React and Next.js files
+
+.next
+
+# Vercel files
+
+.vercel
+
+# Dependency directories
+
+node_modules

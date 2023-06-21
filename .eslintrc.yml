@@ -1,0 +1,25 @@
+extends:
+  - 'plugin:@typescript-eslint/recommended'
+  - 'next'
+  - 'next/core-web-vitals'
+
+plugins:
+  - '@typescript-eslint'
+  - 'prettier'
+  - 'cypress'
+  - 'jest'
+
+parser: '@typescript-eslint/parser'
+
+rules:
+  quotes:
+    - error
+    - single
+  quote-props:
+    - error
+    - consistent
+  prettier/prettier:
+    - error
+    - singleQuote: true
+  import/no-anonymous-default-export:
+    - off
