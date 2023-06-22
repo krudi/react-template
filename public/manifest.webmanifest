@@ -1,10 +1,10 @@
 {
-  "name": "react-template",
-  "short_name": "react-template",
-  "description": "Description for the webmanifest file.",
-  "start_url": ".",
+  "name": "Blog application",
+  "short_name": "Blog app",
+  "description": "Blog site built with React and Next.js, using latest Next.js features.",
+  "start_url": "/",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#171717",
   "background_color": "#FFFFFF",
   "lang": "en-EN",
   "orientation": "any",
@@ -12,32 +12,38 @@
     {
       "src": "favicons/nextjs-16x16.svg",
       "type": "image/svg+xml",
-      "sizes": "16x16"
+      "sizes": "16x16",
+      "purpose": "any maskable"
     },
     {
       "src": "favicons/nextjs-32x32.svg",
       "type": "image/svg+xml",
-      "sizes": "32x32"
+      "sizes": "32x32",
+      "purpose": "any maskable"
     },
     {
       "src": "favicons/nextjs-32x32.svg",
       "type": "image/svg+xml",
-      "sizes": "48x48"
+      "sizes": "48x48",
+      "purpose": "any maskable"
     },
     {
       "src": "favicons/nextjs-144x144.svg",
       "type": "image/svg+xml",
-      "sizes": "144x144"
+      "sizes": "144x144",
+      "purpose": "any maskable"
     },
     {
       "src": "favicons/nextjs-192x192.svg",
       "type": "image/svg+xml",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose": "any maskable"
     },
     {
-      "src": "favicons/nextjs-512x512.svg",
-      "type": "image/svg+xml",
-      "sizes": "512x512"
+      "src": "favicons/nextjs-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
     }
   ]
 }
