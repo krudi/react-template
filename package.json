@@ -31,7 +31,7 @@
   "funding": [
     {
       "type": "individual",
-      "url": "http://example.com/donate/"
+      "url": "http://example.com/donate"
     }
   ],
   "engines": {
