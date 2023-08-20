@@ -6,7 +6,7 @@
     "**/*.d.ts",
     "components/**/*.tsx"
   ],
-  "exclude": ["node_modules", "cypress/**/*.ts", ".next"],
+  "exclude": ["node_modules", ".next"],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {

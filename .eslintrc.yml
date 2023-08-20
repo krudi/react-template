@@ -6,7 +6,6 @@ extends:
 plugins:
   - '@typescript-eslint'
   - 'prettier'
-  - 'cypress'
   - 'jest'
 
 parser: '@typescript-eslint/parser'
