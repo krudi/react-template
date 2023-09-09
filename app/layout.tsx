@@ -110,12 +110,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en" dir="ltr" className={roboto.className}>
       <head />
       <body>
-        <div className="container mx-auto">
+        <div className="container">
           <Navigation />
 
           <Header />
 
-          <main className="my-10 p-5 border-1 border-gray-300">
+          <main className="main">
             {children}
           </main>
 

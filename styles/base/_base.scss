@@ -1,0 +1,20 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  line-height: 1.5;
+  text-size-adjust: 100%;
+  font-family: system-ui, -apple-system, "Segoe UI", roboto, helvetica, arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+a {
+  color: $c-gray;
+  font-size: $fs-1;
+}
+
+a:hover,
+a:focus {
+  color: $c-gray-dark;
+}

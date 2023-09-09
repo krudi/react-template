@@ -1,0 +1,34 @@
+.navigation {
+  width: 100%;
+  min-height: 5rem;
+  margin-bottom: $spacer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navigation-logo {
+  margin-bottom: 0;
+  padding-inline: 1rem;
+  padding-block: 0.5rem;
+  background-color: $c-primary;
+  display: flex;
+}
+
+.navigation-logo-link {
+  text-decoration: none;
+  color: $c-white;
+}
+
+.navigation-logo-link:hover,
+.navigation-logo-link:focus {
+  color: $c-white;
+}
+
+.navigation-list {
+  margin: 0;
+  padding: 0;
+  display: inline-flex;
+  gap: $spacer;
+  list-style: none;
+}

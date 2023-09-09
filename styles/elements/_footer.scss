@@ -1,0 +1,14 @@
+.footer {
+  width: 100%;
+  min-height: 5rem;
+  padding: 1rem;
+  margin-top: $spacer;
+  background-color: $c-primary;
+  display: flex;
+  align-items: center;
+}
+
+.footer-text {
+  margin-bottom: 0;
+  color: $c-white;
+}

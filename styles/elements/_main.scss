@@ -1,0 +1,11 @@
+.main {
+  margin-block: $spacer;
+  padding: 1rem;
+  border: 1px solid $c-gray-light;
+}
+
+.main-text-block {
+  display: flex;
+  flex-direction: column;
+  gap: $spacer;
+}
