@@ -86,7 +86,7 @@
     "jest-environment-jsdom": "^29.6.4",
     "jest-transform-stub": "^2.0.0",
     "lint-staged": "^14.0.1",
-    "markdownlint": "^0.28.2",
+    "markdownlint": "^0.31.0",
     "markdownlint-cli": "^0.36.0",
     "postcss": "^8.4.29",
     "postcss-import": "^15.1.0",
