@@ -36,3 +36,4 @@ rules:
   selector-pseudo-element-colon-notation: double
   selector-no-vendor-prefix: true
   media-feature-name-no-vendor-prefix: true
+  scss/dollar-variable-empty-line-before: null
