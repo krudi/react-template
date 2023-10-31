@@ -50,8 +50,6 @@ Navigate into your project directory and start linting your files
   - `npm run lint:css:fix`: to eliminate all possible errors
 - `npm run lint:files`: lints configuration files with [Prettier](https://github.com/prettier/prettier)
   - `npm run lint:files:fix`: to eliminate all possible errors
-- `npm run lint:markdown`: - lints markdown files with [markdownlint-cli](https://www.npmjs.com/package/markdownlint-cli)
-  - `npm run lint:markdown`: to eliminate all possible errors
 - `npm run lint:full` - to run all lints commands above
 - `npm run lint:full:fix` - to run all lints all commands above and fix those automatically
 
