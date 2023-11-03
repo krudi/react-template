@@ -7,10 +7,6 @@ next-env.d.ts
 
 .vercel
 
-# Jest files
-
-coverage
-
 # Environment variables
 
 *.env

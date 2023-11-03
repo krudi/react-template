@@ -53,10 +53,6 @@ Navigate into your project directory and start linting your files.
 - `npm run lint:full` - to run all lints commands above
 - `npm run lint:full:fix` - to run all lints all commands above and fix those automatically
 
-## Testing with [Jest](https://jestjs.io)
-
-[Jest](https://jestjs.io) is a testing framework that provides an easy-to-use and comprehensive testing solution for [JavaScript](https://www.javascript.com) codebases.
-
 ## What's more?
 
 - [SASS](https://sass-lang.com)
