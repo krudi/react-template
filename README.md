@@ -43,7 +43,6 @@ Start the production server (after running `npm run build`).
 
 Navigate into your project directory and start linting your files.
 
-- `npm run lint:jsx`: lints [React](https://reactjs.org/docs/introducing-jsx.html) files
 - `npm run lint:js`: lints [JavaScript](https://www.javascript.com) files
   - `npm run lint:js:fix`: to eliminate all possible errors
 - `npm run lint:css`: lints [Cascading Style Sheets](https://developer.mozilla.org/en-US/docs/Web/CSS) files
