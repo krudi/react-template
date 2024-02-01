@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport  } from 'next'
 import { Roboto } from 'next/font/google'
 import Navigation from '@/components/Navigation'
 import Header from '@/components/Header'
@@ -6,29 +6,11 @@ import Footer from '@/components/Footer'
 
 import '@/styles/styles.scss'
 
-export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_PROJECT_URL as string),
-  title: 'krudi-io',
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 1
-  },
-  description:
-    'My current blog site built with React and Next.js, using latest Next.js features.',
-  keywords: ['template'],
-  generator: 'Next.js',
-  applicationName: 'krudi-io',
-  referrer: 'origin-when-cross-origin',
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
   colorScheme: 'light',
-  creator: 'Creator',
-  publisher: 'Publisher',
-  category: 'Category',
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false
-  },
   themeColor: [
     {
       media: '(prefers-color-scheme: light)',
@@ -39,6 +21,25 @@ export const metadata: Metadata = {
       color: 'black'
     }
   ],
+}
+
+export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_PROJECT_URL as string),
+  title: 'krudi-io',
+  description:
+    'My current blog site built with React and Next.js, using latest Next.js features.',
+  keywords: ['template'],
+  generator: 'Next.js',
+  applicationName: 'krudi-io',
+  referrer: 'origin-when-cross-origin',
+  creator: 'Creator',
+  publisher: 'Publisher',
+  category: 'Category',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false
+  },
   authors: [
     {
       name: 'Author',
