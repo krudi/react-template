@@ -18,6 +18,7 @@ To launch the project in development mode with hot module replacement.
 
 - `npm run dev`: to compile the [React](https://reactjs.org) application and serve it to the
   browser
+- `npm run dev:turbo`: to compile faster in local development
 
 _You can view the development server at <http://localhost:3000>_
 

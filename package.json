@@ -38,7 +38,8 @@
     "node": ">= 20.11.0"
   },
   "scripts": {
-    "dev": "next dev --turbo",
+    "dev": "next dev",
+    "dev:turbo": "next dev --turbo --show-all",
     "build": "next build",
     "start": "next start",
     "lint:js": "eslint --ext .js,.ts,.jsx,.tsx .",
