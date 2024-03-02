@@ -24,10 +24,14 @@ rules:
   comment-whitespace-inside: always
   comment-empty-line-before: always
   at-rule-no-vendor-prefix: true
-  rule-empty-line-before: always
+  rule-empty-line-before:
+    - "always"
+    - except:
+        - "after-single-line-comment"
   selector-pseudo-element-colon-notation: double
   selector-no-vendor-prefix: true
   media-feature-name-no-vendor-prefix: true
+  media-feature-range-notation: prefix
   custom-property-empty-line-before:
     - "always"
     - except:
@@ -37,3 +41,5 @@ rules:
       ignore:
         - "after-comment"
         - "inside-single-line-block"
+  no-descending-specificity: null
+  shorthand-property-no-redundant-values: null
