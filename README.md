@@ -53,10 +53,6 @@ Navigate into your project directory and start linting your files.
 - `npm run lint:full` - to run all lints commands above
 - `npm run lint:full:fix` - to run all lints all commands above and fix those automatically
 
-## What's more?
-
-- [SASS](https://sass-lang.com)
-
 ## Additional information
 
 - `npx npm-check-updates` - to check if some [npm](https://www.npmjs.com) packages are needed

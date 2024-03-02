@@ -10,11 +10,11 @@ body {
 }
 
 a {
-  color: $c-gray;
-  font-size: $fs-1;
+  color: var(--c-gray);
+  font-size: var(--fs-1);
 }
 
 a:hover,
 a:focus {
-  color: $c-gray-dark;
+  color: var(--c-gray-dark);
 }
