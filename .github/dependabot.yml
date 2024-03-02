@@ -32,11 +32,6 @@ updates:
           - postcss
           - cssnano
           - autoprefixer
-      Commit:
-          patterns:
-            - husky
-            - lint-staged
-            - "@commitlint/*"
       Lint:
         patterns:
           - stylelint
