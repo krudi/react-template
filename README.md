@@ -55,5 +55,7 @@ Navigate into your project directory and start linting your files.
 
 ## Additional information
 
-- `npx npm-check-updates` - to check if some [npm](https://www.npmjs.com) packages are needed
-- `npx npm-check-updates -u` - to upgrade all [npm](https://www.npmjs.com) packages
+Commands for [NPM](https://www.npmjs.com) to manage the packages.
+
+- `npx npm-check-updates` - to show outdated [NPM](https://www.npmjs.com) packages
+- `npx npm-check-updates -u` - to update [NPM](https://www.npmjs.com) packages
