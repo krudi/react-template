@@ -15,7 +15,7 @@ rules:
     - ignore: ["attribute", "class", "id"]
   selector-max-id: 1
   selector-attribute-quotes: always
-  declaration-no-important: true
+  declaration-no-important: null
   property-no-vendor-prefix: true
   value-no-vendor-prefix: true
   function-url-quotes: always
@@ -28,6 +28,7 @@ rules:
     - "always"
     - except:
         - "after-single-line-comment"
+        - "first-nested"
   selector-pseudo-element-colon-notation: double
   selector-no-vendor-prefix: true
   media-feature-name-no-vendor-prefix: true
@@ -43,3 +44,5 @@ rules:
         - "inside-single-line-block"
   no-descending-specificity: null
   shorthand-property-no-redundant-values: null
+  declaration-block-no-redundant-longhand-properties: null
+  color-function-notation: modern
