@@ -52,16 +52,15 @@
     "lint:full:fix": "npm run lint:js:fix && npm run lint:css:fix && npm run lint:files"
   },
   "dependencies": {
-    "@types/node": "20.12.13",
-    "@types/react": "18.3.3",
-    "@types/react-dom": "18.3.0",
     "next": "14.2.3",
     "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "typescript": "5.4.5"
+    "react-dom": "18.3.1"
   },
   "devDependencies": {
     "@babel/preset-react": "7.24.6",
+    "@types/node": "^20.13.0",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "7.11.0",
     "@typescript-eslint/parser": "7.11.0",
     "@vitejs/plugin-react": "4.3.0",
@@ -80,6 +79,7 @@
     "prop-types": "15.8.1",
     "stylelint": "16.6.1",
     "stylelint-config-standard": "36.0.0",
-    "ts-node": "10.9.2"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
   }
 }
