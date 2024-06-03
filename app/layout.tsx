@@ -89,7 +89,6 @@ export const metadata: Metadata = {
         process.env.NEXT_PUBLIC_PROJECT_URL as string + '/meta-tags/page-view.webp'
     }
   },
-  manifest: '/manifest.webmanifest',
   icons: {
     icon: '/favicons/nextjs-favicon.svg',
     shortcut: '/favicons/nextjs-favicon.svg',
