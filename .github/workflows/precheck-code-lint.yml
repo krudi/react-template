@@ -1,4 +1,4 @@
-name: Install dependencies and build the project
+name: Run linting commands
 
 on:
   push:
@@ -22,6 +22,10 @@ jobs:
       matrix:
         node-version:
           - "20.11.0"
+        command:
+          - "lint:js"
+          - "lint:css"
+          - "lint:files"
 
     steps:
       - name: Checkout the current branch
@@ -36,7 +40,5 @@ jobs:
       - name: Install dependencies in the project
         run: npm install
 
-      - name: Build the project
-        run: npm run build
-        env:
-          NEXT_PUBLIC_PROJECT_URL: ${{ secrets.NEXT_PUBLIC_PROJECT_URL }}
+      - name:  Run Node linting commands
+        run: "npm run ${{ matrix.command }}"
