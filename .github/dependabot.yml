@@ -4,32 +4,3 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    reviewers:
-      - "krudi"
-    assignees:
-      - "krudi"
-    groups:
-      React:
-        patterns:
-          - react
-          - next
-          - "vitejs/*"
-          - "@babel/*"
-      TypeScript:
-        patterns:
-          - typescript
-          - ts-node
-          - pro-types
-          - "@types/*"
-      ESLint:
-        patterns:
-          - eslint
-          - "@typescript-eslint/*"
-      StyleSheet:
-        patterns:
-          - postcss
-          - autoprefixer
-      Lint:
-        patterns:
-          - stylelint
-          - prettier
