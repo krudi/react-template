@@ -8,11 +8,10 @@
     }
   ],
   "version": "0.1.0",
-  "publisher": "author",
   "authors": [
     {
-      "name": "authors",
-      "email": "example@mail.com",
+      "name": "krudi",
+      "email": "patryk.kudlik@gmail.com",
       "url": "https://github.com/krudi/react-template"
     }
   ],
@@ -28,14 +27,9 @@
     "type": "git",
     "url": "https://github.com/krudi/react-template.git"
   },
-  "funding": [
-    {
-      "type": "individual",
-      "url": "http://example.com/donate"
-    }
-  ],
   "engines": {
-    "node": ">= 20.11.0"
+    "node": ">= 20.11.0",
+    "npm": ">= 10.8.1"
   },
   "scripts": {
     "dev": "next dev",
