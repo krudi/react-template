@@ -1,6 +1,6 @@
 
 /** @type {import('stylelint').Config} */
-export const config = {
+export default {
     'extends': 'stylelint-config-standard',
     'overrides': [
         {
@@ -71,4 +71,4 @@ export const config = {
         'declaration-block-no-redundant-longhand-properties': null,
         'color-function-notation': 'modern'
     }
-};
+}
