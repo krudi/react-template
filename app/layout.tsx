@@ -1,10 +1,11 @@
+import '~/styles/styles.css'
+
 import type { Metadata, Viewport } from 'next'
 import { Roboto } from 'next/font/google'
-import Navigation from '~/components/Navigation'
-import Header from '~/components/Header'
-import Footer from '~/components/Footer'
 
-import '~/styles/styles.css'
+import Footer from '~/components/Footer'
+import Header from '~/components/Header'
+import Navigation from '~/components/Navigation'
 
 export const viewport: Viewport = {
     width: 'device-width',
