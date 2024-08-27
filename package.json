@@ -40,8 +40,8 @@
         "lint:js:fix": "eslint -c ./eslint.config.mjs --fix",
         "lint:css": "stylelint --c ./stylelint.config.mjs **/*.css",
         "lint:css:fix": "stylelint -c ./stylelint.config.mjs --fix **/*.css",
-        "lint:files": "prettier --check \"**/*.{html,graphql,yml,yaml}\"",
-        "lint:files:fix": "prettier --write \"**/*.{html,graphql,yml,yaml}\"",
+        "lint:files": "prettier --check \"**/*.{js,jsx,ts,tsx,css,html,xml,yaml,yml,json,json5,graphql,gql}\"",
+        "lint:files:fix": "prettier --write \"**/*.{js,jsx,ts,tsx,css,html,xml,yaml,yml,json,json5,graphql,gql}\"",
         "lint:full": "npm run lint:js && npm run lint:css && npm run lint:files",
         "lint:full:fix": "npm run lint:js:fix && npm run lint:css:fix && npm run lint:files"
     },
