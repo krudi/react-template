@@ -1,82 +1,82 @@
 {
-  "name": "react-template",
-  "description": "A template with Next.js built on React with focus on performance and best practices.",
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/krudi/react-template/LICENSE"
+    "name": "react-template",
+    "description": "A template with Next.js built on React with focus on performance and best practices.",
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://github.com/krudi/react-template/LICENSE"
+        }
+    ],
+    "version": "0.1.0",
+    "authors": [
+        {
+            "name": "krudi",
+            "email": "patryk.kudlik@gmail.com",
+            "url": "https://github.com/krudi/react-template"
+        }
+    ],
+    "private": false,
+    "homepage": "https://github.com/krudi/react-template#readme",
+    "bugs": {
+        "url": "https://github.com/krudi/react-template/issues"
+    },
+    "keywords": [
+        "template"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/krudi/react-template.git"
+    },
+    "engines": {
+        "node": ">= 20.11.0",
+        "npm": ">= 10.8.1"
+    },
+    "scripts": {
+        "dev": "next dev",
+        "dev:turbo": "next dev --turbo --show-all",
+        "build": "next build",
+        "start": "next start",
+        "lint:js": "eslint -c ./eslint.config.mjs",
+        "lint:js:fix": "eslint -c ./eslint.config.mjs --fix",
+        "lint:css": "stylelint --c ./stylelint.config.mjs **/*.css",
+        "lint:css:fix": "stylelint -c ./stylelint.config.mjs --fix **/*.css",
+        "lint:files": "prettier --check \"**/*.{html,graphql,yml,yaml}\"",
+        "lint:files:fix": "prettier --write \"**/*.{html,graphql,yml,yaml}\"",
+        "lint:full": "npm run lint:js && npm run lint:css && npm run lint:files",
+        "lint:full:fix": "npm run lint:js:fix && npm run lint:css:fix && npm run lint:files"
+    },
+    "dependencies": {
+        "next": "^14.2.6",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1"
+    },
+    "devDependencies": {
+        "@babel/preset-react": "^7.24.7",
+        "@eslint/js": "^9.9.1",
+        "@next/eslint-plugin-next": "^15.0.0-canary.130",
+        "@types/eslint__js": "^8.42.3",
+        "@types/node": "^22.5.0",
+        "@types/react": "^18.3.4",
+        "@types/react-dom": "^18.3.0",
+        "@vitejs/plugin-react": "^4.3.1",
+        "autoprefixer": "^10.4.20",
+        "eslint": "^9.9.1",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-react": "^7.8.0-rc.0",
+        "eslint-plugin-react-hooks": "^5.1.0-beta-26f2496093-20240514",
+        "eslint-plugin-simple-import-sort": "^12.1.1",
+        "postcss": "^8.4.41",
+        "postcss-custom-media": "^11.0.1",
+        "postcss-import": "^16.1.0",
+        "postcss-load-config": "^6.0.1",
+        "postcss-nested": "^6.2.0",
+        "postcss-syntax": "^0.36.2",
+        "prettier": "^3.3.3",
+        "prop-types": "^15.8.1",
+        "stylelint": "^16.8.2",
+        "stylelint-config-standard": "^36.0.1",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.5.4",
+        "typescript-eslint": "^8.2.0"
     }
-  ],
-  "version": "0.1.0",
-  "authors": [
-    {
-      "name": "krudi",
-      "email": "patryk.kudlik@gmail.com",
-      "url": "https://github.com/krudi/react-template"
-    }
-  ],
-  "private": false,
-  "homepage": "https://github.com/krudi/react-template#readme",
-  "bugs": {
-    "url": "https://github.com/krudi/react-template/issues"
-  },
-  "keywords": [
-    "template"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/krudi/react-template.git"
-  },
-  "engines": {
-    "node": ">= 20.11.0",
-    "npm": ">= 10.8.1"
-  },
-  "scripts": {
-    "dev": "next dev",
-    "dev:turbo": "next dev --turbo --show-all",
-    "build": "next build",
-    "start": "next start",
-    "lint:js": "eslint -c ./eslint.config.mjs",
-    "lint:js:fix": "eslint -c ./eslint.config.mjs --fix",
-    "lint:css": "stylelint --c ./stylelint.config.mjs **/*.css",
-    "lint:css:fix": "stylelint -c ./stylelint.config.mjs --fix **/*.css",
-    "lint:files": "prettier --check \"**/*.{html,graphql,yml,yaml}\"",
-    "lint:files:fix": "prettier --write \"**/*.{html,graphql,yml,yaml}\"",
-    "lint:full": "npm run lint:js && npm run lint:css && npm run lint:files",
-    "lint:full:fix": "npm run lint:js:fix && npm run lint:css:fix && npm run lint:files"
-  },
-  "dependencies": {
-    "next": "14.2.6",
-    "react": "18.3.1",
-    "react-dom": "18.3.1"
-  },
-  "devDependencies": {
-    "@babel/preset-react": "7.24.7",
-    "@eslint/js": "^9.9.1",
-    "@next/eslint-plugin-next": "^15.0.0-canary.130",
-    "@types/eslint__js": "^8.42.3",
-    "@types/node": "^22.5.0",
-    "@types/react": "^18.3.4",
-    "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react": "4.3.1",
-    "autoprefixer": "10.4.20",
-    "eslint": "9.9.1",
-    "eslint-config-prettier": "9.1.0",
-    "eslint-plugin-react": "^7.8.0-rc.0",
-    "eslint-plugin-react-hooks": "^5.1.0-beta-26f2496093-20240514",
-    "eslint-plugin-simple-import-sort": "^12.1.1",
-    "postcss": "8.4.41",
-    "postcss-custom-media": "11.0.1",
-    "postcss-import": "16.1.0",
-    "postcss-load-config": "6.0.1",
-    "postcss-nested": "6.2.0",
-    "postcss-syntax": "0.36.2",
-    "prettier": "3.3.3",
-    "prop-types": "15.8.1",
-    "stylelint": "16.8.2",
-    "stylelint-config-standard": "36.0.1",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.5.4",
-    "typescript-eslint": "^8.2.0"
-  }
 }
