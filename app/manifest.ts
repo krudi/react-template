@@ -1,4 +1,4 @@
-import { MetadataRoute } from 'next'
+import { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
     return {
@@ -12,9 +12,7 @@ export default function manifest(): MetadataRoute.Manifest {
         lang: 'en-EN',
         orientation: 'any',
         prefer_related_applications: true,
-        categories: [
-            'template'
-        ],
+        categories: ['template'],
         icons: [
             {
                 src: 'favicons/nextjs-16x16.svg',
@@ -71,5 +69,5 @@ export default function manifest(): MetadataRoute.Manifest {
                 label: 'Homescreen of the app in the mobile view.'
             }
         ]
-    }
+    };
 }

@@ -1,44 +1,44 @@
 name: Run linting commands
 
 on:
-  push:
-    branches:
-      - develop
-      - main
-      - "!dependabot/**"
+    push:
+        branches:
+            - develop
+            - main
+            - '!dependabot/**'
 
-  pull_request:
-    branches:
-      - develop
-      - main
-      - "!dependabot/**"
+    pull_request:
+        branches:
+            - develop
+            - main
+            - '!dependabot/**'
 
 jobs:
-  build:
-    name: Build and start Node.js project
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        node-version:
-          - "20.11.0"
-        command:
-          - "lint:js"
-          - "lint:css"
-          - "lint:files"
+    build:
+        name: Build and start Node.js project
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                node-version:
+                    - '20.11.0'
+                command:
+                    - 'lint:js'
+                    - 'lint:css'
+                    - 'lint:files'
 
-    steps:
-      - name: Checkout the current branch
-        uses: actions/checkout@v4
+        steps:
+            - name: Checkout the current branch
+              uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '${{ matrix.node-version }}'
-          cache: npm
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '${{ matrix.node-version }}'
+                  cache: npm
 
-      - name: Install dependencies in the project
-        run: npm install
+            - name: Install dependencies in the project
+              run: npm install
 
-      - name: Run Node linting commands
-        run: "npm run ${{ matrix.command }}"
+            - name: Run Node linting commands
+              run: 'npm run ${{ matrix.command }}'

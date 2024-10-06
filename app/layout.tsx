@@ -57,7 +57,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
             icon: '/favicons/nextjs-favicon.svg',
             shortcut: '/favicons/nextjs-favicon.svg',
             apple: '/favicons/nextjs-apple-touch.svg'
-        },
+        }
     };
 };
 

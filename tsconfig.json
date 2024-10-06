@@ -7,26 +7,17 @@
         ".next/types/**/*.ts",
         "next-env.d.ts"
     ],
-    "exclude": [
-        "node_modules",
-        ".next"
-    ],
+    "exclude": ["node_modules", ".next"],
     "compilerOptions": {
         "baseUrl": ".",
         "paths": {
             "~/*": ["*"],
             "~/components/*": ["components/*"],
-            "~/lib/*": ["lib/*"],
+            "~/lib/*": ["lib/*"]
         },
-        "types": [
-            "node"
-        ],
+        "types": ["node"],
         "target": "ES5",
-        "lib": [
-            "DOM",
-            "DOM.Iterable",
-            "ESNext"
-        ],
+        "lib": ["DOM", "DOM.Iterable", "ESNext"],
         "allowJs": true,
         "skipLibCheck": true,
         "strict": false,
