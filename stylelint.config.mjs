@@ -37,20 +37,15 @@ export default {
         'font-weight-notation': 'numeric',
         'font-family-name-quotes': 'always-where-recommended',
         'comment-whitespace-inside': 'always',
-        'comment-empty-line-before': [
+        'at-rule-no-vendor-prefix': true,
+        'rule-empty-line-before': [
             'always', {
                 'except': [
+                    'after-single-line-comment',
                     'first-nested'
                 ]
             }
         ],
-        'at-rule-no-vendor-prefix': true,
-        'rule-empty-line-before': ['always', {
-            'except': [
-                'after-single-line-comment',
-                'first-nested'
-            ]
-        }],
         'selector-pseudo-element-colon-notation': 'double',
         'selector-no-vendor-prefix': true,
         'media-feature-name-no-vendor-prefix': true,
