@@ -38,5 +38,3 @@ jobs:
 
       - name: Build the project
         run: npm run build
-        env:
-          NEXT_PUBLIC_PROJECT_URL: ${{ secrets.NEXT_PUBLIC_PROJECT_URL }}

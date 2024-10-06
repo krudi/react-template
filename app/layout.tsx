@@ -2,10 +2,15 @@ import '~/styles/styles.css'
 
 import type { Metadata, Viewport } from 'next'
 import { Roboto } from 'next/font/google'
+import { headers } from 'next/headers'
 
 import Footer from '~/components/Footer'
 import Header from '~/components/Header'
 import Navigation from '~/components/Navigation'
+import { RootLayoutProps } from '~/types'
+
+const headersList = headers();
+const domain = headersList.get("host") as string;
 
 export const viewport: Viewport = {
     width: 'device-width',
@@ -26,21 +31,19 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
     title: 'krudi-io',
-    metadataBase: new URL(process.env.NEXT_PUBLIC_PROJECT_URL as string),
+    metadataBase: new URL(`https://${domain}`),
     applicationName: 'krudi-io',
-    description:
-        'My current blog site built with React and Next.js, using latest Next.js features.',
+    description: 'My current blog site built with React and Next.js, using latest Next.js features.',
     keywords: ['template'],
     referrer: 'origin-when-cross-origin',
     openGraph: {
         title: 'krudi-io',
-        description:
-            'My current blog site built with React and Next.js, using latest Next.js features.',
-        url: process.env.NEXT_PUBLIC_PROJECT_URL as string,
+        description: 'My current blog site built with React and Next.js, using latest Next.js features.',
+        url: `https://${domain}`,
         siteName: 'Next.js',
         images: [
             {
-                url: process.env.NEXT_PUBLIC_PROJECT_URL as string + '/meta-tags/page-view.webp',
+                url: `https://${domain}/meta-tags/page-view.webp`,
                 width: 1800,
                 height: 1600,
                 alt: 'Alternative description'
@@ -58,7 +61,7 @@ export const metadata: Metadata = {
         siteId: '1467726470533754880',
         images: [
             {
-                url: process.env.NEXT_PUBLIC_PROJECT_URL as string + '/meta-tags/page-view.webp',
+                url: `https://${domain}/meta-tags/page-view.webp`,
                 alt: 'Alternative description'
             }
         ]
@@ -75,9 +78,6 @@ const roboto = Roboto({
     subsets: ['latin'],
     display: 'swap'
 })
-export interface RootLayoutProps {
-    children: React.ReactNode
-}
 
 export default function RootLayout({ children }: RootLayoutProps) {
     return (
