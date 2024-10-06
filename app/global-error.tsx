@@ -1,8 +1,8 @@
-'use client'
+'use client';
 
-import NextError from "next/error";
+import NextError from 'next/error';
 
-import { GlobalErrorProps } from "~/types/Layouts"
+import { GlobalErrorProps } from '~/types/Layouts';
 
 export default function GlobalError({ reset }: GlobalErrorProps) {
     return (
@@ -15,17 +15,13 @@ export default function GlobalError({ reset }: GlobalErrorProps) {
 
                     <hr className="hr" />
 
-                    <h4>
-                        Something went wrong!
-                    </h4>
+                    <h4>Something went wrong!</h4>
                     <p>
                         <NextError statusCode={0} />
                     </p>
-                    <button onClick={() => reset()}>
-                        Try again
-                    </button>
+                    <button onClick={() => reset()}>Try again</button>
                 </section>
             </body>
         </html>
-    )
+    );
 }

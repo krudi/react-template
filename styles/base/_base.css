@@ -1,20 +1,29 @@
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 body {
-  margin: 0;
-  line-height: 1.5;
-  text-size-adjust: 100%;
-  font-family: system-ui, -apple-system, "Segoe UI", roboto, helvetica, arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    margin: 0;
+    line-height: 1.5;
+    text-size-adjust: 100%;
+    font-family:
+        system-ui,
+        -apple-system,
+        'Segoe UI',
+        roboto,
+        helvetica,
+        arial,
+        sans-serif,
+        'Apple Color Emoji',
+        'Segoe UI Emoji';
 }
 
 a {
-  color: var(--c-gray);
-  font-size: var(--fs-1);
+    color: var(--c-gray);
+    font-size: var(--fs-1);
 }
 
 a:hover,
 a:focus {
-  color: var(--c-gray-dark);
+    color: var(--c-gray-dark);
 }

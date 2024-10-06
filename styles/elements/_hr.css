@@ -1,4 +1,4 @@
 .hr {
-  margin-block: var(--spacer);
-  border-top: 1px solid var(--c-gray-light);
+    margin-block: var(--spacer);
+    border-top: 1px solid var(--c-gray-light);
 }

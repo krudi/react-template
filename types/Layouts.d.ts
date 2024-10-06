@@ -1,5 +1,5 @@
 export interface RootLayoutProps {
-    children: React.ReactNode
+    children: React.ReactNode;
 }
 
 export interface GlobalErrorProps {
