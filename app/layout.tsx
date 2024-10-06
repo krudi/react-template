@@ -1,11 +1,65 @@
-import '~/styles/styles.css'
+import '~/styles/styles.css';
 
-import type { Metadata, Viewport } from 'next'
-import { Roboto } from 'next/font/google'
+import type { Metadata, Viewport } from 'next';
+import { Roboto } from 'next/font/google';
+import { headers } from 'next/headers';
 
-import Footer from '~/components/Footer'
-import Header from '~/components/Header'
-import Navigation from '~/components/Navigation'
+import Footer from '~/components/Footer';
+import Header from '~/components/Header';
+import Navigation from '~/components/Navigation';
+import { RootLayoutProps } from '~/types';
+
+export const generateMetadata = async (): Promise<Metadata> => {
+    const headersList = headers();
+    const domain = headersList.get('host') as string;
+
+    return {
+        title: 'krudi-io',
+        metadataBase: new URL(`https://${domain}`),
+        applicationName: 'krudi-io',
+        description:
+            'My current blog site built with React and Next.js, using latest Next.js features.',
+        keywords: ['template'],
+        referrer: 'origin-when-cross-origin',
+        openGraph: {
+            title: 'krudi-io',
+            description:
+                'My current blog site built with React and Next.js, using latest Next.js features.',
+            url: `https://${domain}`,
+            siteName: 'Next.js',
+            images: [
+                {
+                    url: `https://${domain}/meta-tags/page-view.webp`,
+                    width: 1800,
+                    height: 1600,
+                    alt: 'Alternative description'
+                }
+            ],
+            locale: 'en-US',
+            type: 'website'
+        },
+        twitter: {
+            title: 'krudi-io',
+            description:
+                'My current blog site built with React and Next.js, using latest Next.js features.',
+            card: 'summary_large_image',
+            creator: '@twitter',
+            creatorId: '1467726470533754880',
+            siteId: '1467726470533754880',
+            images: [
+                {
+                    url: `https://${domain}/meta-tags/page-view.webp`,
+                    alt: 'Alternative description'
+                }
+            ]
+        },
+        icons: {
+            icon: '/favicons/nextjs-favicon.svg',
+            shortcut: '/favicons/nextjs-favicon.svg',
+            apple: '/favicons/nextjs-apple-touch.svg'
+        },
+    };
+};
 
 export const viewport: Viewport = {
     width: 'device-width',
@@ -21,67 +75,22 @@ export const viewport: Viewport = {
             media: '(prefers-color-scheme: dark)',
             color: 'black'
         }
-    ],
-}
-
-export const metadata: Metadata = {
-    title: 'krudi-io',
-    metadataBase: new URL(process.env.NEXT_PUBLIC_PROJECT_URL as string),
-    applicationName: 'krudi-io',
-    description:
-        'My current blog site built with React and Next.js, using latest Next.js features.',
-    keywords: ['template'],
-    referrer: 'origin-when-cross-origin',
-    openGraph: {
-        title: 'krudi-io',
-        description:
-            'My current blog site built with React and Next.js, using latest Next.js features.',
-        url: process.env.NEXT_PUBLIC_PROJECT_URL as string,
-        siteName: 'Next.js',
-        images: [
-            {
-                url: process.env.NEXT_PUBLIC_PROJECT_URL as string + '/meta-tags/page-view.webp',
-                width: 1800,
-                height: 1600,
-                alt: 'Alternative description'
-            }
-        ],
-        locale: 'en-US',
-        type: 'website'
-    },
-    twitter: {
-        title: 'krudi-io',
-        description: 'My current blog site built with React and Next.js, using latest Next.js features.',
-        card: 'summary_large_image',
-        creator: '@twitter',
-        creatorId: '1467726470533754880',
-        siteId: '1467726470533754880',
-        images: [
-            {
-                url: process.env.NEXT_PUBLIC_PROJECT_URL as string + '/meta-tags/page-view.webp',
-                alt: 'Alternative description'
-            }
-        ]
-    },
-    icons: {
-        icon: '/favicons/nextjs-favicon.svg',
-        shortcut: '/favicons/nextjs-favicon.svg',
-        apple: '/favicons/nextjs-apple-touch.svg'
-    }
-}
+    ]
+};
 
 const roboto = Roboto({
     weight: ['400', '500', '700'],
     subsets: ['latin'],
     display: 'swap'
-})
-export interface RootLayoutProps {
-    children: React.ReactNode
-}
+});
 
 export default function RootLayout({ children }: RootLayoutProps) {
     return (
-        <html lang="en" dir="ltr" className={roboto.className}>
+        <html
+            lang="en"
+            dir="ltr"
+            className={roboto.className}
+        >
             <head />
             <body>
                 <div className="container">
@@ -89,13 +98,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
                     <Header />
 
-                    <main className="main">
-                        {children}
-                    </main>
+                    <main className="main">{children}</main>
 
                     <Footer />
                 </div>
             </body>
         </html>
-    )
+    );
 }
