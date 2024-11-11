@@ -65,7 +65,7 @@
         "eslint-plugin-react": "^7.8.0-rc.0",
         "eslint-plugin-react-hooks": "^5.1.0-beta-26f2496093-20240514",
         "eslint-plugin-simple-import-sort": "^12.1.1",
-        "postcss": "^8.4.41",
+        "postcss": "^8.4.48",
         "postcss-import": "^16.1.0",
         "postcss-load-config": "^6.0.1",
         "postcss-nested": "^6.2.0",
