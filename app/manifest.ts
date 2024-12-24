@@ -5,10 +5,14 @@ export default function manifest(): MetadataRoute.Manifest {
         name: 'react-template',
         short_name: 'react-template',
         description: 'Description for the webmanifest file.',
-        start_url: '/',
-        display: 'standalone',
         theme_color: '#000000',
-        background_color: '#AFCC1E',
+        background_color: '#2596BE',
+        display_override: [
+            "window-controls-overlay"
+        ],
+        display: 'standalone',
+        id: '/',
+        start_url: '/',
         lang: 'en-EN',
         orientation: 'any',
         prefer_related_applications: true,
@@ -56,17 +60,15 @@ export default function manifest(): MetadataRoute.Manifest {
                 src: 'manifest/desktop-home-screen-view.webp',
                 sizes: '1280x720',
                 type: 'image/webp',
-                // @ts-expect-error: Not exist in type
+                label: 'Homescreen of the app in the desktop view.',
                 form_factor: 'wide',
-                label: 'Homescreen of the app in the desktop view.'
             },
             {
                 src: 'manifest/mobile-home-screen-view.webp',
                 sizes: '540x720',
                 type: 'image/webp',
-                // @ts-expect-error: Not exist in type
+                label: 'Homescreen of the app in the mobile view.',
                 form_factor: 'narrow',
-                label: 'Homescreen of the app in the mobile view.'
             }
         ]
     };
