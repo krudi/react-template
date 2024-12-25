@@ -11,7 +11,7 @@ const typeScriptConfig = [
     ...tseslint.configs.recommended,
     {
         languageOptions: {
-            parser: tseslint.parser
+            parser: tseslint.parser,
         },
     },
     {
@@ -21,13 +21,13 @@ const typeScriptConfig = [
 ];
 
 const importSortConfig = {
-  plugins: {
-    'simple-import-sort': importSortPlugin,
-  },
-  rules: {
-    'simple-import-sort/imports': 'error',
-    'simple-import-sort/exports': 'error',
-  },
+    plugins: {
+        'simple-import-sort': importSortPlugin,
+    },
+    rules: {
+        'simple-import-sort/imports': 'error',
+        'simple-import-sort/exports': 'error',
+    },
 };
 
 const nextConfig = {
@@ -38,8 +38,6 @@ const nextConfig = {
     rules: {
         ...nextPlugin.configs.recommended.rules,
         ...nextPlugin.configs['core-web-vitals'].rules,
-        ...reactPlugin.configs['jsx-runtime'].rules,
-        ...reactHooksPlugin.configs.recommended.rules,
     },
 };
 
@@ -50,21 +48,22 @@ export default tseslint.config(
             'dev-dist',
             'public',
             'node_modules',
-            '.next'
+            '.next',
         ],
     },
     {
         languageOptions: {
             globals: {
-                ...globals.node
-            }
-        }
+                ...globals.node,
+            },
+        },
     },
     {
         plugins: {
             'react': reactPlugin,
             'react-hooks': reactHooksPlugin,
-        }
+            '@next/next': nextPlugin,
+        },
     },
     {
         files: ['**/*.{js,jsx,cjs,mjs,ts,tsx,mts}'],

@@ -7,9 +7,7 @@ export default function manifest(): MetadataRoute.Manifest {
         description: 'Description for the webmanifest file.',
         theme_color: '#000000',
         background_color: '#2596BE',
-        display_override: [
-            "window-controls-overlay"
-        ],
+        display_override: ['window-controls-overlay'],
         display: 'standalone',
         id: '/',
         start_url: '/',
@@ -61,14 +59,14 @@ export default function manifest(): MetadataRoute.Manifest {
                 sizes: '1280x720',
                 type: 'image/webp',
                 label: 'Homescreen of the app in the desktop view.',
-                form_factor: 'wide',
+                form_factor: 'wide'
             },
             {
                 src: 'manifest/mobile-home-screen-view.webp',
                 sizes: '540x720',
                 type: 'image/webp',
                 label: 'Homescreen of the app in the mobile view.',
-                form_factor: 'narrow',
+                form_factor: 'narrow'
             }
         ]
     };

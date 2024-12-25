@@ -10,7 +10,7 @@ import Navigation from '~/components/Navigation';
 import { RootLayoutProps } from '~/types';
 
 export const generateMetadata = async (): Promise<Metadata> => {
-    const headersList = headers();
+    const headersList = await headers();
     const domain = headersList.get('host') as string;
 
     return {
