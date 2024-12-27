@@ -10,7 +10,7 @@ updates:
       - 'dependencies'
       - 'github'
     commit-message:
-      prefix: '[dependencies]'
+      prefix: 'build(deps)'
 
   - package-ecosystem: 'npm'
     directory: '/'
@@ -22,7 +22,7 @@ updates:
       - 'dependencies'
       - 'npm'
     commit-message:
-      prefix: '[dependencies]'
+      prefix: 'build(deps)'
     ignore:
       - dependency-name: '*'
         update-types:
