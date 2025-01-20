@@ -46,7 +46,7 @@
         "lint:full:fix": "npm run lint:js:fix && npm run lint:css:fix && npm run lint:files"
     },
     "dependencies": {
-        "next": "^15.1.4",
+        "next": "^15.1.5",
         "react": "^19.0.0",
         "react-dom": "^19.0.0"
     },
