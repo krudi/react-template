@@ -1,4 +1,3 @@
-
 /** @type {import('stylelint').Config} */
 export default {
     'extends': 'stylelint-config-standard',
@@ -13,6 +12,7 @@ export default {
     'ignoreFiles': [
         '**/*.js',
         '**/*.ts',
+        'public/**/*.css',
         'node_modules/**/*.css',
     ],
     'rules': {
@@ -37,15 +37,20 @@ export default {
         'font-weight-notation': 'numeric',
         'font-family-name-quotes': 'always-where-recommended',
         'comment-whitespace-inside': 'always',
-        'at-rule-no-vendor-prefix': true,
-        'rule-empty-line-before': [
+        'comment-empty-line-before': [
             'always', {
                 'except': [
-                    'after-single-line-comment',
                     'first-nested'
                 ]
             }
         ],
+        'at-rule-no-vendor-prefix': true,
+        'rule-empty-line-before': ['always', {
+            'except': [
+                'after-single-line-comment',
+                'first-nested'
+            ]
+        }],
         'selector-pseudo-element-colon-notation': 'double',
         'selector-no-vendor-prefix': true,
         'media-feature-name-no-vendor-prefix': true,
@@ -66,6 +71,8 @@ export default {
         'no-descending-specificity': null,
         'shorthand-property-no-redundant-values': null,
         'declaration-block-no-redundant-longhand-properties': null,
-        'color-function-notation': 'modern'
+        'color-function-notation': 'modern',
+        'at-rule-no-deprecated': null,
+        'no-invalid-position-at-import-rule': null,
     }
 }
