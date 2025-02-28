@@ -54,7 +54,6 @@
         "@babel/preset-react": "^7.26.3",
         "@eslint/js": "^9.21.0",
         "@next/eslint-plugin-next": "^15.2.0",
-        "@types/eslint__js": "^9.14.0",
         "@types/node": "^22.13.5",
         "@types/react": "^19.0.10",
         "@types/react-dom": "^19.0.4",
