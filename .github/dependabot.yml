@@ -1,60 +1,85 @@
 version: 2
 updates:
-    - package-ecosystem: 'github-actions'
-      directory: '/'
-      reviewers:
-          - 'krudi'
-      schedule:
-          interval: 'daily'
-      labels:
-          - 'dependencies'
-      commit-message:
-          prefix: 'build(deps)'
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    reviewers:
+      - 'krudi'
+    schedule:
+      interval: 'daily'
+    labels:
+      - 'dependencies'
+    commit-message:
+      prefix: 'build(deps)'
 
-    - package-ecosystem: 'npm'
-      directory: '/'
-      reviewers:
-          - 'krudi'
-      schedule:
-          interval: 'daily'
-      labels:
-          - 'dependencies'
-      commit-message:
-          prefix: 'build(deps)'
-      ignore:
-          - dependency-name: '*'
-            update-types:
-                - 'version-update:semver-major'
-      groups:
-          framework:
-              patterns:
-                  - '^next$'
-                  - '^react$'
-                  - '^react-dom$'
-              update-types:
-                  - 'minor'
-          linting-and-formatting:
-              patterns:
-                  - 'eslint*'
-                  - 'stylelint*'
-                  - 'prettier'
-              update-types:
-                  - 'minor'
-          typings:
-              patterns:
-                  - '@types/*'
-              update-types:
-                  - 'minor'
-          build-tools:
-              patterns:
-                  - 'typescript*'
-                  - 'ts-node*'
-                  - '@vitejs/*'
-              update-types:
-                  - 'minor'
-          postcss:
-              patterns:
-                  - 'postcss*'
-                  - 'autoprefixer'
-              update-types:
-                  - 'minor'
+  - package-ecosystem: 'npm'
+    directory: '/'
+    reviewers:
+      - 'krudi'
+    schedule:
+      interval: 'daily'
+    labels:
+      - 'dependencies'
+    commit-message:
+      prefix: 'build(deps)'
+    ignore:
+      - dependency-name: '*'
+        update-types:
+          - 'version-update:semver-major'
+    groups:
+      framework:
+        patterns:
+          - 'next'
+          - 'react'
+          - 'react-dom'
+        update-types:
+          - 'minor'
+
+      linting-and-formatting:
+        patterns:
+          - 'eslint'
+          - 'eslint-config-prettier'
+          - 'eslint-plugin-react'
+          - 'eslint-plugin-react-hooks'
+          - 'eslint-plugin-simple-import-sort'
+          - '@eslint/js'
+          - '@next/eslint-plugin-next'
+          - 'stylelint'
+          - 'stylelint-config-standard'
+          - 'prettier'
+        update-types:
+          - 'minor'
+
+      typings:
+        patterns:
+          - '@types/node'
+          - '@types/react'
+          - '@types/react-dom'
+        update-types:
+          - 'minor'
+
+      build-tools:
+        patterns:
+          - 'typescript'
+          - 'ts-node'
+          - 'typescript-eslint'
+          - '@vitejs/plugin-react'
+          - '@babel/preset-react'
+        update-types:
+          - 'minor'
+
+      postcss:
+        patterns:
+          - 'postcss'
+          - 'postcss-import'
+          - 'postcss-load-config'
+          - 'postcss-nested'
+          - 'postcss-syntax'
+          - 'autoprefixer'
+        update-types:
+          - 'minor'
+
+      utilities:
+        patterns:
+          - 'prop-types'
+        update-types:
+          - 'minor'
