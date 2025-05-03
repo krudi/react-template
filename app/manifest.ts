@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
         name: 'react-template',
         short_name: 'react-template',
         description: 'Description for the webmanifest file.',
-        theme_color: '#000000',
+        theme_color: '#FFFFFF',
         background_color: '#2596BE',
         display_override: ['window-controls-overlay'],
         display: 'standalone',
@@ -17,40 +17,58 @@ export default function manifest(): MetadataRoute.Manifest {
         categories: ['template'],
         icons: [
             {
-                src: 'favicons/nextjs-16x16.svg',
-                type: 'image/svg+xml',
+                src: 'favicons/favicon-16x16.png',
+                type: 'image/png',
                 sizes: '16x16',
                 purpose: 'maskable'
             },
             {
-                src: 'favicons/nextjs-32x32.svg',
-                type: 'image/svg+xml',
+                src: 'favicons/favicon-32x32.png',
+                type: 'image/png',
                 sizes: '32x32',
                 purpose: 'maskable'
             },
             {
-                src: 'favicons/nextjs-48x48.svg',
-                type: 'image/svg+xml',
+                src: 'favicons/favicon-36x36.png',
+                type: 'image/png',
+                sizes: '36x36',
+                purpose: 'maskable'
+            },
+            {
+                src: 'favicons/favicon-48x48.png',
+                type: 'image/png',
                 sizes: '48x48',
                 purpose: 'maskable'
             },
             {
-                src: 'favicons/nextjs-144x144.svg',
-                type: 'image/svg+xml',
-                sizes: '144x144',
+                src: 'favicons/favicon-72x72.png',
+                type: 'image/png',
+                sizes: '72x72',
+                purpose: 'maskable'
+            },
+            {
+                src: 'favicons/favicon-96x96.png',
+                type: 'image/png',
+                sizes: '96x96',
                 purpose: 'any'
             },
             {
-                src: 'favicons/nextjs-192x192.svg',
-                type: 'image/svg+xml',
-                sizes: '192x192',
+                src: 'favicons/favicon-144x144.png',
+                type: 'image/png',
+                sizes: '144x144',
                 purpose: 'maskable'
             },
             {
-                src: 'favicons/nextjs-512x512.svg',
-                type: 'image/svg+xml',
+                src: 'favicons/android-icon-192x192.png',
+                type: 'image/png',
+                sizes: '192x192',
+                purpose: 'any'
+            },
+            {
+                src: 'favicons/favicon-512x512.png',
+                type: 'image/png',
                 sizes: '512x512',
-                purpose: 'maskable'
+                purpose: 'any'
             }
         ],
         screenshots: [
