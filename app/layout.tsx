@@ -153,7 +153,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
                 }
             ]
         },
-        icons,
+        icons
     };
 };
 
@@ -182,7 +182,11 @@ const roboto = Roboto({
 
 export default function RootLayout({ children }: RootLayoutProps) {
     return (
-        <html lang="en" dir="ltr" className={roboto.className}>
+        <html
+            lang="en"
+            dir="ltr"
+            className={roboto.className}
+        >
             <head>
                 <meta
                     name="msapplication-config"
@@ -207,9 +211,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
                     <Header />
 
-                    <main className="main">
-                        {children}
-                    </main>
+                    <main className="main">{children}</main>
 
                     <Footer />
                 </div>
