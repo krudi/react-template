@@ -21,6 +21,7 @@ updates:
           - dependency-name: '*'
             update-types:
                 - 'version-update:semver-major'
+
       groups:
           framework:
               patterns:
@@ -28,7 +29,8 @@ updates:
                   - 'react'
                   - 'react-dom'
               update-types:
-                  - 'minor'
+                - 'minor'
+                - 'patch'
 
           linting-and-formatting:
               patterns:
@@ -44,6 +46,7 @@ updates:
                   - 'prettier'
               update-types:
                   - 'minor'
+                  - 'patch'
 
           typings:
               patterns:
@@ -52,6 +55,7 @@ updates:
                   - '@types/react-dom'
               update-types:
                   - 'minor'
+                  - 'patch'
 
           build-tools:
               patterns:
@@ -62,6 +66,7 @@ updates:
                   - '@babel/preset-react'
               update-types:
                   - 'minor'
+                  - 'patch'
 
           postcss:
               patterns:
@@ -73,9 +78,11 @@ updates:
                   - 'autoprefixer'
               update-types:
                   - 'minor'
+                  - 'patch'
 
           utilities:
               patterns:
                   - 'prop-types'
               update-types:
                   - 'minor'
+                  - 'patch'
