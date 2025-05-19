@@ -1,4 +1,4 @@
-import { type Config } from "prettier";
+import { type Config } from 'prettier';
 
 const config: Config = {
     printWidth: 80,
@@ -12,7 +12,7 @@ const config: Config = {
     bracketSameLine: false,
     singleAttributePerLine: true,
     insertPragma: false,
-    proseWrap: 'always',
+    proseWrap: 'always'
 };
 
 export default config;

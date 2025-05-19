@@ -29,8 +29,8 @@ updates:
                   - 'react'
                   - 'react-dom'
               update-types:
-                - 'minor'
-                - 'patch'
+                  - 'minor'
+                  - 'patch'
 
           linting-and-formatting:
               patterns:

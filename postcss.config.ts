@@ -1,11 +1,11 @@
-import { type Config } from "postcss-load-config";
+import { type Config } from 'postcss-load-config';
 
 const config: Config = {
     plugins: {
         'postcss-import': {},
         'postcss-nested': {},
-        'autoprefixer': {}
+        autoprefixer: {}
     }
-}
+};
 
 export default config;
