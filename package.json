@@ -41,8 +41,8 @@
         "lint:js:fix": "eslint -c ./eslint.config.ts --fix",
         "lint:css": "stylelint --c ./stylelint.config.ts **/*.css",
         "lint:css:fix": "stylelint -c ./stylelint.config.ts --fix **/*.css",
-        "lint:files": "prettier --check \"**/*.{js,jsx,ts,tsx,css,html,xml,yaml,yml,json,json5,graphql,gql}\"",
-        "lint:files:fix": "prettier --write \"**/*.{js,jsx,ts,tsx,css,html,xml,yaml,yml,json,json5,graphql,gql}\"",
+        "lint:files": "prettier --check \"**/*.{js,jsx,ts,tsx,css,html,yaml,yml,json,json5,graphql,gql}\"",
+        "lint:files:fix": "prettier --write \"**/*.{js,jsx,ts,tsx,css,html,yaml,yml,json,json5,graphql,gql}\"",
         "lint:full": "npm run lint:js && npm run lint:css && npm run lint:files",
         "lint:full:fix": "npm run lint:js:fix && npm run lint:css:fix && npm run lint:files:fix"
     },
