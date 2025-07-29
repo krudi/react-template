@@ -47,17 +47,17 @@
         "lint:full:fix": "npm run lint:js:fix && npm run lint:css:fix && npm run lint:files:fix"
     },
     "dependencies": {
-        "next": "^15.3.4",
-        "react": "^19.1.0",
-        "react-dom": "^19.1.0"
+        "next": "^15.4.4",
+        "react": "^19.1.1",
+        "react-dom": "^19.1.1"
     },
     "devDependencies": {
         "@babel/preset-react": "^7.27.1",
         "@eslint/js": "^9.29.0",
         "@next/eslint-plugin-next": "^15.3.4",
         "@types/node": "^22.15.33",
-        "@types/react": "^19.1.8",
-        "@types/react-dom": "^19.1.6",
+        "@types/react": "^19.1.9",
+        "@types/react-dom": "^19.1.7",
         "@vitejs/plugin-react": "^4.6.0",
         "autoprefixer": "^10.4.21",
         "eslint": "^9.29.0",
