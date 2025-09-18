@@ -2,9 +2,7 @@
 
 import NextError from 'next/error';
 
-import { GlobalErrorProps } from '~/types/Layouts';
-
-export default function GlobalError({ reset }: GlobalErrorProps) {
+export default function GlobalError({ reset }: { reset: () => void }) {
     return (
         <html>
             <body>
