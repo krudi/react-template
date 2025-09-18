@@ -1,20 +1,12 @@
 {
     "name": "react-template",
     "description": "A template with Next.js built on React with focus on performance and best practices.",
-    "licenses": [
-        {
-            "type": "MIT",
-            "url": "https://github.com/krudi/react-template/LICENSE"
-        }
-    ],
-    "version": "0.1.0",
-    "authors": [
-        {
-            "name": "krudi",
-            "email": "patryk.kudlik@gmail.com",
-            "url": "https://github.com/krudi/react-template"
-        }
-    ],
+    "license": "MIT",
+    "author": {
+        "name": "krudi",
+        "email": "patryk.kudlik@gmail.com",
+        "url": "https://github.com/krudi"
+    },
     "private": false,
     "homepage": "https://github.com/krudi/react-template#readme",
     "bugs": {
@@ -37,48 +29,37 @@
         "dev:turbo": "next dev --turbo",
         "build": "next build",
         "start": "next start",
-        "lint:js": "eslint -c ./eslint.config.ts",
-        "lint:js:fix": "eslint -c ./eslint.config.ts --fix",
-        "lint:css": "stylelint --c ./stylelint.config.ts **/*.css",
-        "lint:css:fix": "stylelint -c ./stylelint.config.ts --fix **/*.css",
-        "lint:files": "prettier --check \"**/*.{js,jsx,ts,tsx,css,html,yaml,yml,json,json5,graphql,gql}\"",
-        "lint:files:fix": "prettier --write \"**/*.{js,jsx,ts,tsx,css,html,yaml,yml,json,json5,graphql,gql}\"",
-        "lint:full": "npm run lint:js && npm run lint:css && npm run lint:files",
-        "lint:full:fix": "npm run lint:js:fix && npm run lint:css:fix && npm run lint:files:fix"
+        "typecheck": "tsc -p tsconfig.json --noEmit",
+        "lint:eslint": "eslint .",
+        "lint:eslint:fix": "eslint . --fix",
+        "lint:stylelint": "stylelint --c ./stylelint.config.mjs **/*.css",
+        "lint:stylelint:fix": "stylelint -c ./stylelint.config.mjs --fix **/*.css"
     },
     "dependencies": {
-        "next": "^15.3.4",
-        "react": "^19.1.0",
-        "react-dom": "^19.1.0"
+        "next": "^15.5.3",
+        "react": "^19.1.1",
+        "react-dom": "^19.1.1"
     },
     "devDependencies": {
         "@babel/preset-react": "^7.27.1",
-        "@eslint/js": "^9.29.0",
-        "@next/eslint-plugin-next": "^15.3.4",
-        "@types/node": "^22.15.33",
-        "@types/react": "^19.1.8",
-        "@types/react-dom": "^19.1.6",
-        "@vitejs/plugin-react": "^4.6.0",
+        "@krudi/eslint-config": "^0.1.4",
+        "@krudi/prettier-config": "^0.1.4",
+        "@krudi/typescript-config": "^0.1.4",
+        "@types/node": "^24.5.2",
+        "@types/react": "^19.1.13",
+        "@types/react-dom": "^19.1.9",
+        "@vitejs/plugin-react": "^5.0.3",
         "autoprefixer": "^10.4.21",
-        "eslint": "^9.29.0",
-        "eslint-config-prettier": "^10.1.5",
-        "eslint-plugin-react": "^7.37.5",
-        "eslint-plugin-react-hooks": "^5.2.0",
-        "eslint-plugin-simple-import-sort": "^12.1.1",
-        "install": "^0.13.0",
-        "jiti": "^2.4.2",
-        "npm": "^11.4.2",
         "postcss": "^8.5.6",
         "postcss-import": "^16.1.1",
         "postcss-load-config": "^6.0.1",
         "postcss-nested": "^7.0.2",
         "postcss-syntax": "^0.36.2",
-        "prettier": "^3.6.1",
+        "prettier": "^3.6.2",
         "prop-types": "^15.8.1",
-        "stylelint": "^16.21.0",
-        "stylelint-config-standard": "^37.0.0",
+        "stylelint": "^16.24.0",
+        "stylelint-config-standard": "^39.0.0",
         "ts-node": "^10.9.2",
-        "typescript": "^5.8.3",
-        "typescript-eslint": "^8.35.0"
+        "typescript": "^5.9.2"
     }
 }
