@@ -1,18 +1,17 @@
-import type { Config } from 'stylelint';
-
-const config: Config = {
+/** @type {import('stylelint').Config} */
+export default {
     extends: 'stylelint-config-standard',
     overrides: [
         {
             files: ['**/*.css'],
-            customSyntax: 'postcss'
-        }
+            customSyntax: 'postcss',
+        },
     ],
     ignoreFiles: [
         '**/*.js',
         '**/*.ts',
         'public/**/*.css',
-        'node_modules/**/*.css'
+        'node_modules/**/*.css',
     ],
     rules: {
         'no-duplicate-selectors': true,
@@ -21,8 +20,8 @@ const config: Config = {
         'selector-no-qualifying-type': [
             true,
             {
-                ignore: ['attribute', 'class', 'id']
-            }
+                ignore: ['attribute', 'class', 'id'],
+            },
         ],
         'selector-max-id': 1,
         'selector-attribute-quotes': 'always',
@@ -36,15 +35,15 @@ const config: Config = {
         'comment-empty-line-before': [
             'always',
             {
-                except: ['first-nested']
-            }
+                except: ['first-nested'],
+            },
         ],
         'at-rule-no-vendor-prefix': true,
         'rule-empty-line-before': [
             'always',
             {
-                except: ['after-single-line-comment', 'first-nested']
-            }
+                except: ['after-single-line-comment', 'first-nested'],
+            },
         ],
         'selector-pseudo-element-colon-notation': 'double',
         'selector-no-vendor-prefix': true,
@@ -56,18 +55,16 @@ const config: Config = {
                 except: [
                     'after-custom-property',
                     'first-nested',
-                    'after-comment'
+                    'after-comment',
                 ],
-                ignore: ['after-comment', 'inside-single-line-block']
-            }
+                ignore: ['after-comment', 'inside-single-line-block'],
+            },
         ],
         'no-descending-specificity': null,
         'shorthand-property-no-redundant-values': null,
         'declaration-block-no-redundant-longhand-properties': null,
         'color-function-notation': 'modern',
         'at-rule-no-deprecated': null,
-        'no-invalid-position-at-import-rule': null
-    }
+        'no-invalid-position-at-import-rule': null,
+    },
 };
-
-export default config;

@@ -1,40 +1,20 @@
 {
-    "include": [
-        "**/*.ts",
-        "**/*.tsx",
-        "*.d.ts",
-        ".*.ts",
-        ".next/types/**/*.ts",
-        "next-env.d.ts"
-    ],
-    "exclude": ["node_modules", ".next"],
+    "extends": "@krudi/typescript-config/nextjs.json",
     "compilerOptions": {
         "baseUrl": ".",
         "paths": {
-            "~/*": ["*"],
-            "~/components/*": ["components/*"],
-            "~/lib/*": ["lib/*"]
-        },
-        "types": ["node"],
-        "target": "ES5",
-        "lib": ["DOM", "DOM.Iterable", "ESNext"],
-        "allowJs": true,
-        "skipLibCheck": true,
-        "strict": false,
-        "strictNullChecks": true,
-        "forceConsistentCasingInFileNames": true,
-        "noEmit": true,
-        "esModuleInterop": true,
-        "module": "ESNext",
-        "moduleResolution": "node",
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-        "incremental": true,
-        "plugins": [
-            {
-                "name": "next"
-            }
-        ],
-        "jsx": "preserve"
-    }
+            "@/*": ["./*"],
+            "@/components/*": ["components/*"]
+        }
+    },
+    "include": [
+        "next-env.d.ts",
+        "**/*.ts",
+        "**/*.tsx",
+        ".next/types/**/*.ts",
+        "next.config.mjs",
+        "stylelint.config.mjs",
+        "postcss.config.mjs"
+    ],
+    "exclude": ["node_modules"]
 }
