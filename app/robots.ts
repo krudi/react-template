@@ -9,9 +9,9 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
         rules: {
             userAgent: '*',
             allow: '/',
-            disallow: ['/error', '/not-found']
+            disallow: ['/error', '/not-found'],
         },
         host: `https://${domain}`,
-        sitemap: `https://${domain}/sitemap.xml`
+        sitemap: `https://${domain}/sitemap.xml`,
     };
 }

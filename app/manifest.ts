@@ -20,56 +20,56 @@ export default function manifest(): MetadataRoute.Manifest {
                 src: 'favicons/favicon-16x16.png',
                 type: 'image/png',
                 sizes: '16x16',
-                purpose: 'maskable'
+                purpose: 'maskable',
             },
             {
                 src: 'favicons/favicon-32x32.png',
                 type: 'image/png',
                 sizes: '32x32',
-                purpose: 'maskable'
+                purpose: 'maskable',
             },
             {
                 src: 'favicons/favicon-36x36.png',
                 type: 'image/png',
                 sizes: '36x36',
-                purpose: 'maskable'
+                purpose: 'maskable',
             },
             {
                 src: 'favicons/favicon-48x48.png',
                 type: 'image/png',
                 sizes: '48x48',
-                purpose: 'maskable'
+                purpose: 'maskable',
             },
             {
                 src: 'favicons/favicon-72x72.png',
                 type: 'image/png',
                 sizes: '72x72',
-                purpose: 'maskable'
+                purpose: 'maskable',
             },
             {
                 src: 'favicons/favicon-96x96.png',
                 type: 'image/png',
                 sizes: '96x96',
-                purpose: 'any'
+                purpose: 'any',
             },
             {
                 src: 'favicons/favicon-144x144.png',
                 type: 'image/png',
                 sizes: '144x144',
-                purpose: 'maskable'
+                purpose: 'maskable',
             },
             {
                 src: 'favicons/android-icon-192x192.png',
                 type: 'image/png',
                 sizes: '192x192',
-                purpose: 'any'
+                purpose: 'any',
             },
             {
                 src: 'favicons/favicon-512x512.png',
                 type: 'image/png',
                 sizes: '512x512',
-                purpose: 'any'
-            }
+                purpose: 'any',
+            },
         ],
         screenshots: [
             {
@@ -77,15 +77,15 @@ export default function manifest(): MetadataRoute.Manifest {
                 sizes: '1280x720',
                 type: 'image/webp',
                 label: 'Homescreen of the app in the desktop view.',
-                form_factor: 'wide'
+                form_factor: 'wide',
             },
             {
                 src: 'manifest/mobile-home-screen-view.webp',
                 sizes: '540x720',
                 type: 'image/webp',
                 label: 'Homescreen of the app in the mobile view.',
-                form_factor: 'narrow'
-            }
-        ]
+                form_factor: 'narrow',
+            },
+        ],
     };
 }
