@@ -1,88 +1,23 @@
 version: 2
 updates:
-    - package-ecosystem: 'github-actions'
-      directory: '/'
-      schedule:
-          interval: 'daily'
-      labels:
-          - 'dependencies'
-      commit-message:
-          prefix: 'build(deps)'
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    labels:
+      - "dependencies"
+    commit-message:
+      prefix: "build(deps)"
 
-    - package-ecosystem: 'npm'
-      directory: '/'
-      schedule:
-          interval: 'daily'
-      labels:
-          - 'dependencies'
-      commit-message:
-          prefix: 'build(deps)'
-      ignore:
-          - dependency-name: '*'
-            update-types:
-                - 'version-update:semver-major'
-
-      groups:
-          framework:
-              patterns:
-                  - 'next'
-                  - 'react'
-                  - 'react-dom'
-              update-types:
-                  - 'minor'
-                  - 'patch'
-
-          linting-and-formatting:
-              patterns:
-                  - 'eslint'
-                  - 'eslint-config-prettier'
-                  - 'eslint-plugin-react'
-                  - 'eslint-plugin-react-hooks'
-                  - 'eslint-plugin-simple-import-sort'
-                  - '@eslint/js'
-                  - '@next/eslint-plugin-next'
-                  - 'stylelint'
-                  - 'stylelint-config-standard'
-                  - 'prettier'
-              update-types:
-                  - 'minor'
-                  - 'patch'
-
-          typings:
-              patterns:
-                  - '@types/node'
-                  - '@types/react'
-                  - '@types/react-dom'
-              update-types:
-                  - 'minor'
-                  - 'patch'
-
-          build-tools:
-              patterns:
-                  - 'typescript'
-                  - 'ts-node'
-                  - 'typescript-eslint'
-                  - '@vitejs/plugin-react'
-                  - '@babel/preset-react'
-              update-types:
-                  - 'minor'
-                  - 'patch'
-
-          postcss:
-              patterns:
-                  - 'postcss'
-                  - 'postcss-import'
-                  - 'postcss-load-config'
-                  - 'postcss-nested'
-                  - 'postcss-syntax'
-                  - 'autoprefixer'
-              update-types:
-                  - 'minor'
-                  - 'patch'
-
-          utilities:
-              patterns:
-                  - 'prop-types'
-              update-types:
-                  - 'minor'
-                  - 'patch'
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    labels:
+      - "dependencies"
+    commit-message:
+      prefix: "build(deps)"
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - "version-update:semver-major"
