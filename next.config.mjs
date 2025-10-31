@@ -4,6 +4,7 @@
 const nextConfig = {
     experimental: {
         globalNotFound: true,
+        authInterrupts: true,
     },
     reactStrictMode: true,
 };
