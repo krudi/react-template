@@ -1,4 +1,5 @@
 {
+    "$schema": "https://json.schemastore.org/package.json",
     "name": "react-template",
     "description": "A template with Next.js built on React with focus on performance and best practices.",
     "license": "MIT",
@@ -20,9 +21,10 @@
         "url": "https://github.com/krudi/react-template.git"
     },
     "engines": {
-        "node": ">= 23.11.0",
-        "npm": ">= 10.8.1"
+        "node": ">= 22.18.0",
+        "npm": ">= 11.6.2"
     },
+    "packageManager": "npm@11.6.2",
     "type": "module",
     "scripts": {
         "dev": "next dev",
@@ -30,36 +32,34 @@
         "build": "next build",
         "start": "next start",
         "typecheck": "tsc -p tsconfig.json --noEmit",
-        "lint:eslint": "eslint .",
-        "lint:eslint:fix": "eslint . --fix",
+        "lint:eslint": "eslint . --cache --cache-location .cache/.eslintcache",
+        "lint:eslint:fix": "eslint . --fix --cache --cache-location .cache/.eslintcache",
         "lint:stylelint": "stylelint --c ./stylelint.config.mjs **/*.css",
         "lint:stylelint:fix": "stylelint -c ./stylelint.config.mjs --fix **/*.css"
     },
     "dependencies": {
-        "next": "^15.5.3",
-        "react": "^19.1.1",
-        "react-dom": "^19.1.1"
+        "next": "^16.0.1",
+        "react": "^19.2.0",
+        "react-dom": "^19.2.0"
     },
     "devDependencies": {
-        "@babel/preset-react": "^7.27.1",
-        "@krudi/eslint-config": "^0.1.4",
-        "@krudi/prettier-config": "^0.1.4",
-        "@krudi/typescript-config": "^0.1.4",
-        "@types/node": "^24.5.2",
-        "@types/react": "^19.1.13",
-        "@types/react-dom": "^19.1.9",
-        "@vitejs/plugin-react": "^5.0.3",
+        "@babel/preset-react": "^7.28.5",
+        "@krudi/eslint-config": "^0.1.7",
+        "@krudi/prettier-config": "^0.1.6",
+        "@krudi/typescript-config": "^0.1.7",
+        "@types/node": "^24.9.2",
+        "@types/react": "^19.2.2",
+        "@types/react-dom": "^19.2.2",
         "autoprefixer": "^10.4.21",
         "postcss": "^8.5.6",
         "postcss-import": "^16.1.1",
         "postcss-load-config": "^6.0.1",
         "postcss-nested": "^7.0.2",
         "postcss-syntax": "^0.36.2",
-        "prettier": "^3.6.2",
-        "prop-types": "^15.8.1",
-        "stylelint": "^16.24.0",
-        "stylelint-config-standard": "^39.0.0",
+        "stylelint": "^16.25.0",
+        "stylelint-config-standard": "^39.0.1",
+        "stylelint-order": "^7.0.0",
         "ts-node": "^10.9.2",
-        "typescript": "^5.9.2"
+        "typescript": "^5.9.3"
     }
 }
