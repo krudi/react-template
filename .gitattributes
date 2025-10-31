@@ -1,0 +1,72 @@
+* text=auto eol=lf
+
+# Next.js
+*.ts            text eol=lf
+*.tsx           text eol=lf
+*.js            text eol=lf
+*.jsx           text eol=lf
+*.mjs           text eol=lf
+*.cjs           text eol=lf
+*.d.ts          text eol=lf
+
+# Configuration & data
+*.json          text eol=lf diff=json
+*.json5         text eol=lf diff=json
+*.jsonc         text eol=lf diff=json
+*.yaml          text eol=lf diff=yaml
+*.yml           text eol=lf diff=yaml
+*.toml          text eol=lf
+*.ini           text eol=lf
+*.env           text eol=lf
+*.env.*         text eol=lf
+*.dotenv        text eol=lf
+*.tsbuildinfo   text eol=lf
+*.lock          text eol=lf
+
+# Styles & markup
+*.css           text eol=lf diff=css
+*.scss          text eol=lf
+*.sass          text eol=lf
+*.less          text eol=lf
+*.pcss          text eol=lf
+*.md            text eol=lf diff=markdown
+*.mdx           text eol=lf diff=markdown
+*.html          text eol=lf diff=html
+*.svg           text eol=lf
+
+# Binary assets
+*.png           binary
+*.jpg           binary
+*.jpeg          binary
+*.gif           binary
+*.webp          binary
+*.avif          binary
+*.ico           binary
+*.ttf           binary
+*.otf           binary
+*.woff          binary
+*.woff2         binary
+*.mp4           binary
+*.mov           binary
+*.mp3           binary
+*.wav           binary
+*.ogg           binary
+
+# Export rules
+/.github/        export-ignore
+/.vscode/        export-ignore
+/.husky/         export-ignore
+.env             export-ignore
+.env.*           export-ignore
+.next/           export-ignore
+.turbo/          export-ignore
+.vercel/         export-ignore
+node_modules/    export-ignore
+dist/            export-ignore
+build/           export-ignore
+out/             export-ignore
+coverage/        export-ignore
+reports/         export-ignore
+*.log            export-ignore
+*.cache          export-ignore
+*.tmp            export-ignore
