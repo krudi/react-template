@@ -1,12 +1,13 @@
 import '@/styles/styles.css';
 
-import Footer from 'components/footer';
-import Header from 'components/header';
-import Navigation from 'components/navigation';
 import type { Metadata, Viewport } from 'next';
 import { Roboto } from 'next/font/google';
 import { headers } from 'next/headers';
 
+import Footer from '@/components/footer';
+import Header from '@/components/header';
+import Navigation from '@/components/navigation';
+\
 export const generateMetadata = async (): Promise<Metadata> => {
     const headersList = await headers();
     const domain = headersList.get('host') as string;
