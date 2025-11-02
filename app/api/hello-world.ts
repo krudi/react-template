@@ -1,12 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-type Data = {
-    name: string;
-};
-
 export default function handler(
     req: NextApiRequest,
-    res: NextApiResponse<Data>
+    res: NextApiResponse<{ message: string }>
 ) {
-    res.status(200).json({ name: 'John Doe' });
+    res.status(200).json({ message: 'Hello from Next.js!' });
 }
