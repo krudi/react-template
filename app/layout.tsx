@@ -3,11 +3,12 @@ import '@/styles/styles.css';
 import type { Metadata, Viewport } from 'next';
 import { Roboto } from 'next/font/google';
 import { headers } from 'next/headers';
+import type { ReactNode } from 'react';
 
 import Footer from '@/components/footer';
 import Header from '@/components/header';
 import Navigation from '@/components/navigation';
-\
+
 export const generateMetadata = async (): Promise<Metadata> => {
     const headersList = await headers();
     const domain = headersList.get('host') as string;
@@ -177,11 +178,7 @@ const roboto = Roboto({
     display: 'swap',
 });
 
-export default function RootLayout({
-    children,
-}: {
-    children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
     return (
         <html
             lang="en"
