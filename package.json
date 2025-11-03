@@ -46,7 +46,7 @@
         "@babel/preset-react": "^7.28.5",
         "@krudi/eslint-config": "^0.1.7",
         "@krudi/prettier-config": "^0.1.6",
-        "@krudi/typescript-config": "^0.1.7",
+        "@krudi/typescript-config": "^0.1.9",
         "@types/node": "^24.9.2",
         "@types/react": "^19.2.2",
         "@types/react-dom": "^19.2.2",
