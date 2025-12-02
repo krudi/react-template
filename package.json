@@ -2,6 +2,7 @@
     "$schema": "https://json.schemastore.org/package.json",
     "name": "react-template",
     "description": "A template with Next.js built on React with focus on performance and best practices.",
+    "version": "0.1.0",
     "license": "MIT",
     "author": {
         "name": "krudi",
