@@ -1,34 +1,29 @@
-# React and Next.js files
-
-.next
-next-env.d.ts
-
-# Environment variables
-
+# Environment
 *.env
 !.env-*
 
-# Dependency directories
-
+# Dependencies
 node_modules
 
-# ESLint files
+# Build output
+build
+dist
+dev-dist
+.next
+next-env.d.ts
 
+# Tooling caches
+.cache/
 .cache/.eslintcache
 .eslint-config-inspector
-
-# TypeScript files
-
 .cache/tsbuildinfo.json
 
-# macOS and iOS files
-
+# OS files
 .DS_Store
 .AppleDouble
 .LSOverride
 
-# Compiled files
-
+# Compiled artifacts
 *.com
 *.class
 *.dll
@@ -36,8 +31,7 @@ node_modules
 *.o
 *.so
 
-# Secret files
-
+# Secrets
 *.der
 *.key
 *.pem
