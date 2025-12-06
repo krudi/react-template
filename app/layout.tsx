@@ -17,14 +17,12 @@ export const generateMetadata = async (): Promise<Metadata> => {
         title: 'react-template',
         metadataBase: new URL(`https://${domain}`),
         applicationName: 'react-template',
-        description:
-            'A template with Next.js built on React with focus on performance and best practices.',
+        description: 'A template with Next.js built on React with focus on performance and best practices.',
         keywords: ['template'],
         referrer: 'origin-when-cross-origin',
         openGraph: {
             title: 'react-template',
-            description:
-                'A template with Next.js built on React with focus on performance and best practices.',
+            description: 'A template with Next.js built on React with focus on performance and best practices.',
             url: `https://${domain}`,
             siteName: 'Next.js',
             images: [
@@ -40,8 +38,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
         },
         twitter: {
             title: 'react-template',
-            description:
-                'My template with Next.js built on React with focus on performance and best practices.',
+            description: 'My template with Next.js built on React with focus on performance and best practices.',
             card: 'summary_large_image',
             creator: '@twitter',
             creatorId: '1467726470533754880',

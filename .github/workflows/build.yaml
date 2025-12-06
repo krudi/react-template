@@ -3,36 +3,38 @@ name: Build
 on: [push]
 
 concurrency:
-  group: build-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+    group: build-${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
 
 permissions:
-  contents: read
+    contents: read
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v6
 
-      - name: Set up Node.js environment
-        uses: actions/setup-node@v6
-        with:
-          cache: npm
+            - name: Set up Node.js environment
+              uses: actions/setup-node@v6
+              with:
+                  cache: npm
 
-      - name: Cache node modules and Next.js build cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.npm
-            ${{ github.workspace }}/.next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
-          restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
+            - name: Cache node modules and Next.js build cache
+              uses: actions/cache@v4
+              with:
+                  path: |
+                      ~/.npm
+                      ${{ github.workspace }}/.next/cache
+                  key:
+                      ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.js',
+                      '**/*.jsx', '**/*.ts', '**/*.tsx') }}
+                  restore-keys: |
+                      ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
 
-      - name: Install dependencies
-        run: npm install
+            - name: Install dependencies
+              run: npm install
 
-      - name: Compile and build
-        run: npm run build
+            - name: Compile and build
+              run: npm run build
