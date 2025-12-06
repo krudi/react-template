@@ -30,7 +30,7 @@
         "lint:eslint:fix": "eslint . --fix --cache --cache-location .cache/.eslintcache",
         "lint:prettier": "prettier --check . --cache --cache-strategy metadata --cache-location .cache/.prettiercache",
         "lint:prettier:fix": "prettier --write . --cache --cache-strategy metadata --cache-location .cache/.prettiercache",
-        "lint:stylelint": "stylelint --cache --cache-location .cache/.stylelintcache --c ./stylelint.config.mjs */.css",
+        "lint:stylelint": "stylelint --cache --cache-location .cache/.stylelintcache -c ./stylelint.config.mjs **/*.css",
         "lint:stylelint:fix": "stylelint --cache --cache-location .cache/.stylelintcache -c ./stylelint.config.mjs --fix **/*.css",
         "start": "next start",
         "typecheck": "tsc -p tsconfig.json --noEmit"
