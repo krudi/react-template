@@ -1,47 +1,38 @@
 name: Lint
 
-on: [push, pull_request]
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
 
 concurrency:
-    group: lint-${{ github.workflow }}-${{ github.ref }}
-    cancel-in-progress: true
+  group: lint-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
-    contents: read
+  contents: read
 
 jobs:
-    lint:
-        runs-on: ubuntu-latest
-        strategy:
-            fail-fast: false
-            matrix:
-                lint-commands:
-                    - 'npm run lint:eslint'
-                    - 'npm run lint:stylelint'
+  lint:
+    if: ${{ github.actor != 'dependabot[bot]' }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        lint-commands:
+          - "npm run lint:eslint"
+          - "npm run lint:stylelint"
 
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@v6
-
-            - name: Set up Node.js environment
-              uses: actions/setup-node@v6
-              with:
-                  cache: npm
-
-            - name: Cache node modules and Next.js build cache
-              uses: actions/cache@v4
-              with:
-                  path: |
-                      ~/.npm
-                      ${{ github.workspace }}/.next/cache
-                  key:
-                      ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.js',
-                      '**/*.jsx', '**/*.ts', '**/*.tsx') }}
-                  restore-keys: |
-                      ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
-
-            - name: Install dependencies
-              run: npm install
-
-            - name: Run lint command (${{ matrix.lint-commands }})
-              run: ${{ matrix.lint-commands }}
+    steps:
+      - uses: krudi/reusable-actions/.github/actions/github-checkout@main
+      - uses: krudi/reusable-actions/.github/actions/node-setup@main
+        with:
+          cache: npm
+          node_version_file: .nvmrc
+      - uses: krudi/reusable-actions/.github/actions/node-next-cache@main
+      - uses: krudi/reusable-actions/.github/actions/node-install@main
+      - uses: krudi/reusable-actions/.github/actions/ci-command@main
+        with:
+          command: ${{ matrix.lint-commands }}
