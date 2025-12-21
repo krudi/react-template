@@ -165,7 +165,6 @@ const roboto = Roboto({
     weight: ['400', '500', '700'],
     subsets: ['latin'],
     display: 'swap',
-    variable: '--body-font-family',
 });
 
 export default function RootLayout({ children }: { children: ReactNode }) {
