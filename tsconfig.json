@@ -2,8 +2,13 @@
     "extends": "@krudi/typescript-config/nextjs.json",
     "compilerOptions": {
         "paths": {
-            "@/*": ["./*"],
-            "@components/*": ["./components/*"]
+            "@/*": ["./src/*"],
+            "@app/*": ["./src/app/*"],
+            "@components/*": ["./src/components/*"],
+            "@lib/*": ["./src/lib/*"],
+            "@styles/*": ["./src/styles/*"],
+            "@types": ["./src/types/index"],
+            "@types/*": ["./src/types/*"],
         }
     },
     "include": [
