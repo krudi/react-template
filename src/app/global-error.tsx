@@ -14,9 +14,11 @@ export default function GlobalError({ reset }: { reset: () => void }) {
                     <hr className="hr" />
 
                     <h4>Something went wrong!</h4>
-                    <p>
+
+                    <div>
                         <NextError statusCode={0} />
-                    </p>
+                    </div>
+
                     <button onClick={() => reset()}>Try again</button>
                 </section>
             </body>
