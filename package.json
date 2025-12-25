@@ -43,7 +43,7 @@
     },
     "devDependencies": {
         "@babel/preset-react": "^7.28.5",
-        "@krudi/eslint-config": "^0.1.7",
+        "@krudi/eslint-config": "^0.1.8",
         "@krudi/prettier-config": "^0.1.8",
         "@krudi/stylelint-config": "^0.1.1",
         "@krudi/typescript-config": "^0.1.9",
