@@ -13,9 +13,10 @@ dev-dist
 next-env.d.ts
 
 # Tooling caches files
-.cache/
 .cache/.eslintcache
 .eslint-config-inspector
+.cache/.prettiercache
+.cache/.stylelintcache
 .cache/tsbuildinfo.json
 
 # OS files

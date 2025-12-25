@@ -10,16 +10,16 @@ public
 .next
 
 # Environment files
-**/.env
-**/.env.*
+*.env
+!.env-*
 
 # Git files
-**/.gitignore
-**/.gitkeep
+.gitignore
+.gitkeep
 
 # Tooling files
-**/.prettierignore
-**/*.tsbuildinfo
+.prettierignore
+*.tsbuildinfo
 
 # Lock files
 package-lock.json
