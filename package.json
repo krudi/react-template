@@ -23,6 +23,7 @@
     },
     "type": "module",
     "scripts": {
+        "clean": "rm -rf .cache node_modules .next",
         "build": "next build",
         "dev": "next dev",
         "dev:turbo": "next dev --turbo",
