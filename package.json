@@ -13,7 +13,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/krudi/react-template.git"
+        "url": "git+https://github.com/krudi/react-template.git"
     },
     "license": "MIT",
     "author": {
@@ -54,7 +54,7 @@
         "postcss": "^8.5.6",
         "postcss-import": "^16.1.1",
         "postcss-load-config": "^6.0.1",
-        "postcss-nested": "^7.0.2",
+        "postcss-nesting": "^13.0.2",
         "postcss-syntax": "^0.36.2",
         "ts-node": "^10.9.2",
         "typescript": "^5.9.3"
