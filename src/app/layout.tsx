@@ -13,6 +13,17 @@ export const metadata: Metadata = {
     applicationName: 'react-template',
     description: 'A template with Next.js built on React with focus on performance and best practices.',
     keywords: ['template'],
+    authors: [
+        {
+            name: 'Patryk Kudlik',
+            url: process.env.NEXT_PUBLIC_SITE_URL,
+        },
+    ],
+    creator: 'Patryk Kudlik',
+    publisher: 'Patryk Kudlik',
+    alternates: {
+        canonical: process.env.NEXT_PUBLIC_SITE_URL,
+    },
     referrer: 'origin-when-cross-origin',
     openGraph: {
         title: 'react-template',
@@ -21,7 +32,7 @@ export const metadata: Metadata = {
         siteName: 'react-template',
         images: [
             {
-                url: `${process.env.NEXT_PUBLIC_SITE_URL!}/meta-tags/page-view.webp`,
+                url: `${process.env.NEXT_PUBLIC_SITE_URL!}/meta-tags/page-view.png`,
                 width: 1800,
                 height: 1600,
                 alt: 'Alternative description',
@@ -35,14 +46,15 @@ export const metadata: Metadata = {
         description: 'A template with Next.js built on React with focus on performance and best practices.',
         card: 'summary_large_image',
         creator: '@twitter',
-        creatorId: '1467726470533754880',
-        siteId: '1467726470533754880',
         images: [
             {
-                url: `${process.env.NEXT_PUBLIC_SITE_URL!}/meta-tags/page-view.webp`,
+                url: `${process.env.NEXT_PUBLIC_SITE_URL!}/meta-tags/page-view.png`,
                 alt: 'Alternative description',
             },
         ],
+    },
+    verification: {
+        google: 'Q9rK2mA0ZxWcE4B_HY8nLJpUoFqGdS7V5tI1eM6l3',
     },
     icons: {
         icon: [
