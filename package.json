@@ -38,7 +38,7 @@
     },
     "dependencies": {
         "next": "^16.1.4",
-        "react": "^19.2.1",
+        "react": "^19.2.4",
         "react-dom": "^19.2.3"
     },
     "devDependencies": {
@@ -48,7 +48,7 @@
         "@krudi/stylelint-config": "^0.1.1",
         "@krudi/typescript-config": "^0.1.9",
         "@types/node": "^24.10.9",
-        "@types/react": "^19.2.9",
+        "@types/react": "^19.2.10",
         "@types/react-dom": "^19.2.3",
         "autoprefixer": "^10.4.23",
         "postcss": "^8.5.6",
