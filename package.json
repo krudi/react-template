@@ -47,7 +47,7 @@
         "@krudi/prettier-config": "^0.1.8",
         "@krudi/stylelint-config": "^0.1.1",
         "@krudi/typescript-config": "^0.1.9",
-        "@types/node": "^24.10.13",
+        "@types/node": "^24.10.15",
         "@types/react": "^19.2.14",
         "@types/react-dom": "^19.2.3",
         "autoprefixer": "^10.4.24",
