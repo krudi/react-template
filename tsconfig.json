@@ -6,16 +6,16 @@
             "@app/*": ["./src/app/*"],
             "@components/*": ["./src/components/*"],
             "@lib/*": ["./src/lib/*"],
+            "@utils/*": ["./src/utils/*"],
             "@styles/*": ["./src/styles/*"],
-            "@types": ["./src/types/index"],
-            "@types/*": ["./src/types/*"],
+            "@models": ["./src/types/index"],
+            "@models/*": ["./src/types/*"]
         }
     },
     "include": [
         "next-env.d.ts",
-        "app/**/*.ts",
-        "app/**/*.tsx",
-        "components/**/*.tsx",
+        "src/**/*.ts",
+        "src/**/*.tsx",
         "client.d.ts",
         ".next/types/**/*.ts",
         ".next/dev/types/**/*.ts"
