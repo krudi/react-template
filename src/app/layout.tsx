@@ -7,55 +7,54 @@ import type { Metadata, Viewport } from 'next';
 import { Roboto } from 'next/font/google';
 import type { ReactNode } from 'react';
 
+import { siteMetadata } from '@utils/seo';
+import { siteUrl } from '@utils/site-url';
+
 export const metadata: Metadata = {
-    title: 'react-template',
-    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL!),
-    applicationName: 'react-template',
-    description: 'A template with Next.js built on React with focus on performance and best practices.',
-    keywords: ['template'],
-    authors: [
-        {
-            name: 'Patryk Kudlik',
-            url: process.env.NEXT_PUBLIC_SITE_URL,
-        },
-    ],
-    creator: 'Patryk Kudlik',
-    publisher: 'Patryk Kudlik',
+    title: {
+        default: siteMetadata.title,
+        template: `%s | ${siteMetadata.title}`,
+    },
+    metadataBase: new URL(siteUrl),
+    applicationName: siteMetadata.title,
+    description: siteMetadata.description,
+    keywords: siteMetadata.keywords,
+    authors: siteMetadata.authors,
+    creator: siteMetadata.name,
+    publisher: siteMetadata.name,
     alternates: {
-        canonical: process.env.NEXT_PUBLIC_SITE_URL,
+        canonical: siteUrl,
     },
     referrer: 'origin-when-cross-origin',
     openGraph: {
-        title: 'react-template',
-        description: 'A template with Next.js built on React with focus on performance and best practices.',
-        url: process.env.NEXT_PUBLIC_SITE_URL!,
-        siteName: 'react-template',
+        title: siteMetadata.title,
+        description: siteMetadata.description,
+        url: siteUrl,
+        siteName: siteMetadata.name,
         images: [
             {
-                url: `${process.env.NEXT_PUBLIC_SITE_URL!}/meta-tags/page-view.png`,
-                width: 1800,
-                height: 1600,
-                alt: 'Alternative description',
+                url: siteMetadata.ogImage.url,
+                width: siteMetadata.ogImage.width,
+                height: siteMetadata.ogImage.height,
+                alt: siteMetadata.ogImage.alt,
             },
         ],
         locale: 'en-US',
         type: 'website',
     },
     twitter: {
-        title: 'react-template',
-        description: 'A template with Next.js built on React with focus on performance and best practices.',
+        title: siteMetadata.title,
+        description: siteMetadata.description,
         card: 'summary_large_image',
         creator: '@twitter',
         images: [
             {
-                url: `${process.env.NEXT_PUBLIC_SITE_URL!}/meta-tags/page-view.png`,
-                alt: 'Alternative description',
+                url: siteMetadata.ogImage.url,
+                alt: siteMetadata.ogImage.alt,
             },
         ],
     },
-    verification: {
-        google: 'Q9rK2mA0ZxWcE4B_HY8nLJpUoFqGdS7V5tI1eM6l3',
-    },
+    verification: siteMetadata.verification,
     icons: {
         icon: [
             {

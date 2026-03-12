@@ -1,4 +1,14 @@
+import type { Metadata } from 'next';
 import Script from 'next/script';
+
+import { createPageMetadata } from '@utils/seo';
+
+export const metadata: Metadata = createPageMetadata({
+    path: '/',
+    title: 'Homepage',
+    description: 'Starter homepage for the React Template project built with Next.js and focused on performance.',
+    keywords: ['react template', 'next.js', 'homepage', 'starter'],
+});
 
 export default function Page() {
     return (
