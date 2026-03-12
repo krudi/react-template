@@ -1,14 +1,14 @@
 import { MetadataRoute } from 'next';
-import { headers } from 'next/headers';
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    const headersList = await headers();
-    const domain = headersList.get('host') as string;
+import { siteUrl } from '@utils/site-url';
 
-    return [
-        {
-            url: `https://${domain}`,
-            lastModified: new Date().toISOString(),
-        },
-    ];
+const publicRoutes = ['/'];
+
+export default function sitemap(): MetadataRoute.Sitemap {
+    const lastModified = new Date();
+
+    return publicRoutes.map((route) => ({
+        url: new URL(route, siteUrl).toString(),
+        lastModified,
+    }));
 }
