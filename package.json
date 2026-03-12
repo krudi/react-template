@@ -19,7 +19,7 @@
     "author": {
         "name": "krudi",
         "email": "patryk.kudlik@gmail.com",
-        "url": "https://github.com/krudi"
+        "url": "https://krudi.io"
     },
     "type": "module",
     "scripts": {
@@ -61,7 +61,7 @@
     },
     "packageManager": "npm@11.6.4",
     "engines": {
-        "node": ">= 22.18.0",
+        "node": ">= 24.14.0",
         "npm": ">= 11.6.4"
     }
 }
