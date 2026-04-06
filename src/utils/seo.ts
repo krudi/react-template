@@ -1,6 +1,5 @@
-import type { Metadata } from 'next';
-
 import { siteUrl } from '@utils/site-url';
+import type { Metadata } from 'next';
 
 export const siteMetadata = {
     siteUrl,

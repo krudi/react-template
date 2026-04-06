@@ -1,7 +1,6 @@
+import { createPageMetadata } from '@utils/seo';
 import type { Metadata } from 'next';
 import Script from 'next/script';
-
-import { createPageMetadata } from '@utils/seo';
 
 export const metadata: Metadata = createPageMetadata({
     path: '/',

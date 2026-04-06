@@ -3,12 +3,11 @@ import '@styles/styles.css';
 import Footer from '@components/footer';
 import Header from '@components/header';
 import Navigation from '@components/navigation';
+import { siteMetadata } from '@utils/seo';
+import { siteUrl } from '@utils/site-url';
 import type { Metadata, Viewport } from 'next';
 import { Roboto } from 'next/font/google';
 import type { ReactNode } from 'react';
-
-import { siteMetadata } from '@utils/seo';
-import { siteUrl } from '@utils/site-url';
 
 export const metadata: Metadata = {
     title: {
