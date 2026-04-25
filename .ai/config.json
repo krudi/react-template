@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "project": {
+    "name": "react-template",
+    "description": "Minimal Next.js 16 starter template",
+    "type": "nextjs",
+    "isTemplate": true
+  },
+  "stack": {
+    "language": "typescript",
+    "framework": "nextjs",
+    "frameworkVersion": "16",
+    "runtime": "node",
+    "packageManager": "npm"
+  },
+  "commands": {
+    "dev": "npm run dev",
+    "build": "npm run build",
+    "lint": "npm run lint",
+    "typecheck": "npm run typecheck"
+  },
+  "ports": {
+    "dev": 3000
+  },
+  "integrations": {
+    "sharedConfigs": "@krudi/eslint-config, @krudi/typescript-config, @krudi/prettier-config"
+  },
+  "docs": {
+    "agentsFile": "AGENTS.md",
+    "claudeFile": "CLAUDE.md",
+    "rules": ".ai/rules/nextjs.md",
+    "lessons": ".ai/memory/lessons.md"
+  }
+}
