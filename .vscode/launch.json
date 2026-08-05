@@ -8,7 +8,7 @@
             "command": "npm run dev"
         },
         {
-            "name": "Next.js: debug client-side (Google CHrome)",
+            "name": "Next.js: debug client-side (Google Chrome)",
             "type": "chrome",
             "request": "launch",
             "url": "http://localhost:3000"
@@ -34,8 +34,7 @@
             "runtimeArgs": ["--inspect"],
             "skipFiles": ["<node_internals>/**"],
             "serverReadyAction": {
-                "action": "debugWithEdge",
-                "killOnServerStop": true,
+                "action": "debugWithChrome",
                 "pattern": "- Local:.+(https?://.+)",
                 "uriFormat": "%s",
                 "webRoot": "${workspaceFolder}"

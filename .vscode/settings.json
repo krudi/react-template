@@ -1,15 +1,16 @@
 {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "oxc.oxc-vscode",
     "editor.codeActionsOnSave": {
+        "source.fixAll.oxc": "explicit",
         "source.addMissingImports.ts": "never",
-        "source.fixAll.eslint": "explicit",
-        "source.fixAll.stylelint": "never",
         "source.organizeImports": "never",
         "source.removeUnused.ts": "never",
         "source.removeUnusedImports": "never",
         "source.sort.json": "never",
         "source.sortImports": "never"
     },
+    "oxc.fmt.configPath": ".oxfmtrc.json",
+    "oxc.fmt.experimental": true,
     "js/ts.tsdk.path": "node_modules/typescript/lib",
     "js/ts.tsdk.promptToUseWorkspaceVersion": true
 }
