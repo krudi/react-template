@@ -1,18 +1,19 @@
 # React Template
 
-Minimal Next.js 16 + React 19 starter template. Intentionally lean — only core dependencies included. Use this as the base when starting a new Next.js project.
+Minimal Next.js 16 + React 19 starter template. Intentionally lean — only core dependencies included. Use this as the
+base when starting a new Next.js project.
 
 ## Stack
 
 - Next.js 16 (App Router), React 19, TypeScript
-- Shared configs: `@krudi/eslint-config`, `@krudi/typescript-config`, `@krudi/prettier-config`
+- Lint/format: oxlint + oxfmt · TypeScript config: `@krudi/typescript-config`
 
 ## Commands
 
 ```bash
 npm run dev        # start dev server (localhost:3000)
 npm run build      # production build
-npm run lint       # eslint + prettier + stylelint
+npm run lint       # oxlint + oxfmt --check
 npm run typecheck  # tsc --noEmit
 ```
 
@@ -26,7 +27,7 @@ npm run typecheck  # tsc --noEmit
 
 ## Cross-project context
 
-- **Uses config from:** `shared-configs` (`@krudi/eslint-config`, `@krudi/typescript-config`, `@krudi/prettier-config`)
+- **Uses config from:** `shared-configs` (`@krudi/typescript-config`)
 - When `shared-configs` publishes a new version, update `package.json` in this template
 
 ---
@@ -39,26 +40,12 @@ This template tracks `@krudi/*` config packages — keep them up to date when sh
 
 ## Rules
 
-@.ai/rules/nextjs.md
+@.ai/rules/nextjs.md @.ai/memory/lessons.md @.ai/skills/commit/SKILL.md @.ai/skills/pr/SKILL.md
+@.ai/skills/retrospective/SKILL.md @.ai/skills/test/SKILL.md
 
----
-
-## For Claude Code
-
-### Slash commands
-
-| Command | What it does |
-|---------|---|
-| `/test` | Run lint, typecheck, and build |
-
-### Rules loaded automatically
-
-| Rule file | Applied to |
-|-----------|---|
-| `.ai/rules/nextjs.md` | `**/*.tsx`, `**/*.ts` |
-
-### Constraints
+## Constraints
 
 - This is a template — keep it intentionally lean; do not add feature-specific code
-- When scaffolding a new project from this template, remind the user to update `package.json` name, `app/layout.tsx` metadata, and create a project-specific `AGENTS.md` and `.ai/config.json`
-- Always use `@krudi/*` shared configs — do not add standalone ESLint/Prettier/TypeScript configs
+- When scaffolding a new project from this template, remind the user to update `package.json` name, `app/layout.tsx`
+  metadata, and create a project-specific `AGENTS.md` and `.ai/config.json`
+- Lint and format with oxlint + oxfmt; keep TypeScript config on `@krudi/typescript-config`

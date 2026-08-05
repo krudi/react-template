@@ -19,10 +19,10 @@ alwaysApply: false
 - Server actions: suffix with `Action` (`createUserAction.ts`)
 - Route handlers: `route.ts` inside `app/api/...`
 
-## Shared configs (from `@krudi/*`)
+## Tooling
 
-- ESLint: `@krudi/eslint-config` · TypeScript: `@krudi/typescript-config`
-- Prettier: `@krudi/prettier-config` · Stylelint: `@krudi/stylelint-config`
+- Lint + format: oxlint + oxfmt (root `.oxlintrc.json` / `.oxfmtrc.json`)
+- TypeScript: `@krudi/typescript-config`
 
 ## Performance
 
@@ -35,6 +35,6 @@ alwaysApply: false
 ```bash
 npm run dev        # dev server (localhost:3000)
 npm run build      # production build
-npm run lint       # eslint + prettier + stylelint
+npm run lint       # oxlint + oxfmt --check
 npm run typecheck  # tsc --noEmit
 ```
