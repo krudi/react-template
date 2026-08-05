@@ -25,6 +25,7 @@
         ".turbo",
         "*.tsbuildinfo",
         "package-lock.json",
+        "skills-lock.json",
         "package.json",
         "*.svg",
         "next-env.d.ts"
