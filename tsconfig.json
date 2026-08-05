@@ -5,6 +5,7 @@
             "@/*": ["./src/*"],
             "@app/*": ["./src/app/*"],
             "@components/*": ["./src/components/*"],
+            "@config/*": ["./src/config/*"],
             "@lib/*": ["./src/lib/*"],
             "@utils/*": ["./src/utils/*"],
             "@styles/*": ["./src/styles/*"],
