@@ -1,5 +1,7 @@
 # Environment files
 *.env
+.env*
+!.env*.example
 !.env-*
 
 # Dependencies files
@@ -12,17 +14,18 @@ dev-dist
 .next
 next-env.d.ts
 
-# Tooling caches files
-.cache/.eslintcache
-.eslint-config-inspector
-.cache/.prettiercache
-.cache/.stylelintcache
-.cache/tsbuildinfo.json
+# Tooling cache files
+.cache
+*.tsbuildinfo
+
+# Agent tooling files
+.claude/settings.local.json
 
 # OS files
 .DS_Store
 .AppleDouble
 .LSOverride
+Thumbs.db
 
 # Compiled artifacts files
 *.com
