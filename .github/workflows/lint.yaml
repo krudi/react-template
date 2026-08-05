@@ -1,52 +1,38 @@
 name: Lint
 
 on:
-  pull_request:
-    types:
-      - opened
-      - synchronize
-      - reopened
+    pull_request:
+        types:
+            - opened
+            - synchronize
+            - reopened
 
 concurrency:
-  group: lint-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+    group: lint-${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
 
 permissions:
-  contents: read
+    contents: read
 
 jobs:
-  lint:
-    if: ${{ github.actor != 'dependabot[bot]' }}
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        lint-commands:
-          - "npm run lint:eslint"
-          - "npm run lint:stylelint"
+    lint:
+        if: ${{ github.actor != 'dependabot[bot]' }}
+        runs-on: ubuntu-latest
+        timeout-minutes: 10
+        strategy:
+            fail-fast: false
+            matrix:
+                lint-commands:
+                    - 'npm run lint:ox'
+                    - 'npm run format:ox:check'
+                    - 'npm run typecheck'
 
-    steps:
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
 
-      - name: Checkout repository
-        uses: actions/checkout@v6
+            - name: Set up Node workspace
+              uses: ./.github/actions/setup-node-workspace
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v6
-        with:
-          cache: npm
-          node-version-file: .nvmrc
-
-      - name: Restore Next.js cache
-        uses: actions/cache@v5
-        with:
-          path: |
-            ~/.npm
-            ${{ github.workspace }}/.next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
-          restore-keys: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run lint command
-        run: ${{ matrix.lint-commands }}
+            - name: Run lint command
+              run: ${{ matrix.lint-commands }}
