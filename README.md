@@ -10,7 +10,7 @@ practices.
 > You need to have [Node.js](https://github.com/nodejs) installed on your computer before running this project.
 
 1. First clone this repository and navigate into your project directory
-2. `copy .env-example .env` - copy the **.env** file
+2. `copy .env.example .env` - copy the **.env** file
 3. Install the dependencies: `npm install`
 4. Run the development server: `npm run dev`
 
