@@ -1,0 +1,27 @@
+{
+    "$schema": "./node_modules/oxlint/configuration_schema.json",
+    "plugins": ["eslint", "typescript", "react", "unicorn", "import"],
+    "categories": {
+        "correctness": "error"
+    },
+    "rules": {
+        "react/rules-of-hooks": "error",
+        "react/no-children-prop": "off"
+    },
+    "ignorePatterns": [
+        ".agents",
+        ".ai",
+        ".claude",
+        ".codex",
+        "node_modules",
+        "dist",
+        "build",
+        "coverage",
+        ".cache",
+        ".turbo",
+        "*.tsbuildinfo",
+        ".next",
+        "public",
+        "next-env.d.ts"
+    ]
+}

@@ -1,0 +1,32 @@
+{
+    "$schema": "./node_modules/oxfmt/configuration_schema.json",
+    "printWidth": 120,
+    "tabWidth": 4,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "bracketSpacing": true,
+    "arrowParens": "always",
+    "bracketSameLine": false,
+    "singleAttributePerLine": true,
+    "proseWrap": "always",
+    "sortImports": true,
+    "ignorePatterns": [
+        ".agents",
+        ".ai",
+        ".claude",
+        ".codex",
+        "node_modules",
+        "dist",
+        "build",
+        "coverage",
+        ".cache",
+        ".turbo",
+        "*.tsbuildinfo",
+        "package-lock.json",
+        "package.json",
+        "*.svg",
+        "next-env.d.ts"
+    ]
+}
