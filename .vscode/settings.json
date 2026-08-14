@@ -10,7 +10,22 @@
         "source.sortImports": "never"
     },
     "oxc.fmt.configPath": ".oxfmtrc.json",
-    "oxc.fmt.experimental": true,
-    "js/ts.tsdk.path": "node_modules/typescript/lib",
-    "js/ts.tsdk.promptToUseWorkspaceVersion": true
+    "js/ts.experimental.useTsgo": true,
+    "files.associations": {
+        ".env": "dotenv",
+        ".env.*": "dotenv",
+        "*.env": "dotenv"
+    },
+    "[dotenv]": {
+        "editor.formatOnSave": false,
+        "editor.defaultFormatter": null
+    },
+    "[properties]": {
+        "editor.formatOnSave": false,
+        "editor.defaultFormatter": null
+    },
+    "[plaintext]": {
+        "editor.formatOnSave": false,
+        "editor.defaultFormatter": null
+    }
 }
