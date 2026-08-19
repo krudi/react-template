@@ -25,15 +25,9 @@ _You can view the development server at <http://localhost:3000>_
 
 ## Starting production mode
 
-Build and optimize your application with [Vite](https://github.com/vitejs/vite) for production.
+Build and optimize the Next.js application for production.
 
 - `npm run build`: build for production with minification
-
-## Exporting [React](https://reactjs.org) project
-
-Build the application, generate every route as a HTML file and statically export to directory.
-
-- `npm run export`: to generate static project files
 
 ## Starting the project
 
@@ -45,7 +39,9 @@ Start the production server (after running `npm run build`).
 
 Navigate into your project directory and start linting your files.
 
-- `npm run lint:eslint`: lints [JavaScript](https://www.javascript.com) files
-    - `npm run lint:eslint:fix`: to eliminate all possible errors
-- `npm run lint:stylelint`: lints [Cascading Style Sheets](https://developer.mozilla.org/en-US/docs/Web/CSS) files
-    - `npm run lint:stylelint:fix`: to eliminate all possible errors
+- `npm run lint`: runs the shared Oxlint and Oxfmt checks
+- `npm run lint:ox`: lints JavaScript and TypeScript
+    - `npm run lint:ox:fix`: fixes supported Oxlint findings
+- `npm run format:ox`: formats supported repository files
+    - `npm run format:ox:check`: checks formatting without writing files
+- `npm run typecheck`: type-checks the project

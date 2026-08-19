@@ -1,4 +1,4 @@
-name: Lint
+name: Typecheck
 
 on:
     push:
@@ -11,22 +11,16 @@ on:
             - reopened
 
 concurrency:
-    group: lint-${{ github.workflow }}-${{ github.ref }}
+    group: typecheck-${{ github.workflow }}-${{ github.ref }}
     cancel-in-progress: true
 
 permissions:
     contents: read
 
 jobs:
-    lint:
+    typecheck:
         runs-on: ubuntu-latest
         timeout-minutes: 10
-        strategy:
-            fail-fast: false
-            matrix:
-                lint-commands:
-                    - 'npm run lint:ox'
-                    - 'npm run format:ox:check'
 
         steps:
             - name: Checkout repository
@@ -44,5 +38,5 @@ jobs:
             - name: Install dependencies
               run: npm ci --no-audit --no-fund
 
-            - name: Run lint command
-              run: ${{ matrix.lint-commands }}
+            - name: Run typecheck
+              run: npm run typecheck
