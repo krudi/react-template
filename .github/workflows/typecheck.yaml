@@ -38,5 +38,8 @@ jobs:
             - name: Install dependencies
               run: npm ci --no-audit --no-fund
 
+            - name: Generate Next.js types
+              run: npm run typecheck:next
+
             - name: Run typecheck
               run: npm run typecheck

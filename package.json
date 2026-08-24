@@ -33,7 +33,8 @@
         "lint:ox": "oxlint .",
         "lint:ox:fix": "oxlint . --fix",
         "start": "next start",
-        "typecheck": "tsc -p tsconfig.json --noEmit"
+        "typecheck": "tsc -p tsconfig.json --noEmit",
+        "typecheck:next": "next typegen"
     },
     "dependencies": {
         "@t3-oss/env-nextjs": "^0.13.11",
