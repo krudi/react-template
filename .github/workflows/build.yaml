@@ -24,7 +24,16 @@ jobs:
         timeout-minutes: 15
 
         env:
-            NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
+            # Compile-only placeholders — this job never starts a database or sends real email, it
+            # only needs `next build` to succeed. NEXT_PUBLIC_SITE_URL is inlined into the client
+            # bundle and is never sensitive, so it doesn't need to be a secret here — deployment
+            # (not yet configured) would supply its own real value independently of this job.
+            # The `.invalid` hostname (RFC 2606) can never resolve to any real service, including
+            # another project's database on this host.
+            NEXT_PUBLIC_SITE_URL: http://localhost:3000
+            BETTER_AUTH_URL: http://localhost:3000
+            BETTER_AUTH_SECRET: ci-only-placeholder-secret-at-least-32-chars
+            DATABASE_URL: postgres://postgres:postgres@react-template-db-not-configured.invalid:5432/app
 
         steps:
             - name: Checkout repository
