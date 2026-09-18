@@ -6,7 +6,7 @@ base when starting a new Next.js project.
 ## Stack
 
 - Next.js 16 (App Router), React 19, TypeScript
-- Lint/format: oxlint + oxfmt · TypeScript config: `@krudi/typescript-config`
+- Lint/format: oxlint + oxfmt · TypeScript config: local `tsconfig.json` (project-owned, not shared)
 
 ## Commands
 
@@ -25,17 +25,6 @@ npm run typecheck  # tsc --noEmit
 4. Create project `AGENTS.md` with stack and domain context
 5. Create `.ai/config.json` with project metadata
 
-## Cross-project context
-
-- **Uses config from:** `shared-configs` (`@krudi/typescript-config`)
-- When `shared-configs` publishes a new version, update `package.json` in this template
-
----
-
-## Notes
-
-This template tracks `@krudi/*` config packages — keep them up to date when shared-configs releases a new version.
-
 ---
 
 ## Rules
@@ -48,4 +37,19 @@ This template tracks `@krudi/*` config packages — keep them up to date when sh
 - This is a template — keep it intentionally lean; do not add feature-specific code
 - When scaffolding a new project from this template, remind the user to update `package.json` name, `app/layout.tsx`
   metadata, and create a project-specific `AGENTS.md` and `.ai/config.json`
-- Lint and format with oxlint + oxfmt; keep TypeScript config on `@krudi/typescript-config`
+- Lint and format with oxlint + oxfmt; keep TypeScript config local to this project (`tsconfig.json`), not a shared
+  package
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read
+the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next`
+package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at
+`node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted
+change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

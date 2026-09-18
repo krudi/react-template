@@ -22,9 +22,6 @@
     "ports": {
         "dev": 3000
     },
-    "integrations": {
-        "sharedConfigs": "@krudi/eslint-config, @krudi/typescript-config, @krudi/prettier-config"
-    },
     "docs": {
         "agentsFile": "AGENTS.md",
         "claudeFile": "CLAUDE.md",
