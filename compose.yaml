@@ -1,0 +1,48 @@
+name: ${COMPOSE_PROJECT_NAME:-react-template}
+
+services:
+    postgres:
+        image: postgres:${POSTGRES_VERSION:-16}
+        container_name: ${COMPOSE_PROJECT_NAME:-react-template}-postgres
+        environment:
+            POSTGRES_USER: ${POSTGRES_USER:-react_template_local}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+            POSTGRES_DB: ${POSTGRES_DB:-react_template_local_db}
+        ports:
+            - '127.0.0.1:${POSTGRES_PORT:-5435}:5432'
+        volumes:
+            - postgres-data:/var/lib/postgresql/data
+        networks:
+            - internal
+        restart: unless-stopped
+        healthcheck:
+            test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-react_template_local}']
+            interval: 2s
+            timeout: 2s
+            retries: 15
+
+    mailpit:
+        image: axllent/mailpit:${MAILPIT_VERSION:-v1.30.6}
+        container_name: ${COMPOSE_PROJECT_NAME:-react-template}-mailpit
+        ports:
+            - '${MAILPIT_BIND:-127.0.0.1}:${MAILPIT_SMTP_PORT:-1026}:1025'
+            - '${MAILPIT_BIND:-127.0.0.1}:${MAILPIT_WEB_PORT:-8025}:8025'
+        environment:
+            MP_DATABASE: /data/mailpit.db
+            MP_MAX_MESSAGES: 5000
+        volumes:
+            - mailpit-data:/data
+        networks:
+            - internal
+        restart: unless-stopped
+
+volumes:
+    postgres-data:
+        driver: local
+    mailpit-data:
+        driver: local
+
+networks:
+    internal:
+        name: ${COMPOSE_PROJECT_NAME}-network-internal
+        driver: bridge
