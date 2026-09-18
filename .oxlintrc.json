@@ -31,6 +31,8 @@
         "*.tsbuildinfo",
         ".next",
         "public",
-        "next-env.d.ts"
+        "next-env.d.ts",
+        "src/lib/db/schemas/auth.ts",
+        "src/lib/db/migrations"
     ]
 }
