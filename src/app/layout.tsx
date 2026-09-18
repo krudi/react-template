@@ -1,12 +1,17 @@
-import '@styles/styles.css';
+import '@styles/shadcn-foundation.css';
 import Footer from '@components/footer';
 import Header from '@components/header';
-import Navigation from '@components/navigation';
-import { siteMetadata } from '@utils/seo';
-import { siteUrl } from '@utils/site-url';
+import { ThemeProvider } from '@components/theme-provider';
+import { siteMetadata } from '@utils/site/seo';
+import { siteUrl } from '@utils/site/site-url';
 import type { Metadata, Viewport } from 'next';
-import { Roboto } from 'next/font/google';
+import { Geist } from 'next/font/google';
 import type { ReactNode } from 'react';
+
+import { Toaster } from '@/components/ui/sonner';
+import { cn } from '@/lib/utils';
+
+const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
 
 export const metadata: Metadata = {
     title: {
@@ -170,18 +175,13 @@ export const viewport: Viewport = {
     ],
 };
 
-const roboto = Roboto({
-    weight: ['400', '500', '700'],
-    subsets: ['latin'],
-    display: 'swap',
-});
-
 export default function RootLayout({ children }: { children: ReactNode }) {
     return (
         <html
             lang="en"
             dir="ltr"
-            className={roboto.className}
+            className={cn('font-sans', geist.variable)}
+            suppressHydrationWarning
         >
             <head>
                 <meta
@@ -202,14 +202,19 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 />
             </head>
             <body>
-                <div className="container">
-                    <Navigation />
+                <ThemeProvider
+                    attribute="class"
+                    defaultTheme="system"
+                    enableSystem
+                >
+                    <div className="container mx-auto px-4">
+                        <Header />
+                        <main aria-label="Main content">{children}</main>
 
-                    <Header />
-                    <main aria-label="Main content">{children}</main>
-
-                    <Footer />
-                </div>
+                        <Footer />
+                    </div>
+                    <Toaster />
+                </ThemeProvider>
             </body>
         </html>
     );

@@ -1,26 +1,24 @@
 'use client';
 
-import NextError from 'next/error';
+import '@styles/shadcn-foundation.css';
+import { Button } from '@components/ui/button';
 
 export default function GlobalError({ reset }: { reset: () => void }) {
     return (
-        <html>
+        <html lang="en">
             <body>
-                <section>
-                    <h3>
-                        <b>Page:</b> global-error.tsx
-                    </h3>
-
-                    <hr className="hr" />
-
-                    <h4>Something went wrong!</h4>
-
-                    <div>
-                        <NextError statusCode={0} />
-                    </div>
-
-                    <button onClick={() => reset()}>Try again</button>
-                </section>
+                <main className="mx-auto flex min-h-svh max-w-md flex-col items-center justify-center gap-4 px-4 text-center">
+                    <h1 className="text-2xl font-semibold text-foreground">Something went wrong</h1>
+                    <p className="text-muted-foreground">
+                        An unexpected application error occurred. Try again — if the problem persists, come back later.
+                    </p>
+                    <Button
+                        variant="outline"
+                        onClick={() => reset()}
+                    >
+                        Try again
+                    </Button>
+                </main>
             </body>
         </html>
     );

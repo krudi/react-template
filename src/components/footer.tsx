@@ -1,11 +1,43 @@
+import Link from 'next/link';
+
+import { Separator } from '@/components/ui/separator';
+
 export default function Footer() {
+    const year = new Date().getFullYear();
+
     return (
-        <>
-            <footer className="footer">
-                <p className="footer-text">
-                    <b>Component:</b> Footer.tsx
+        <footer className="py-8">
+            <Separator className="mb-4" />
+
+            <div className="flex flex-col items-center justify-between gap-3 text-sm text-muted-foreground sm:flex-row">
+                <p>
+                    &copy; {year}{' '}
+                    <Link
+                        href="/"
+                        className="hover:text-foreground"
+                    >
+                        react-template
+                    </Link>
                 </p>
-            </footer>
-        </>
+
+                <nav
+                    aria-label="Footer"
+                    className="flex items-center gap-4"
+                >
+                    <Link
+                        href="/"
+                        className="hover:text-foreground"
+                    >
+                        Home
+                    </Link>
+                    <Link
+                        href="/sign-in"
+                        className="hover:text-foreground"
+                    >
+                        Sign in
+                    </Link>
+                </nav>
+            </div>
+        </footer>
     );
 }
