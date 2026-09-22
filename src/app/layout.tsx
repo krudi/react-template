@@ -1,4 +1,4 @@
-import '@styles/shadcn-foundation.css';
+import '@app/globals.css';
 import Footer from '@components/footer';
 import Header from '@components/header';
 import { ThemeProvider } from '@components/theme-provider';

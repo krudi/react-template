@@ -29,7 +29,6 @@
             "@features/*": ["./src/features/*"],
             "@lib/*": ["./src/lib/*"],
             "@utils/*": ["./src/utils/*"],
-            "@styles/*": ["./src/styles/*"],
             "@models": ["./src/types/index"],
             "@models/*": ["./src/types/*"]
         }

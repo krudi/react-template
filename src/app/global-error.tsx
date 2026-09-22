@@ -1,6 +1,6 @@
 'use client';
 
-import '@styles/shadcn-foundation.css';
+import '@app/globals.css';
 import { Button } from '@components/ui/button';
 
 export default function GlobalError({ reset }: { reset: () => void }) {
