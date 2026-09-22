@@ -30,6 +30,7 @@
         "*.svg",
         "next-env.d.ts",
         "src/lib/db/schemas/auth.ts",
-        "src/lib/db/migrations"
+        "src/lib/db/migrations",
+        "src/components/ui/**"
     ]
 }

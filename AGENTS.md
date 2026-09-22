@@ -1,12 +1,15 @@
 # React Template
 
-Minimal Next.js 16 + React 19 starter template. Intentionally lean — only core dependencies included. Use this as the
-base when starting a new Next.js project.
+Next.js 16 + React 19 starter template with Better Auth (email/password, two-factor), Drizzle ORM + PostgreSQL, Tailwind
+CSS v4 and shadcn/ui. Use this as the base when starting a new Next.js project.
 
 ## Stack
 
 - Next.js 16 (App Router), React 19, TypeScript
 - Lint/format: oxlint + oxfmt · TypeScript config: local `tsconfig.json` (project-owned, not shared)
+- Browser support: the Tailwind CSS v4 baseline declared in `.browserslistrc` (Chrome/Edge 111+, Safari/iOS 16.4+,
+  Firefox 128+, Samsung Internet 22+, Opera 98+). No Autoprefixer: Tailwind and Next.js emit the prefixes these targets
+  need.
 
 ## Commands
 
@@ -20,7 +23,7 @@ npm run typecheck  # tsc --noEmit
 ## When creating from this template
 
 1. Clone and rename the directory and `package.json` `name` field
-2. Update `app/layout.tsx` metadata (title, description)
+2. Update `src/app/layout.tsx` metadata (title, description)
 3. Add project-specific dependencies
 4. Create project `AGENTS.md` with stack and domain context
 5. Create `.ai/config.json` with project metadata
@@ -35,10 +38,19 @@ npm run typecheck  # tsc --noEmit
 ## Constraints
 
 - This is a template — keep it intentionally lean; do not add feature-specific code
-- When scaffolding a new project from this template, remind the user to update `package.json` name, `app/layout.tsx`
+- When scaffolding a new project from this template, remind the user to update `package.json` name, `src/app/layout.tsx`
   metadata, and create a project-specific `AGENTS.md` and `.ai/config.json`
 - Lint and format with oxlint + oxfmt; keep TypeScript config local to this project (`tsconfig.json`), not a shared
   package
+
+## Generated shadcn components
+
+- The entire `src/components/ui/**` directory is shadcn vendor code and read-only by default.
+- Do not manually edit, reformat, lint-autofix, regenerate or overwrite files inside it (for example
+  `shadcn add --overwrite`) without explicit approval.
+- Put application-specific customisation outside this directory: props at the call site, or a wrapper outside
+  `src/components/ui/`.
+- `.oxfmtrc.json` ignores `src/components/ui/**`, so new files placed there are protected from formatting automatically.
 
 <!-- BEGIN:nextjs-agent-rules -->
 
