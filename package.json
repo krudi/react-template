@@ -2,7 +2,7 @@
     "$schema": "https://json.schemastore.org/package.json",
     "name": "react-template",
     "version": "0.1.0",
-    "private": false,
+    "private": true,
     "description": "A template with Next.js built on React with focus on performance and best practices.",
     "keywords": [
         "template"
@@ -72,15 +72,11 @@
         "@types/react": "^19.2.18",
         "@types/react-dom": "^19.2.4",
         "auth": "^1.7.5",
-        "autoprefixer": "^10.5.4",
         "drizzle-kit": "^0.31.10",
         "oxfmt": "^0.62.0",
         "oxlint": "^1.77.0",
         "oxlint-tsgolint": "^7.0.2001",
         "postcss": "^8.5.25",
-        "postcss-import": "^16.1.1",
-        "postcss-load-config": "^6.0.1",
-        "postcss-nesting": "^14.0.1",
         "tsx": "^4.23.13",
         "typescript": "^7.0.2"
     },

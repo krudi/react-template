@@ -1,1 +1,12 @@
-> 0.25%, not dead
+# Tailwind CSS v4 baseline: Chrome 111, Safari 16.4, Firefox 128 (https://tailwindcss.com/docs/compatibility).
+# Chromium-based browsers are listed from their first version with Chromium 111 features (oklch, color-mix).
+chrome >= 111
+edge >= 111
+opera >= 98
+samsung >= 22
+and_chr >= 111
+op_mob >= 80
+safari >= 16.4
+ios_saf >= 16.4
+firefox >= 128
+and_ff >= 128
