@@ -1,13 +1,16 @@
 import { serverEnv } from '@config/server-env';
 
+const SEEDABLE_NODE_ENVS = new Set(['development', 'test']);
 const ALLOWED_DATABASE_HOSTS = new Set(['localhost', '127.0.0.1']);
 const REQUIRED_DATABASE_PORT = '5435';
 const REQUIRED_DATABASE_NAME = 'react_template_local_db';
 
 function assertSeedableEnvironment(): void {
-    if (process.env.NODE_ENV !== 'development') {
+    const nodeEnv = process.env.NODE_ENV;
+
+    if (nodeEnv === undefined || !SEEDABLE_NODE_ENVS.has(nodeEnv)) {
         throw new Error(
-            `Refusing to seed: NODE_ENV must be exactly "development" (got ${process.env.NODE_ENV ? `"${process.env.NODE_ENV}"` : 'unset'}).`
+            `Refusing to seed: NODE_ENV must be "development" or "test" (got ${nodeEnv ? `"${nodeEnv}"` : 'unset'}).`
         );
     }
 }

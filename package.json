@@ -30,7 +30,7 @@
         "clean": "rm -rf .cache node_modules .next",
         "db:generate": "drizzle-kit generate",
         "db:migrate": "drizzle-kit migrate",
-        "db:seed": "node --env-file=.env --import tsx ./src/lib/db/seeders/index.ts",
+        "db:seed": "NODE_ENV=${NODE_ENV:-development} node --env-file=.env --import tsx ./src/lib/db/seeders/index.ts",
         "dev": "next dev",
         "dev:turbo": "next dev --turbo",
         "format:ox": "oxfmt .",
