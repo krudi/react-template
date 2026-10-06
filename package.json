@@ -82,7 +82,7 @@
         "@types/react-dom": "~19.2.7",
         "auth": "^1.7.7",
         "drizzle-kit": "^0.31.11",
-        "knip": "^6.39.0",
+        "knip": "^6.40.0",
         "lefthook": "^2.1.17",
         "oxfmt": "^0.72.0",
         "oxlint": "^1.87.0",
