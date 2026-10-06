@@ -56,6 +56,11 @@ Do not create competing documentation; update the owner instead.
   reset, security notifications) live in `src/lib/auth/emails/` and render through `email-layout.ts`. `src/proxy.ts`
   only guards `/account` with an optimistic cookie check, so the auth pages (`/sign-in`, `/sign-up`, `/verify-email`,
   `/forgot-password`, `/reset-password`, `/two-factor`) stay public; protected pages still call `requireSession()`.
+- Security headers are set inline in `next.config.ts` (`poweredByHeader: false`, HSTS, `X-Frame-Options: DENY`,
+  `strict-origin-when-cross-origin`, Permissions-Policy) with a nonce-free Content Security Policy built by
+  `src/config/content-security-policy.ts`: scripts and styles keep `'unsafe-inline'` (Next.js and next-themes need it
+  without a nonce), `'unsafe-eval'` only in development. `src/instrumentation-client.ts` sets zod to `jitless` so zod's
+  `new Function` probe does not trip `script-src` in the browser.
 - Environment variables are declared as zod schemas in `src/lib/validation/environment.ts` and exposed through
   `@t3-oss/env-nextjs` in `src/config/server-env.ts` / `src/config/client-env.ts`; add new ones there and to
   `.env.example`.
@@ -72,8 +77,8 @@ Do not create competing documentation; update the owner instead.
   owner-local files and untracked scratch exactly as found — never restore, reset or stash them to make a task easier.
 - Generated output (`.next/`, `.cache/`, build output, a skill's `output/`) is never committed.
 - Never start, stop or restart the owner's dev servers: the compose stack (`docker compose up -d --wait` /
-  `docker compose down`, Postgres and Mailpit) and Next.js (`npm run dev` / `npm run dev:turbo`). Reuse healthy ones; if
-  one is missing, report the exact command for the owner and stop that step.
+  `docker compose down`, Postgres and Mailpit) and Next.js (`npm run dev`). Reuse healthy ones; if one is missing,
+  report the exact command for the owner and stop that step.
 - Do not modify unrelated files solely to make a repository-wide check pass, and never silently skip a failing check:
   report the exact command, the failure, and whether it looks related.
 

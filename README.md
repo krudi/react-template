@@ -5,20 +5,14 @@ practices.
 
 ## Quick start
 
-> [!NOTE]
->
-> You need [Node.js](https://github.com/nodejs) >= 24.19.0 (see `.nvmrc`) and npm >= 12.0.0 installed on your computer
-> before running this project. [Docker](https://www.docker.com) (with Compose) is also required to run the local
-> Postgres and Mailpit services.
+Prerequisites: [Node.js](https://nodejs.org) from `.nvmrc` and [Docker](https://www.docker.com) with Compose.
 
-1. First clone this repository and navigate into your project directory
-2. `cp .env.example .env` - copy the **.env** file, then set `BETTER_AUTH_SECRET` (generate one with
-   `npm run auth:secret`) and review the other variables (`DATABASE_URL`, `BETTER_AUTH_URL`, `NEXT_PUBLIC_SITE_URL`,
-   `SMTP_*`)
-3. Install the dependencies: `npm install`
-4. Start Postgres and Mailpit: `docker compose up -d && docker compose up -d --wait postgres mailpit`
-5. Apply the database migrations: `npm run db:migrate`
-6. Run the development server: `npm run dev`
+1. `npm ci`
+2. `npm run install:lefthook`
+3. `cp .env.example .env`, then set `BETTER_AUTH_SECRET` from `npm run auth:secret`
+4. `docker compose up -d --wait postgres mailpit` and `npm run db:migrate`
+5. `npm run dev`: <http://localhost:3000>
+6. `npm run build` and `npm run start`
 
 ## Database and email (Docker Compose)
 
@@ -82,30 +76,7 @@ scripts out of production deploy paths entirely.
 - `npm run auth:generate`: regenerate the Drizzle auth schema from the Better Auth config
 - `NODE_ENV=development npm run db:seed`: create the fixture development account described above
 
-## Starting development mode
-
-To launch the project in development mode with hot module replacement.
-
-- `npm run dev`: to compile the [React](https://reactjs.org) application and serve it to the browser
-- `npm run dev:turbo`: to compile faster in local development
-
-_You can view the development server at <http://localhost:3000>_
-
-## Starting production mode
-
-Build and optimize the Next.js application for production.
-
-- `npm run build`: build for production with minification
-
-## Starting the project
-
-Start the production server (after running `npm run build`).
-
-- `npm run start`: starts a web-server with a preview of your project
-
 ## Commands for linting/fixing files
-
-Navigate into your project directory and start linting your files.
 
 - `npm run lint`: runs the shared Oxlint and Oxfmt checks
 - `npm run lint:ox`: lints JavaScript and TypeScript
@@ -115,4 +86,3 @@ Navigate into your project directory and start linting your files.
 - `npm run typecheck`: type-checks the project
 - `npm run knip`: reports unused files, exports and dependencies
 - `npm run verify:static`: runs typecheck, lint and Knip in one command
-- `npm run install:lefthook`: installs the Git hooks from `lefthook.yml` (once per clone)
