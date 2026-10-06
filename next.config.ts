@@ -1,7 +1,5 @@
 import type { NextConfig } from 'next';
 
-import { contentSecurityPolicy } from './src/config/content-security-policy';
-
 const nextConfig: NextConfig = {
     experimental: {
         authInterrupts: true,
@@ -15,10 +13,25 @@ const nextConfig: NextConfig = {
                 headers: [
                     {
                         key: 'Content-Security-Policy',
-                        value: contentSecurityPolicy({
-                            development: process.env.NODE_ENV === 'development',
-                            https: (process.env['BETTER_AUTH_URL'] ?? '').startsWith('https://'),
-                        }),
+                        value: [
+                            "default-src 'self'",
+                            `script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === 'development' ? " 'unsafe-eval'" : ''}`,
+                            "style-src 'self' 'unsafe-inline'",
+                            "img-src 'self' data: blob:",
+                            "font-src 'self'",
+                            `connect-src 'self'${process.env.NODE_ENV === 'development' ? ' ws:' : ''}`,
+                            "media-src 'self'",
+                            "object-src 'none'",
+                            "frame-src 'none'",
+                            "worker-src 'self' blob:",
+                            "manifest-src 'self'",
+                            "base-uri 'self'",
+                            "form-action 'self'",
+                            "frame-ancestors 'none'",
+                            ...((process.env['BETTER_AUTH_URL'] ?? '').startsWith('https://')
+                                ? ['upgrade-insecure-requests']
+                                : []),
+                        ].join('; '),
                     },
                     { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' },
                     { key: 'X-Content-Type-Options', value: 'nosniff' },
