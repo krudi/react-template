@@ -13,7 +13,7 @@ export default function manifest(): MetadataRoute.Manifest {
         start_url: '/',
         lang: 'en-EN',
         orientation: 'any',
-        prefer_related_applications: true,
+        prefer_related_applications: false,
         categories: ['template'],
         icons: [
             {
