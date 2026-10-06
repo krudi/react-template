@@ -11,6 +11,7 @@ pre-commit:
               - '.ai/**'
               - '.claude/**'
               - '.codex/**'
+              - '.next/**'
               - 'public/**'
               - 'next-env.d.ts'
               - 'src/lib/db/schemas/auth.ts'

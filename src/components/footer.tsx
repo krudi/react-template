@@ -2,9 +2,9 @@ import Link from 'next/link';
 
 import { Separator } from '@/components/ui/separator';
 
-export default function Footer() {
-    const year = new Date().getFullYear();
+const year = new Date().getFullYear();
 
+export default function Footer() {
     return (
         <footer className="py-8">
             <Separator className="mb-4" />

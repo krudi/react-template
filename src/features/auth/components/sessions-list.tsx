@@ -10,8 +10,8 @@ type SessionInfo = {
     id: string;
     token: string;
     createdAt: Date;
-    ipAddress?: string | null;
-    userAgent?: string | null;
+    ipAddress?: string | null | undefined;
+    userAgent?: string | null | undefined;
 };
 
 type SessionsListProps = {
