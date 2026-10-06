@@ -5,9 +5,29 @@
         "NEXT_TELEMETRY_DISABLED": "1"
     },
     "permissions": {
+        "disableBypassPermissionsMode": "disable",
         "deny": [
-            "Read(./.env)",
-            "Read(./.env.*)"
+            "Bash(docker compose up:*)",
+            "Bash(docker compose down:*)",
+            "Bash(docker compose stop:*)",
+            "Bash(docker compose start:*)",
+            "Bash(docker compose restart:*)",
+            "Bash(docker compose kill:*)",
+            "Bash(docker compose -f compose.yaml up:*)",
+            "Bash(docker compose -f compose.yaml down:*)",
+            "Bash(docker compose -f compose.yaml stop:*)",
+            "Bash(docker compose -f compose.yaml start:*)",
+            "Bash(docker compose -f compose.yaml restart:*)",
+            "Bash(docker compose -f compose.yaml kill:*)",
+            "Read(./**/.env)",
+            "Read(./**/.env.local)",
+            "Read(./**/.env.*.local)",
+            "Read(./**/.env.production)",
+            "Read(./**/.env.test)",
+            "Read(./**/.env.testing)",
+            "Read(./**/.env.development)",
+            "Read(./**/.env.staging)",
+            "Read(./**/.env.backup)"
         ]
     }
 }
