@@ -67,6 +67,9 @@ export const auth = betterAuth({
     },
     databaseHooks: {
         user: {
+            create: {
+                before: async (data) => rejectInvalidAvatar(data),
+            },
             update: {
                 before: async (data) => rejectInvalidAvatar(data),
             },
