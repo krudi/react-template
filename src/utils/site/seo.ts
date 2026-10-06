@@ -1,3 +1,4 @@
+import { serverEnv } from '@config/server-env';
 import { siteUrl } from '@utils/site/site-url';
 import type { Metadata } from 'next';
 
@@ -9,10 +10,10 @@ export const siteMetadata = {
     keywords: ['react template', 'next.js template', 'performance', 'seo', 'best practices'] as string[],
     locale: 'en_US',
     ogImage: {
-        url: new URL('/meta-tags/page-view.png', siteUrl).toString(),
+        url: new URL('/images/meta-tags/page-view.png', siteUrl).toString(),
         alt: 'Page preview',
-        width: 1800,
-        height: 1600,
+        width: 1200,
+        height: 630,
     },
     authors: [
         {
@@ -21,7 +22,7 @@ export const siteMetadata = {
         },
     ] satisfies NonNullable<Metadata['authors']>,
     verification: {
-        google: 'Q9rK2mA0ZxWcE4B_HY8nLJpUoFqGdS7V5tI1eM6l3',
+        google: serverEnv.GOOGLE_SITE_VERIFICATION ?? null,
     } satisfies NonNullable<Metadata['verification']>,
 } as const;
 

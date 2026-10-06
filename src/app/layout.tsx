@@ -23,12 +23,13 @@ export const metadata: Metadata = {
     description: siteMetadata.description,
     keywords: siteMetadata.keywords,
     authors: siteMetadata.authors,
+    verification: siteMetadata.verification,
     creator: siteMetadata.name,
     publisher: siteMetadata.name,
     alternates: {
         canonical: siteUrl,
     },
-    referrer: 'origin-when-cross-origin',
+    referrer: 'strict-origin-when-cross-origin',
     openGraph: {
         title: siteMetadata.title,
         description: siteMetadata.description,
@@ -42,7 +43,7 @@ export const metadata: Metadata = {
                 alt: siteMetadata.ogImage.alt,
             },
         ],
-        locale: 'en-US',
+        locale: siteMetadata.locale,
         type: 'website',
     },
     twitter: {
@@ -57,7 +58,6 @@ export const metadata: Metadata = {
             },
         ],
     },
-    verification: siteMetadata.verification,
     icons: {
         icon: [
             {
