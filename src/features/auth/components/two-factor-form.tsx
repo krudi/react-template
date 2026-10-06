@@ -163,7 +163,7 @@ export function TwoFactorForm() {
             <Button
                 type="button"
                 variant="ghost"
-                className="h-auto w-full whitespace-normal py-2"
+                className="h-auto w-full py-2 whitespace-normal"
                 onClick={() => setUseBackupCode((current) => !current)}
             >
                 {useBackupCode

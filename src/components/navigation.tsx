@@ -16,7 +16,7 @@ import { useState } from 'react';
 
 import { cn } from '@/lib/utils';
 
-export const NAV_ITEMS = [{ href: '/', label: 'Home' }] as const;
+const NAV_ITEMS = [{ href: '/', label: 'Home' }] as const;
 
 export type NavUser = { name: string } | null;
 

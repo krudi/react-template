@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=./node_modules/lefthook/schema.json
+min_version: 2.1.0
+
+pre-commit:
+    parallel: true
+    jobs:
+        - name: oxlint
+          glob: '*.{js,jsx,cjs,mjs,ts,tsx}'
+          exclude:
+              - '.agents/**'
+              - '.ai/**'
+              - '.claude/**'
+              - '.codex/**'
+              - 'public/**'
+              - 'next-env.d.ts'
+              - 'src/lib/db/schemas/auth.ts'
+              - 'src/lib/db/migrations/**'
+          run: npx oxlint {staged_files}
+          fail_text:
+              'Fix the reported problems (`npm run lint:ox:fix` handles the auto-fixable ones) and stage the result.'
+
+        - name: oxfmt
+          glob: '*.{js,jsx,cjs,mjs,ts,tsx,css,json,jsonc,md,yaml,yml}'
+          exclude:
+              - '.agents/**'
+              - '.ai/**'
+              - '.claude/**'
+              - '.codex/**'
+              - 'package.json'
+              - 'package-lock.json'
+              - 'skills-lock.json'
+              - 'next-env.d.ts'
+              - 'src/lib/db/schemas/auth.ts'
+              - 'src/lib/db/migrations/**'
+              - 'src/components/ui/**'
+          run: npx oxfmt --check {staged_files}
+          fail_text: 'Run `npm run format:ox` and stage the result.'
+
+commit-msg:
+    jobs:
+        - name: conventional-commit
+          run: >
+              head -n 1 {1} | grep -Eq '^(Merge |Revert |fixup! |squash!
+              )|^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\([a-z0-9/._-]+(,
+              ?[a-z0-9/._-]+)*\))?!?: [^ ].{0,99}$'
+          fail_text:
+              'Subject must be `type(scope): subject` with a type from .ai/skills/commit/SKILL.md, under 100 characters.'
+
+pre-push:
+    jobs:
+        - name: typecheck
+          run: npm run typecheck
+        - name: knip
+          run: npm run knip

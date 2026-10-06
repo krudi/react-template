@@ -1,5 +1,5 @@
 import { siteUrl } from '@utils/site/site-url';
-import { MetadataRoute } from 'next';
+import type { MetadataRoute } from 'next';
 
 const publicRoutes = ['/'];
 

@@ -12,6 +12,10 @@
     "singleAttributePerLine": true,
     "proseWrap": "always",
     "sortImports": true,
+    "sortTailwindcss": {
+        "stylesheet": "src/app/globals.css",
+        "functions": ["cn", "cva"]
+    },
     "ignorePatterns": [
         ".agents",
         ".ai",
@@ -32,5 +36,13 @@
         "src/lib/db/schemas/auth.ts",
         "src/lib/db/migrations",
         "src/components/ui/**"
+    ],
+    "overrides": [
+        {
+            "files": ["AGENTS.md"],
+            "options": {
+                "proseWrap": "preserve"
+            }
+        }
     ]
 }

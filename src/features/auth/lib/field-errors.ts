@@ -4,7 +4,7 @@ function fieldErrors(errors: FormFieldError[]): Array<{ message?: string }> {
     return errors.map((error) => (typeof error === 'string' ? { message: error } : (error ?? {})));
 }
 
-export function visibleFieldErrors(field: {
+function visibleFieldErrors(field: {
     state: { meta: { isTouched: boolean; errors: FormFieldError[] } };
 }): Array<{ message?: string }> {
     return field.state.meta.isTouched ? fieldErrors(field.state.meta.errors) : [];
