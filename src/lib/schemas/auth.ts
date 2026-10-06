@@ -1,3 +1,4 @@
+import { MIN_PASSWORD_LENGTH } from '@lib/auth/security';
 import { z } from 'zod';
 
 export const signInSchema = z.object({
@@ -10,7 +11,9 @@ export const signUpSchema = z
     .object({
         name: z.string().min(1, 'Enter your name'),
         email: z.email('Enter a valid email address'),
-        password: z.string().min(8, 'Password must be at least 8 characters long'),
+        password: z
+            .string()
+            .min(MIN_PASSWORD_LENGTH, `Password must be at least ${MIN_PASSWORD_LENGTH} characters long`),
         confirmPassword: z.string().min(1, 'Confirm your password'),
     })
     .refine((data) => data.password === data.confirmPassword, {
@@ -18,12 +21,16 @@ export const signUpSchema = z
         path: ['confirmPassword'],
     });
 
+export const resendVerificationSchema = z.object({
+    email: z.email('Enter a valid email address'),
+});
+
 export const forgotPasswordSchema = z.object({
     email: z.email('Enter a valid email address'),
 });
 
 export const resetPasswordSchema = z.object({
-    password: z.string().min(8, 'Password must be at least 8 characters long'),
+    password: z.string().min(MIN_PASSWORD_LENGTH, `Password must be at least ${MIN_PASSWORD_LENGTH} characters long`),
 });
 
 export const twoFactorCodeSchema = z.object({
@@ -37,7 +44,9 @@ export const backupCodeSchema = z.object({
 export const changePasswordSchema = z
     .object({
         currentPassword: z.string().min(1, 'Enter your current password'),
-        newPassword: z.string().min(8, 'Password must be at least 8 characters long'),
+        newPassword: z
+            .string()
+            .min(MIN_PASSWORD_LENGTH, `Password must be at least ${MIN_PASSWORD_LENGTH} characters long`),
         confirmPassword: z.string().min(1, 'Confirm your new password'),
         revokeOtherSessions: z.boolean(),
     })
@@ -54,12 +63,10 @@ export const twoFactorPasswordSchema = z.object({
     password: z.string().min(1, 'Enter your password'),
 });
 
-export type SignInValues = z.infer<typeof signInSchema>;
-export type SignUpValues = z.infer<typeof signUpSchema>;
-export type ForgotPasswordValues = z.infer<typeof forgotPasswordSchema>;
-export type ResetPasswordValues = z.infer<typeof resetPasswordSchema>;
-export type TwoFactorCodeValues = z.infer<typeof twoFactorCodeSchema>;
-export type ChangePasswordValues = z.infer<typeof changePasswordSchema>;
-export type UpdateNameValues = z.infer<typeof updateNameSchema>;
-export type TwoFactorPasswordValues = z.infer<typeof twoFactorPasswordSchema>;
-export type BackupCodeValues = z.infer<typeof backupCodeSchema>;
+export const changeEmailSchema = z.object({
+    newEmail: z.email('Enter a valid email address'),
+});
+
+export const deleteAccountSchema = z.object({
+    password: z.string().min(1, 'Enter your password'),
+});

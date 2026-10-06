@@ -12,4 +12,11 @@ export const seederAuth = betterAuth({
         enabled: true,
         disableSignUp: false,
     },
+    databaseHooks: {
+        user: {
+            create: {
+                before: async (user) => ({ data: { ...user, emailVerified: true } }),
+            },
+        },
+    },
 });

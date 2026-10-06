@@ -1,4 +1,12 @@
-import { ChangePasswordForm, SessionsList, TwoFactorSettings, UpdateProfileForm, UserBar } from '@features/auth';
+import {
+    ChangeEmailForm,
+    ChangePasswordForm,
+    DeleteAccountForm,
+    SessionsList,
+    TwoFactorSettings,
+    UpdateProfileForm,
+    UserBar,
+} from '@features/auth';
 import { auth } from '@lib/auth/auth';
 import { requireSession } from '@utils/auth/session';
 import { createPageMetadata } from '@utils/site/seo';
@@ -47,6 +55,12 @@ export default async function Page() {
             </section>
 
             <section className="flex flex-col gap-3">
+                <h2 className="text-lg font-semibold text-foreground">Email</h2>
+                <Separator />
+                <ChangeEmailForm currentEmail={session.user.email} />
+            </section>
+
+            <section className="flex flex-col gap-3">
                 <h2 className="text-lg font-semibold text-foreground">Password</h2>
                 <Separator />
                 <ChangePasswordForm />
@@ -66,6 +80,12 @@ export default async function Page() {
                     sessions={sessions}
                     currentSessionToken={session.session.token}
                 />
+            </section>
+
+            <section className="flex flex-col gap-3">
+                <h2 className="text-lg font-semibold text-destructive">Delete account</h2>
+                <Separator />
+                <DeleteAccountForm />
             </section>
         </div>
     );

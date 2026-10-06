@@ -7,6 +7,7 @@ type SendEmailInput = {
     subject: string;
     html: string;
     text: string;
+    replyTo?: string;
 };
 
 let cachedTransport: Transporter | null | undefined;
@@ -33,16 +34,16 @@ function getTransport(): Transporter | null {
     return cachedTransport;
 }
 
-export async function sendEmail({ to, subject, html, text }: SendEmailInput): Promise<void> {
+export async function sendEmail({ to, subject, html, text, replyTo }: SendEmailInput): Promise<void> {
     const transport = getTransport();
 
     if (!transport) {
         if (process.env.NODE_ENV === 'production') {
-            throw new Error('SMTP is not configured (SMTP_HOST) — cannot send email in production.');
+            throw new Error('SMTP is not configured (SMTP_HOST, SMTP_FROM) — cannot send email in production.');
         }
-        console.warn(`[email] SMTP not configured — skipped sending to ${to}: "${subject}"`);
+        console.warn(`[email] SMTP not configured; skipped: "${subject}"`);
         return;
     }
 
-    await transport.sendMail({ from: serverEnv.SMTP_FROM, to, subject, html, text });
+    await transport.sendMail({ from: serverEnv.SMTP_FROM, to, subject, html, text, ...(replyTo ? { replyTo } : {}) });
 }

@@ -1,97 +1,58 @@
 'use client';
 
 import { authClient } from '@lib/auth/auth-client';
-import { signInSchema } from '@lib/schemas/auth';
+import { signUpSchema } from '@lib/schemas/auth';
 import { useForm } from '@tanstack/react-form';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
 import { Field, FieldError, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { PasswordInput } from '@/components/ui/password-input';
 
 import { fieldA11yProps } from '../lib/field-errors';
-import { useResendVerificationEmail, verifyEmailPendingHref } from '../lib/use-resend-verification-email';
+import { EMAIL_VERIFIED_CALLBACK_URL, verifyEmailPendingHref } from '../lib/use-resend-verification-email';
 import { AuthCard } from './auth-card';
 
-export function SignInForm() {
+export function SignUpForm() {
     const router = useRouter();
-    const [unverifiedEmail, setUnverifiedEmail] = useState<string | null>(null);
-    const { resendVerificationEmail, isResending } = useResendVerificationEmail();
-
-    async function handleResend(email: string) {
-        if (await resendVerificationEmail(email)) {
-            router.push(verifyEmailPendingHref(email));
-        }
-    }
 
     const form = useForm({
-        defaultValues: { email: '', password: '', rememberMe: true },
-        validators: { onChange: signInSchema },
+        defaultValues: { name: '', email: '', password: '', confirmPassword: '' },
+        validators: { onChange: signUpSchema },
         onSubmit: async ({ value }) => {
-            const { data, error } = await authClient.signIn.email({
+            const { error } = await authClient.signUp.email({
+                name: value.name,
                 email: value.email,
                 password: value.password,
-                rememberMe: value.rememberMe,
+                callbackURL: EMAIL_VERIFIED_CALLBACK_URL,
             });
             if (error) {
-                if (error.code === 'EMAIL_NOT_VERIFIED') {
-                    setUnverifiedEmail(value.email);
-                    toast.error('Verify your email address before signing in.');
-                    return;
-                }
-                setUnverifiedEmail(null);
-                toast.error(error.message ?? 'Failed to sign in.');
+                toast.error(error.message ?? 'Failed to create the account.');
                 return;
             }
-            if (data && 'twoFactorRedirect' in data && data.twoFactorRedirect) {
-                return;
-            }
-            toast.success('Signed in.');
-            router.push('/');
-            router.refresh();
+            router.push(verifyEmailPendingHref(value.email));
         },
     });
 
     return (
         <AuthCard
-            title="Sign in"
-            description="Enter your email and password to continue."
+            title="Create an account"
+            description="Enter your details to get started."
             footer={
                 <p className="text-center text-sm text-muted-foreground">
-                    Don&apos;t have an account?{' '}
+                    Already have an account?{' '}
                     <Link
-                        href="/sign-up"
+                        href="/sign-in"
                         className="text-foreground underline underline-offset-4"
                     >
-                        Sign up
+                        Sign in
                     </Link>
                 </p>
             }
         >
-            {unverifiedEmail && (
-                <div className="flex flex-col gap-3 rounded-lg border border-border bg-muted/30 p-3 text-sm">
-                    <p className="text-muted-foreground">
-                        Verify your email address before signing in. Check your inbox for the link, or request a new
-                        one.
-                    </p>
-                    <Button
-                        type="button"
-                        variant="outline"
-                        size="sm"
-                        className="w-fit"
-                        disabled={isResending}
-                        onClick={() => void handleResend(unverifiedEmail)}
-                    >
-                        {isResending ? 'Sending...' : 'Resend verification email'}
-                    </Button>
-                </div>
-            )}
-
             <form
                 className="flex flex-col gap-4"
                 onSubmit={(event) => {
@@ -100,6 +61,30 @@ export function SignInForm() {
                     void form.handleSubmit();
                 }}
             >
+                <form.Field name="name">
+                    {(field) => {
+                        const { errors, invalid, errorId, inputProps } = fieldA11yProps(field);
+                        return (
+                            <Field data-invalid={invalid}>
+                                <FieldLabel htmlFor={field.name}>Name</FieldLabel>
+                                <Input
+                                    id={field.name}
+                                    name={field.name}
+                                    autoComplete="name"
+                                    value={field.state.value}
+                                    onBlur={field.handleBlur}
+                                    onChange={(event) => field.handleChange(event.target.value)}
+                                    {...inputProps}
+                                />
+                                <FieldError
+                                    id={errorId}
+                                    errors={errors}
+                                />
+                            </Field>
+                        );
+                    }}
+                </form.Field>
+
                 <form.Field name="email">
                     {(field) => {
                         const { errors, invalid, errorId, inputProps } = fieldA11yProps(field);
@@ -130,19 +115,11 @@ export function SignInForm() {
                         const { errors, invalid, errorId, inputProps } = fieldA11yProps(field);
                         return (
                             <Field data-invalid={invalid}>
-                                <div className="flex items-center justify-between">
-                                    <FieldLabel htmlFor={field.name}>Password</FieldLabel>
-                                    <Link
-                                        href="/forgot-password"
-                                        className="text-sm text-muted-foreground underline underline-offset-4"
-                                    >
-                                        Forgot your password?
-                                    </Link>
-                                </div>
+                                <FieldLabel htmlFor={field.name}>Password</FieldLabel>
                                 <PasswordInput
                                     id={field.name}
                                     name={field.name}
-                                    autoComplete="current-password"
+                                    autoComplete="new-password"
                                     value={field.state.value}
                                     onBlur={field.handleBlur}
                                     onChange={(event) => field.handleChange(event.target.value)}
@@ -157,22 +134,28 @@ export function SignInForm() {
                     }}
                 </form.Field>
 
-                <form.Field name="rememberMe">
-                    {(field) => (
-                        <Field orientation="horizontal">
-                            <Checkbox
-                                id={field.name}
-                                checked={field.state.value}
-                                onCheckedChange={(checked) => field.handleChange(checked)}
-                            />
-                            <FieldLabel
-                                htmlFor={field.name}
-                                className="font-normal"
-                            >
-                                Remember me
-                            </FieldLabel>
-                        </Field>
-                    )}
+                <form.Field name="confirmPassword">
+                    {(field) => {
+                        const { errors, invalid, errorId, inputProps } = fieldA11yProps(field);
+                        return (
+                            <Field data-invalid={invalid}>
+                                <FieldLabel htmlFor={field.name}>Confirm password</FieldLabel>
+                                <PasswordInput
+                                    id={field.name}
+                                    name={field.name}
+                                    autoComplete="new-password"
+                                    value={field.state.value}
+                                    onBlur={field.handleBlur}
+                                    onChange={(event) => field.handleChange(event.target.value)}
+                                    {...inputProps}
+                                />
+                                <FieldError
+                                    id={errorId}
+                                    errors={errors}
+                                />
+                            </Field>
+                        );
+                    }}
                 </form.Field>
 
                 <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting] as const}>
@@ -182,7 +165,7 @@ export function SignInForm() {
                             disabled={!canSubmit || isSubmitting}
                             className="w-full"
                         >
-                            {isSubmitting ? 'Signing in...' : 'Sign in'}
+                            {isSubmitting ? 'Creating account...' : 'Create account'}
                         </Button>
                     )}
                 </form.Subscribe>

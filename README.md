@@ -23,11 +23,11 @@ practices.
 ## Database and email (Docker Compose)
 
 This project uses [Docker Compose](https://docs.docker.com/compose) to run a local Postgres database and
-[Mailpit](https://mailpit.axllent.org) (an SMTP catcher for previewing auth emails such as password resets) during
-development. Postgres's first-run bootstrap variables (`POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB`) are set
-directly to the application's own role and database (default `react_template_local` / `react_template_local_db`) — a
-local-only trade-off that makes this role a superuser. The database is published only on `127.0.0.1`, port
-`POSTGRES_PORT` (default `5435`).
+[Mailpit](https://mailpit.axllent.org) (an SMTP catcher for previewing auth emails such as verification links and
+password resets) during development. Postgres's first-run bootstrap variables (`POSTGRES_USER`, `POSTGRES_PASSWORD`,
+`POSTGRES_DB`) are set directly to the application's own role and database (default `react_template_local` /
+`react_template_local_db`) — a local-only trade-off that makes this role a superuser. The database is published only on
+`127.0.0.1`, port `POSTGRES_PORT` (default `5435`).
 
 - `docker compose up -d --wait postgres mailpit`: start Postgres and Mailpit
 - `docker compose down`: stop and remove the containers
@@ -40,13 +40,33 @@ the variables in `.env`._
 
 ## Authentication
 
-Authentication is handled by [Better Auth](https://www.better-auth.com) with email/password and two-factor sign-in.
-Self-serve sign-up is disabled by default (`disableSignUp: true`), so accounts must be created directly against the
-database until sign-up is enabled for your use case.
+Authentication is handled by [Better Auth](https://www.better-auth.com) with email/password and two-factor sign-in. All
+auth emails are sent over SMTP (`SMTP_*`); locally they land in Mailpit.
+
+- **Sign-up** (`/sign-up`): self-serve sign-up is enabled and requires email verification
+  (`requireEmailVerification: true`). Sign-up sends a verification link and shows `/verify-email` ("check your inbox",
+  with a resend button). Opening the link verifies the address, signs the user in (`autoSignInAfterVerification: true`)
+  and sends a welcome email.
+- **Sign-in** (`/sign-in`): an unverified account cannot sign in; the form offers to resend the verification link.
+- **Account** (`/account`): profile, email change, password change, two-factor settings, active sessions and account
+  deletion. Changing the email sends a verification link to the new address; the old address stays active until the link
+  is opened. Deleting the account asks for the password in a confirmation dialog.
+- **Security notifications**: a Better Auth `hooks.after` middleware (`src/lib/auth/hooks/security-notifications.ts`)
+  emails the user after a password change, enabling or disabling two-factor authentication, and regenerating backup
+  codes. A failed send is logged and never fails the action itself.
+- **Hardening** (`src/lib/auth/security.ts`): passwords need at least 12 characters, a password reset signs out every
+  other session, and rate limits are stored in the database (`rate_limit` table) with tight per-endpoint rules for
+  sign-in, sign-up, two-factor, password reset and verification emails. The app origin is always trusted; add extra
+  origins as a comma-separated `BETTER_AUTH_TRUSTED_ORIGINS`. Cookies are `Secure` whenever `BETTER_AUTH_URL` uses
+  https.
+- **Route protection**: `src/proxy.ts` only does an optimistic session-cookie check on `/account`; every other route,
+  including the auth pages, is public. Pages still verify the session on the server (`requireSession`).
 
 `NODE_ENV=development npm run db:seed` creates one fixture account, `user@mail.com`, for local development and testing.
-The password is a fixed value hardcoded in `src/lib/db/seeders/user.ts` — not published here or stored in any
-environment variable. It never modifies an account that already exists.
+The account is created with a verified email address, so it can sign in straight away. The password is a fixed value
+hardcoded in `src/lib/db/seeders/user.ts` — not published here or stored in any environment variable. It never modifies
+an account that already exists: a fixture account seeded before email verification was required stays unverified, so use
+the resend link on the sign-in page (the email arrives in Mailpit) or delete the row and seed again.
 
 The seeder requires `NODE_ENV` to be exactly `development` — not `production`, not `test`, not unset — and separately
 requires `DATABASE_URL` to point at exactly `react_template_local_db` on `localhost`/`127.0.0.1` port `5435` (the Docker
@@ -93,3 +113,6 @@ Navigate into your project directory and start linting your files.
 - `npm run format:ox`: formats supported repository files
     - `npm run format:ox:check`: checks formatting without writing files
 - `npm run typecheck`: type-checks the project
+- `npm run knip`: reports unused files, exports and dependencies
+- `npm run verify:static`: runs typecheck, lint and Knip in one command
+- `npm run install:lefthook`: installs the Git hooks from `lefthook.yml` (once per clone)
