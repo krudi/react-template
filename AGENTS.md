@@ -14,7 +14,7 @@ lean.
 
 | Question                                               | Source                                                                 |
 | ------------------------------------------------------ | ---------------------------------------------------------------------- |
-| Setup, local services, auth, seeding, npm scripts      | `README.md`                                                            |
+| Setup, local services, npm scripts                     | `README.md`                                                            |
 | Conventions, hard rules, verification                  | this file                                                              |
 | Next.js 16 APIs and file conventions                   | `node_modules/next/dist/docs/` — read the relevant guide before coding |
 | Repeatable workflows (commit, PR, test, retrospective) | `.ai/skills/<name>/SKILL.md` — pick by its description                 |
@@ -56,11 +56,19 @@ Do not create competing documentation; update the owner instead.
   reset, security notifications) live in `src/lib/auth/emails/` and render through `email-layout.ts`. `src/proxy.ts`
   only guards `/account` with an optimistic cookie check, so the auth pages (`/sign-in`, `/sign-up`, `/verify-email`,
   `/forgot-password`, `/reset-password`, `/two-factor`) stay public; protected pages still call `requireSession()`.
-- Security headers are set inline in `next.config.ts` (`poweredByHeader: false`, HSTS, `X-Frame-Options: DENY`,
-  `strict-origin-when-cross-origin`, Permissions-Policy) with a nonce-free Content Security Policy built by
-  `src/config/content-security-policy.ts`: scripts and styles keep `'unsafe-inline'` (Next.js and next-themes need it
-  without a nonce), `'unsafe-eval'` only in development. `src/instrumentation-client.ts` sets zod to `jitless` so zod's
-  `new Function` probe does not trip `script-src` in the browser.
+- Auth hardening lives in `src/lib/auth/security.ts`: 12-character minimum password, sessions revoked on password reset,
+  database-backed rate limits (`rate_limit` table), the app origin plus `BETTER_AUTH_TRUSTED_ORIGINS` as trusted
+  origins, `Secure` cookies when `BETTER_AUTH_URL` is https. Security notifications are sent by the `hooks.after`
+  middleware in `src/lib/auth/hooks/security-notifications.ts`; a failed send is logged and never fails the action.
+- `NODE_ENV=development npm run db:seed` creates the verified fixture account `user@mail.com` (password hardcoded in
+  `src/lib/db/seeders/user.ts`). It refuses to run unless `NODE_ENV` is exactly `development` and `DATABASE_URL` points
+  at `react_template_local_db` on `localhost`/`127.0.0.1:5435`, and it never modifies an existing account. These checks
+  catch accidents only; keep seeding out of production deploy paths.
+- Security headers are written out in `next.config.ts` (`poweredByHeader: false`, HSTS, `X-Frame-Options: DENY`,
+  `strict-origin-when-cross-origin`, Permissions-Policy, nonce-free Content Security Policy): scripts and styles keep
+  `'unsafe-inline'` (Next.js and next-themes need it without a nonce), `'unsafe-eval'` only in development.
+  `src/instrumentation-client.ts` sets zod to `jitless` so zod's `new Function` probe does not trip `script-src` in the
+  browser.
 - Environment variables are declared as zod schemas in `src/lib/validation/environment.ts` and exposed through
   `@t3-oss/env-nextjs` in `src/config/server-env.ts` / `src/config/client-env.ts`; add new ones there and to
   `.env.example`.
