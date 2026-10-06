@@ -23,4 +23,5 @@ Explain what you changed and how it solves the problem.
 
 ## Checklist
 
-- [ ] I have read the [Contributing Guidelines](https://github.com/krudi/react-template/blob/main/CONTRIBUTING.md)
+- [ ] I have read the
+      [Contributing Guidelines](https://github.com/krudi/react-template/blob/main/.github/CONTRIBUTING.md)
