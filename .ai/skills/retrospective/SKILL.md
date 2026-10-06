@@ -1,31 +1,32 @@
 ---
 name: retrospective
-description: Capture lessons learned after a session. Use when the user corrects your work, after surprises, or at the end of a substantial session. Updates .ai/memory/lessons.md.
+description:
+    Capture project lessons after corrections, surprises, or substantial React Template sessions. Updates AGENTS.md (Lessons or
+    Conventions) or README.md.
 ---
 
 # Session Retrospective
 
 ## When to use
 
-- User corrects your work (wrong path, wrong assumption, wrong approach)
-- You hit a non-obvious tool limitation or project constraint
+- User corrects a wrong path, wrong stack assumption, or wrong approach
+- A tool limitation or project constraint affects the workflow
 - User says "remember this", "add to lessons", or "document that"
-- End of a session with substantial corrections
+- End of a substantial session with reusable project knowledge
 
 ## Steps
 
-1. Identify what to capture — for each correction, ask: what would have prevented this?
-2. Read `.ai/memory/lessons.md` to check existing lessons
-3. Write or update lessons:
-   - Group by category: Patterns, Gotchas, Commands, Architecture, etc.
-   - Format: `**Bold trigger**: actionable one-sentence lesson`
-   - Max 1–2 sentences per lesson
-   - Update existing entries instead of duplicating
-   - Remove stale/wrong lessons
-4. Keep the file under ~80 lines total — consolidate if it grows
+1. Identify what would have prevented the issue
+2. Read `AGENTS.md`
+3. Put the lesson where it belongs: gotchas in `AGENTS.md` `## Lessons` (create the section before
+   `## AI workflow layout` if it is missing), conventions in `AGENTS.md` `## Conventions`, operational facts (setup,
+   local services, scripts) in `README.md`
+4. Update an existing entry instead of duplicating it, and remove entries that are no longer true
+5. Keep it as current fact/invariant, not a narrated history of the session
+6. Do not create a new documentation file
 
-## What NOT to capture
+## What not to capture
 
 - Trivial typo fixes
 - One-off task details
-- Things already obvious from the error message
+- Information already obvious from the current code or the error message
