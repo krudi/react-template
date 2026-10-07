@@ -1,15 +1,8 @@
 import { VerifyEmailStatus } from '@features/auth';
 import type { VerifyEmailState } from '@features/auth';
-import { createPageMetadata } from '@utils/site/seo';
 import type { Metadata } from 'next';
 
-export const metadata: Metadata = {
-    ...createPageMetadata({
-        path: '/verify-email',
-        title: 'Verify your email',
-    }),
-    robots: { index: false, follow: false },
-};
+export const metadata: Metadata = { title: 'Verify your email', robots: { index: false, follow: false } };
 
 type PageProps = {
     searchParams: Promise<{ email?: string; status?: string; error?: string }>;

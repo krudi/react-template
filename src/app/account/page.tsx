@@ -9,20 +9,13 @@ import {
 } from '@features/auth';
 import { auth } from '@lib/auth/auth';
 import { requireSession } from '@utils/auth/session';
-import { createPageMetadata } from '@utils/site/seo';
 import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import Link from 'next/link';
 
 import { Separator } from '@/components/ui/separator';
 
-export const metadata: Metadata = {
-    ...createPageMetadata({
-        path: '/account',
-        title: 'Your account',
-    }),
-    robots: { index: false, follow: false },
-};
+export const metadata: Metadata = { title: 'Your account', robots: { index: false, follow: false } };
 
 export default async function Page() {
     const session = await requireSession();

@@ -3,17 +3,14 @@ import { buttonVariants } from '@components/ui/button';
 import { Card, CardDescription, CardHeader, CardTitle } from '@components/ui/card';
 import { Separator } from '@components/ui/separator';
 import { getSession } from '@utils/auth/session';
-import { createPageMetadata } from '@utils/site/seo';
 import { KeyRound, Layers, ShieldCheck } from 'lucide-react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
-export const metadata: Metadata = createPageMetadata({
-    path: '/',
+export const metadata: Metadata = {
     title: 'Homepage',
     description: 'A Next.js starter template built with React, Tailwind CSS v4, and shadcn/ui.',
-    keywords: ['react template', 'next.js', 'homepage', 'starter'],
-});
+};
 
 const FEATURES = [
     {
