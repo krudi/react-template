@@ -72,9 +72,21 @@ Do not create competing documentation; update the owner instead.
 - Environment variables are declared as zod schemas in `src/lib/validation/environment.ts` and exposed through
   `@t3-oss/env-nextjs` in `src/config/server-env.ts` / `src/config/client-env.ts`; add new ones there and to
   `.env.example`.
+- SEO uses Next.js conventions only. The root `src/app/layout.tsx` `metadata` sets `metadataBase`, the `%s | Site` title
+  template and default, description, `alternates.canonical: './'` and `openGraph.url: './'` (Next.js resolves both
+  against each route's pathname), Open Graph `siteName`/`locale`/`type`, `applicationName`, `authors`, `creator`,
+  `publisher`, `referrer`, `twitter.card` and `twitter.creator` (per-project placeholders to fill in; Next.js fills the
+  twitter title, description and image from Open Graph) and Google verification; theme colour lives in the `viewport`
+  export. Images come from file conventions in `src/app/`: `favicon.ico`, `icon.png` (32×32), `apple-icon.png`
+  (180×180), `opengraph-image.png` with `opengraph-image.alt.txt`, and `manifest.ts` (the PWA is manifest-only:
+  `public/icon-192x192.png` and `public/icon-512x512.png`, no service worker). Pages export only `title`, `description`
+  and, for auth/account pages, `robots: { index: false, follow: false }`; a page that sets `openGraph` replaces the
+  layout's whole object. Do not add `keywords`, `msapplication-*`/`browserconfig.xml` tags, a `shortcut` icon, per-size
+  icon lists or a manual `theme-color` meta.
 - Starting a project from this template: rename the directory and the `package.json` `name`, update the
-  `src/app/layout.tsx` metadata (title, description), add project dependencies, and rewrite this file with the new
-  project's stack and domain context. Remind the user of these steps when scaffolding.
+  `src/app/layout.tsx` metadata (title, description, Open Graph site name) and the `src/app/` icon and Open Graph image
+  files, add project dependencies, and rewrite this file with the new project's stack and domain context. Remind the
+  user of these steps when scaffolding.
 
 ## Working rules
 
