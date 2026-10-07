@@ -75,7 +75,7 @@ Do not create competing documentation; update the owner instead.
 - SEO uses Next.js conventions only. The root `src/app/layout.tsx` `metadata` sets `metadataBase`, the `%s | Site` title
   template and default, description, `alternates.canonical: './'` and `openGraph.url: './'` (Next.js resolves both
   against each route's pathname), Open Graph `siteName`/`locale`/`type`, `applicationName`, `authors`, `creator`,
-  `publisher`, `referrer`, `twitter.card` and `twitter.creator` (per-project placeholders to fill in; Next.js fills the
+  `publisher`, `referrer`, `twitter.card`, `twitter.site` and `twitter.creator` (per-project placeholders to fill in; Next.js fills the
   twitter title, description and image from Open Graph) and Google verification; theme colour lives in the `viewport`
   export. Images come from file conventions in `src/app/`: `favicon.ico`, `icon.png` (32×32), `apple-icon.png`
   (180×180), `opengraph-image.png` with `opengraph-image.alt.txt`, and `manifest.ts` (the PWA is manifest-only:
