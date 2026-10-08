@@ -9,9 +9,9 @@ import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Field, FieldError, FieldLabel } from '@/components/ui/field';
-import { PasswordInput } from '@/components/ui/password-input';
 
 import { fieldA11yProps } from '../lib/field-errors';
+import { PasswordInput } from './password-input';
 
 export function ChangePasswordForm() {
     const router = useRouter();

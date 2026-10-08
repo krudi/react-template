@@ -12,11 +12,11 @@ import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Field, FieldError, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
-import { PasswordInput } from '@/components/ui/password-input';
 
 import { fieldA11yProps } from '../lib/field-errors';
 import { useResendVerificationEmail, verifyEmailPendingHref } from '../lib/use-resend-verification-email';
 import { AuthCard } from './auth-card';
+import { PasswordInput } from './password-input';
 
 export function SignInForm() {
     const router = useRouter();

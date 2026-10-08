@@ -9,7 +9,6 @@ import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
 import { Field, FieldError, FieldLabel } from '@/components/ui/field';
-import { PasswordInput } from '@/components/ui/password-input';
 import {
     Sheet,
     SheetClose,
@@ -22,6 +21,7 @@ import {
 } from '@/components/ui/sheet';
 
 import { fieldA11yProps } from '../lib/field-errors';
+import { PasswordInput } from './password-input';
 
 export function DeleteAccountForm() {
     const router = useRouter();
