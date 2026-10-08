@@ -12,13 +12,13 @@ lean.
 
 ## Where knowledge lives
 
-| Question                                               | Source                                                                 |
-| ------------------------------------------------------ | ---------------------------------------------------------------------- |
-| Setup, local services, npm scripts                     | `README.md`                                                            |
-| Conventions, hard rules, verification                  | this file                                                              |
-| Next.js 16 APIs and file conventions                   | `node_modules/next/dist/docs/` — read the relevant guide before coding |
-| Repeatable workflows (commit, PR, test, retrospective) | `.ai/skills/<name>/SKILL.md` — pick by its description                 |
-| Git workflow and PR template                           | `.github/CONTRIBUTING.md`, `.github/PULL_REQUEST_TEMPLATE.md`          |
+| Question                                | Source                                                                 |
+| --------------------------------------- | ---------------------------------------------------------------------- |
+| Setup, local services, npm scripts      | `README.md`                                                            |
+| Conventions, hard rules, verification   | this file                                                              |
+| Next.js 16 APIs and file conventions    | `node_modules/next/dist/docs/` — read the relevant guide before coding |
+| Repeatable workflows (commit, PR, test) | `.ai/skills/<name>/SKILL.md` — pick by its description                 |
+| Git workflow and PR template            | `.github/CONTRIBUTING.md`, `.github/PULL_REQUEST_TEMPLATE.md`          |
 
 Do not create competing documentation; update the owner instead.
 
