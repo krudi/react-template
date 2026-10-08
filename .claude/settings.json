@@ -27,7 +27,9 @@
             "Read(./**/.env.testing)",
             "Read(./**/.env.development)",
             "Read(./**/.env.staging)",
-            "Read(./**/.env.backup)"
+            "Read(./**/.env.backup)",
+            "Edit(./src/components/ui/**)",
+            "Write(./src/components/ui/**)"
         ]
     }
 }

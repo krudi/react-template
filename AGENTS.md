@@ -1,11 +1,5 @@
 # Agent instructions
 
-This file is the canonical instruction source for every coding agent. `CLAUDE.md` only imports it, because Claude Code
-does not read `AGENTS.md` by itself. Start every agent session at the repository root: Claude Code expands the
-`@AGENTS.md` import only for the working directory's `CLAUDE.md`, and Codex started inside a subdirectory loads only
-that directory's `AGENTS.md` and none of the repository skills. Skills, adapters and nested instruction files point
-here; they never restate rules.
-
 React Template is a Next.js 16 + React 19 starter with Better Auth (email/password, two-factor), Drizzle ORM +
 PostgreSQL, Tailwind CSS v4 and shadcn/ui on Base UI. It is the base for new Next.js projects, so it stays intentionally
 lean.
@@ -18,6 +12,7 @@ lean.
 | Conventions, hard rules, verification   | this file                                                              |
 | Next.js 16 APIs and file conventions    | `node_modules/next/dist/docs/` — read the relevant guide before coding |
 | Repeatable workflows (commit, PR, test) | `.ai/skills/<name>/SKILL.md` — pick by its description                 |
+| Third-party skills                      | `skills-lock.json` (`npx skills`)                                      |
 | Git workflow and PR template            | `.github/CONTRIBUTING.md`, `.github/PULL_REQUEST_TEMPLATE.md`          |
 
 Do not create competing documentation; update the owner instead.
@@ -37,13 +32,12 @@ Do not create competing documentation; update the owner instead.
 
 - Stack: Next.js 16 (App Router), React 19, TypeScript. TypeScript config is the local, project-owned `tsconfig.json`,
   not a shared package.
-- Lint and format with oxlint + oxfmt (root `.oxlintrc.json` / `.oxfmtrc.json`). oxfmt ignores `src/components/ui/**`,
-  generated Drizzle/Better Auth files and the agent folders (`.ai`, `.agents`, `.claude`, `.codex`).
+- Lint and format with oxlint + oxfmt; `.oxlintrc.json` / `.oxfmtrc.json` own the rules and ignore lists.
 - The `nextjs-agent-rules` block at the end of this file is owned by Next.js: `next dev` rewrites it whenever it differs
   from the installed version's text. `.oxfmtrc.json` sets `proseWrap: preserve` for `AGENTS.md` so oxfmt never rewraps
   it; never edit or reflow it by hand.
-- Browser support is the Tailwind CSS v4 baseline in `.browserslistrc` (Chrome/Edge 111+, Safari/iOS 16.4+, Firefox
-  128+, Samsung Internet 22+, Opera 98+). No Autoprefixer: Tailwind and Next.js emit the prefixes these targets need.
+- Browser support is the Tailwind CSS v4 baseline in `.browserslistrc`. No Autoprefixer: Tailwind and Next.js emit the
+  prefixes these targets need.
 - App Router only, under `src/app/`; no Pages Router. Route handlers are `route.ts` under `src/app/api/`.
 - Server Components by default; add `'use client'` only for browser APIs, event handlers or hooks.
 - Co-locate components with their page or feature (`src/features/<name>/`); move them to `src/components/` once two or
@@ -52,45 +46,27 @@ Do not create competing documentation; update the owner instead.
   `Action`.
 - Use `next/image` for images; a plain `<img>` is only for local `blob:`/data-URL previews. Use `next/font`, never fonts
   from an external CDN. Prefer dynamic `import()` for heavy components.
-- Auth: self-serve sign-up is enabled and requires email verification; auth emails (verification, welcome, password
-  reset, security notifications) live in `src/lib/auth/emails/` and render through `email-layout.ts`. `src/proxy.ts`
-  only guards `/account` with an optimistic cookie check, so the auth pages (`/sign-in`, `/sign-up`, `/verify-email`,
-  `/forgot-password`, `/reset-password`, `/two-factor`) stay public; protected pages still call `requireSession()`.
-- Auth hardening lives in `src/lib/auth/security.ts`: 12-character minimum password, sessions revoked on password reset,
-  database-backed rate limits (`rate_limit` table), the app origin plus `BETTER_AUTH_TRUSTED_ORIGINS` as trusted
-  origins, `Secure` cookies when `BETTER_AUTH_URL` is https. Security notifications are sent by the `hooks.after`
-  middleware in `src/lib/auth/hooks/security-notifications.ts`; a failed send is logged and never fails the action.
-- `NODE_ENV=development npm run db:seed` creates the verified fixture account `user@mail.com` (password hardcoded in
-  `src/lib/db/seeders/user.ts`). It refuses to run unless `NODE_ENV` is exactly `development` and `DATABASE_URL` points
-  at `react_template_local_db` on `localhost`/`127.0.0.1:5435`, and it never modifies an existing account. These checks
-  catch accidents only; keep seeding out of production deploy paths.
-- Security headers are written out in `next.config.ts` (`poweredByHeader: false`, HSTS, `X-Frame-Options: DENY`,
-  `strict-origin-when-cross-origin`, Permissions-Policy, nonce-free Content Security Policy): scripts and styles keep
-  `'unsafe-inline'` (Next.js and next-themes need it without a nonce), `'unsafe-eval'` only in development.
-  `src/instrumentation-client.ts` sets zod to `jitless` so zod's `new Function` probe does not trip `script-src` in the
-  browser.
+- Auth lives in `src/lib/auth/` (hardening in `security.ts`, emails in `emails/`, security notifications in `hooks/`).
+  `src/proxy.ts` is only an optimistic cookie check for `/account`; protected pages still call `requireSession()`.
+- Seeding: `npm run db:seed` refuses non-local databases (`src/lib/db/seeders/index.ts`); these guards catch accidents
+  only, so keep seeding out of production deploy paths.
+- Security headers and the nonce-free Content Security Policy live in `next.config.ts`. `src/instrumentation-client.ts`
+  sets zod to `jitless` so zod's `new Function` probe does not trip `script-src` in the browser.
 - Environment variables are declared as zod schemas in `src/lib/validation/environment.ts` and exposed through
   `@t3-oss/env-nextjs` in `src/config/server-env.ts` / `src/config/client-env.ts`; add new ones there and to
   `.env.example`.
-- SEO uses Next.js conventions only. The root `src/app/layout.tsx` `metadata` sets `metadataBase`, the `%s | Site` title
-  template and default, description, `alternates.canonical: './'` and `openGraph.url: './'` (Next.js resolves both
-  against each route's pathname), Open Graph `siteName`/`locale`/`type`, `applicationName`, `authors`, `creator`,
-  `publisher`, `referrer`, `twitter.card`, `twitter.site` and `twitter.creator` (per-project placeholders to fill in; Next.js fills the
-  twitter title, description and image from Open Graph) and Google verification; theme colour lives in the `viewport`
-  export. Images come from file conventions in `src/app/`: `favicon.ico`, `icon.png` (32×32), `apple-icon.png`
-  (180×180), `opengraph-image.png` with `opengraph-image.alt.txt`, and `manifest.ts` (the PWA is manifest-only:
-  `public/icon-192x192.png` and `public/icon-512x512.png`, no service worker). Pages export only `title`, `description`
-  and, for auth/account pages, `robots: { index: false, follow: false }`; a page that sets `openGraph` replaces the
-  layout's whole object. Do not add `keywords`, `msapplication-*`/`browserconfig.xml` tags, a `shortcut` icon, per-size
-  icon lists or a manual `theme-color` meta.
+- SEO uses Next.js metadata and file conventions only: root `metadata`/`viewport` in `src/app/layout.tsx`, icons, Open
+  Graph image and `manifest.ts` in `src/app/`. Auth/account pages set `robots: { index: false, follow: false }`; a page
+  that sets `openGraph` replaces the layout's whole object. Do not add `keywords`, `msapplication-*`/`browserconfig.xml`
+  tags, a `shortcut` icon, per-size icon lists or a manual `theme-color` meta.
 - Starting a project from this template: rename the directory and the `package.json` `name`, update the
-  `src/app/layout.tsx` metadata (title, description, Open Graph site name) and the `src/app/` icon and Open Graph image
-  files, add project dependencies, and rewrite this file with the new project's stack and domain context. Remind the
-  user of these steps when scaffolding.
+  `src/app/layout.tsx` metadata (title, description, Open Graph site name, `twitter` handles) and the `src/app/` icon and
+  Open Graph image files, add project dependencies, and rewrite this file with the new project's stack and domain
+  context. Remind the user of these steps when scaffolding.
 
 ## Working rules
 
-- Run commands from the repository root with the Node version in `.nvmrc`; use the npm scripts in `package.json`.
+- Run commands from the repository root; use the npm scripts in `package.json`.
 - Git hooks come from `lefthook.yml` (`npm run install:lefthook` once per clone); never bypass them with `--no-verify`.
   When a hook fails, fix the staged files or report the failure — do not work around the hook.
 - Never commit, amend or push unless asked. Stage only files that belong to the task; leave unrelated dirty files,
@@ -105,8 +81,7 @@ Do not create competing documentation; update the owner instead.
 ## Verification
 
 Verification is proportional to the change. While iterating, run the row(s) that match the files you touched; before
-declaring a change complete, widen to every area it crosses. CI runs `lint:ox`, `format:ox:check`,
-`typecheck:next && typecheck`, `knip` and `build`.
+declaring a change complete, widen to every area it crosses. CI checks are defined in `.github/workflows/`.
 
 | Changed area                           | While iterating                                 | Before completion, when applicable                                                                         |
 | -------------------------------------- | ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
@@ -114,28 +89,6 @@ declaring a change complete, widen to every area it crosses. CI runs `lint:ox`, 
 | `src/lib/db/schemas/`, `src/lib/auth/` | `npm run typecheck`                             | `npm run auth:generate` (auth config) and `npm run db:generate`; include the generated files in the change |
 | Markdown, JSON, config files           | `npm run format:ox:check`                       | `npm run lint`; `npm run build` for `next.config.ts`, `postcss.config.json` or `tsconfig.json`             |
 | cross-cutting                          | `npm run verify:static` (typecheck, lint, knip) | `npm run typecheck:next && npm run verify:static`; `npm run build`                                         |
-
-## AI workflow layout
-
-| Path                                          | Holds                                                                                                                          |
-| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| `.ai/skills/<name>/`                          | Project skills — the only copy of each; generated files go to the skill's own `output/`, ignored by a skill-local `.gitignore` |
-| `.agents/skills/`                             | Third-party skills managed by `npx skills` (`skills-lock.json`), plus a symlink per project skill so Codex discovers it        |
-| `.claude/skills/`                             | Symlinks only — Claude Code's discovery path into both of the above                                                            |
-| `.claude/settings.json`, `.codex/config.toml` | Per-agent settings only; keep their environment policy in sync                                                                 |
-| `.ai/audits/<YYYY-MM-DD>-<slug>/README.md`    | An audit lives here only while it holds unresolved work                                                                        |
-
-## Project skills
-
-All React Template-owned skills live canonically under `.ai/skills/`.
-
-Agent-specific skill directories such as `.claude/skills/` and `.agents/skills/` must contain only adapters or symlinks
-to those project skills when required for tool discovery (`ln -s ../../.ai/skills/<name>` in both).
-
-Never maintain duplicate copies of a React Template-owned `SKILL.md`.
-
-When an audit is done, move its durable conclusions into `AGENTS.md` or `README.md`, carry any open item to a tracked
-place, and delete the folder — git history is the archive. Audits carry no screenshots or raw dumps.
 
 <!-- BEGIN:nextjs-agent-rules -->
 
