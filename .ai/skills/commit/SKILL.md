@@ -12,8 +12,8 @@ description:
 1. Run `git status` and `git diff HEAD` to understand all changes
 2. Run `git log --oneline -5` to match recent commit style
 3. Draft a commit message:
-    - `type(scope): subject` — imperative, lowercase, subject <= 100 chars (enforced by the lefthook `commit-msg` hook)
-    - Body: bullets explaining why, wrapped at 80 chars
+    - `type(scope): subject` — a short, professional subject naming the concrete change: imperative, lowercase, <= 100 chars (enforced by the lefthook `commit-msg` hook)
+    - Body: at most one short line when the why is not obvious; no bullet lists or multi-paragraph bodies
     - Add `BREAKING CHANGE:` footer only if applicable
 4. Stage relevant files with `git add <specific-files>`; avoid `git add .`
 5. Commit via heredoc to preserve formatting
