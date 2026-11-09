@@ -15,4 +15,8 @@ export const serverEnvironmentSchema = {
 
 export const clientEnvironmentSchema = {
     NEXT_PUBLIC_SITE_URL: z.url().default('http://localhost:3000'),
+    NEXT_PUBLIC_GTM_ID: z
+        .string()
+        .regex(/^(GTM-[A-Z0-9]+)?$/)
+        .default(''),
 } as const;

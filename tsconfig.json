@@ -43,6 +43,8 @@
         "next-env.d.ts",
         "src/**/*.ts",
         "src/**/*.tsx",
+        "packages/*/src/**/*.ts",
+        "packages/*/src/**/*.tsx",
         "client.d.ts",
         ".next/types/**/*.ts",
         ".next/dev/types/**/*.ts",

@@ -1,5 +1,13 @@
 {
     "$schema": "https://unpkg.com/knip@6/schema.json",
-    "entry": ["drizzle.config.ts", "src/components/ui/**/*.{ts,tsx}"],
-    "drizzle": false
+    "drizzle": false,
+    "workspaces": {
+        ".": {
+            "entry": ["drizzle.config.ts", "src/components/ui/**/*.{ts,tsx}"]
+        },
+        "packages/*": {}
+    },
+    "ignoreIssues": {
+        "packages/consent/src/google-consent.ts": ["exports"]
+    }
 }

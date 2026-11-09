@@ -1,6 +1,7 @@
 import '@app/globals.css';
 import Footer from '@components/footer';
 import Header from '@components/header';
+import { PrivacyControls } from '@components/privacy-controls';
 import { ThemeProvider } from '@components/theme-provider';
 import { serverEnv } from '@config/server-env';
 import { siteUrl } from '@utils/site/site-url';
@@ -81,6 +82,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                         <Footer />
                     </div>
                     <Toaster />
+                    <PrivacyControls />
                 </ThemeProvider>
             </body>
         </html>

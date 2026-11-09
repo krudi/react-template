@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
     },
     reactStrictMode: true,
     poweredByHeader: false,
+    transpilePackages: ['@krudi/consent'],
     async headers() {
         return [
             {
@@ -15,11 +16,11 @@ const nextConfig: NextConfig = {
                         key: 'Content-Security-Policy',
                         value: [
                             "default-src 'self'",
-                            `script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === 'development' ? " 'unsafe-eval'" : ''}`,
+                            `script-src 'self' 'unsafe-inline' https://www.googletagmanager.com${process.env.NODE_ENV === 'development' ? " 'unsafe-eval'" : ''}`,
                             "style-src 'self' 'unsafe-inline'",
-                            "img-src 'self' data: blob:",
+                            "img-src 'self' data: blob: https://www.googletagmanager.com https://*.google-analytics.com",
                             "font-src 'self'",
-                            `connect-src 'self'${process.env.NODE_ENV === 'development' ? ' ws:' : ''}`,
+                            `connect-src 'self' https://www.googletagmanager.com https://*.google-analytics.com${process.env.NODE_ENV === 'development' ? ' ws:' : ''}`,
                             "media-src 'self'",
                             "object-src 'none'",
                             "frame-src 'none'",

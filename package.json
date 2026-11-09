@@ -22,6 +22,9 @@
         "url": "https://krudi.io"
     },
     "type": "module",
+    "workspaces": [
+        "packages/*"
+    ],
     "scripts": {
         "auth:generate": "auth generate --config src/lib/auth/auth.ts --adapter drizzle --dialect postgresql --output src/lib/db/schemas/auth.ts",
         "auth:info": "auth info --config src/lib/auth/auth.ts",
@@ -54,6 +57,7 @@
     },
     "dependencies": {
         "@base-ui/react": "^1.9.0",
+        "@krudi/consent": "*",
         "@t3-oss/env-nextjs": "^0.13.11",
         "@tailwindcss/postcss": "^4.3.3",
         "@tanstack/react-form": "^1.33.5",

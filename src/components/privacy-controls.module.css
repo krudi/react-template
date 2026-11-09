@@ -1,0 +1,11 @@
+.controls {
+    --consent-theme-accent: var(--primary);
+    --consent-theme-accent-foreground: var(--primary-foreground);
+    --consent-theme-surface: var(--card);
+    --consent-theme-surface-raised: var(--muted);
+    --consent-theme-text: var(--foreground);
+    --consent-theme-text-muted: var(--muted-foreground);
+    --consent-theme-border: var(--border);
+    --consent-theme-font: var(--font-sans);
+    --consent-theme-color-scheme: light dark;
+}

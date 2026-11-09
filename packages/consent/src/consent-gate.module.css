@@ -1,0 +1,78 @@
+.gate {
+    --consent-accent: var(--consent-theme-accent, #e4c06e);
+    --consent-accent-foreground: var(--consent-theme-accent-foreground, #181818);
+    --consent-surface: var(--consent-theme-surface, #181818);
+    --consent-text: var(--consent-theme-text, #fafafa);
+    --consent-text-muted: var(--consent-theme-text-muted, #c4c4c4);
+    --consent-border: var(--consent-theme-border, #555555);
+    --consent-font: var(--consent-theme-font, system-ui, sans-serif);
+
+    display: grid;
+    gap: 0.875rem;
+    place-content: center;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    min-height: 16rem;
+    padding: 1.5rem;
+    font-family: var(--consent-font);
+    color: var(--consent-text);
+    text-align: center;
+    border: 1px solid var(--consent-border);
+    border-radius: 18px;
+    background: var(--consent-surface);
+}
+
+.title {
+    margin: 0;
+    font-weight: 700;
+}
+
+.text {
+    max-width: 36rem;
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.55;
+    color: var(--consent-text-muted);
+}
+
+.link {
+    color: var(--consent-accent);
+    text-underline-offset: 3px;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+}
+
+.button {
+    min-height: 2.75rem;
+    padding: 0.6rem 1.25rem;
+    font: inherit;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--consent-text);
+    cursor: pointer;
+    border: 1px solid var(--consent-border);
+    border-radius: 999px;
+    background: transparent;
+}
+
+.button:hover,
+.button:focus-visible {
+    border-color: var(--consent-accent);
+}
+
+.button:focus-visible {
+    outline: 3px solid var(--consent-accent);
+    outline-offset: 3px;
+}
+
+.button-primary {
+    color: var(--consent-accent-foreground);
+    border-color: var(--consent-accent);
+    background: var(--consent-accent);
+}

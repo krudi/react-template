@@ -1,0 +1,16 @@
+{
+    "name": "@krudi/consent",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "exports": {
+        ".": "./src/index.ts"
+    },
+    "dependencies": {
+        "vanilla-cookieconsent": "^3.3.0"
+    },
+    "peerDependencies": {
+        "next": ">=16",
+        "react": ">=19"
+    }
+}

@@ -1,0 +1,76 @@
+.root :global(#cc-main) {
+    --cc-font-family: var(--consent-theme-font, system-ui, sans-serif);
+    --cc-bg: var(--consent-theme-surface, #181818);
+    --cc-primary-color: var(--consent-theme-text, #fafafa);
+    --cc-secondary-color: var(--consent-theme-text-muted, #c4c4c4);
+    --cc-btn-primary-bg: var(--consent-theme-accent, #e4c06e);
+    --cc-btn-primary-color: var(--consent-theme-accent-foreground, #181818);
+    --cc-btn-primary-border-color: var(--consent-theme-accent, #e4c06e);
+    --cc-btn-primary-hover-bg: color-mix(in srgb, var(--consent-theme-accent, #e4c06e) 85%, white);
+    --cc-btn-primary-hover-color: var(--consent-theme-accent-foreground, #181818);
+    --cc-btn-primary-hover-border-color: var(--cc-btn-primary-hover-bg);
+    --cc-btn-secondary-bg: transparent;
+    --cc-btn-secondary-color: var(--consent-theme-text, #fafafa);
+    --cc-btn-secondary-border-color: var(--consent-theme-border, #555555);
+    --cc-btn-secondary-hover-bg: transparent;
+    --cc-btn-secondary-hover-color: var(--consent-theme-text, #fafafa);
+    --cc-btn-secondary-hover-border-color: var(--consent-theme-accent, #e4c06e);
+    --cc-cookie-category-block-bg: var(--consent-theme-surface-raised, #242424);
+    --cc-cookie-category-block-hover-bg: var(--consent-theme-surface-raised, #242424);
+    --cc-cookie-category-block-border: var(--consent-theme-border, #555555);
+    --cc-cookie-category-block-hover-border: var(--consent-theme-accent, #e4c06e);
+    --cc-cookie-category-expanded-block-bg: var(--consent-theme-surface-raised, #242424);
+    --cc-cookie-category-expanded-block-hover-bg: var(--consent-theme-surface-raised, #242424);
+    --cc-separator-border-color: var(--consent-theme-border, #555555);
+    --cc-toggle-on-bg: var(--consent-theme-accent, #e4c06e);
+    --cc-toggle-on-knob-bg: var(--consent-theme-accent-foreground, #181818);
+    --cc-toggle-off-bg: #666666;
+    --cc-toggle-off-knob-bg: #ffffff;
+    --cc-toggle-readonly-bg: #444444;
+    --cc-toggle-readonly-knob-bg: #999999;
+    --cc-footer-bg: var(--consent-theme-surface, #181818);
+    --cc-footer-color: var(--consent-theme-text-muted, #c4c4c4);
+    --cc-footer-border-color: var(--consent-theme-border, #555555);
+    --cc-overlay-bg: rgb(0 0 0 / 65%);
+    --cc-btn-border-radius: 12px;
+    --cc-modal-border-radius: 18px;
+    --cc-modal-margin: 1rem;
+
+    color-scheme: var(--consent-theme-color-scheme, dark);
+}
+
+.root :global(#cc-main .cm__title),
+.root :global(#cc-main .pm__title) {
+    font-family: var(--consent-theme-heading-font, var(--cc-font-family));
+}
+
+.root :global(#cc-main .cm__btn),
+.root :global(#cc-main .pm__btn) {
+    border-radius: 999px;
+}
+
+.reopen {
+    position: fixed;
+    inset-block-end: calc(var(--consent-reopen-bottom, 1rem) + env(safe-area-inset-bottom, 0px));
+    inset-inline-start: 1rem;
+    z-index: 950;
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    color: var(--consent-theme-text, #fafafa);
+    cursor: pointer;
+    border: 1px solid var(--consent-theme-border, #555555);
+    border-radius: 50%;
+    background: var(--consent-theme-surface, #181818);
+}
+
+.reopen:focus-visible {
+    outline: 3px solid var(--consent-theme-accent, #e4c06e);
+    outline-offset: 3px;
+}
+
+:global(.show--consent) .reopen {
+    display: none;
+}
