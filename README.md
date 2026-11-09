@@ -29,6 +29,25 @@ emails), a Mailpit SMTP server. Both are defined in `compose.yaml`.
 Postgres listens on `127.0.0.1:5435` and Mailpit SMTP on `127.0.0.1:1026`. Mailpit's web UI is available at
 <http://localhost:8025>; override the ports with `POSTGRES_PORT`, `MAILPIT_SMTP_PORT` and `MAILPIT_WEB_PORT` in `.env`.
 
+## Release and deploy (Vercel)
+
+One version space: `vX.Y.Z` tags on `main`, created by publishing a GitHub Release. Git pushes never deploy anything
+(`vercel.json` turns Git deployments off, previews included); Vercel only receives builds from this workflow.
+
+1. **Merge to `main`** and wait until its checks are green.
+2. **Publish the Release**: Releases → _Draft a new release_ → new tag `vX.Y.Z`, target `main` → _Generate release
+   notes_ → _Publish release_, or `gh release create v1.2.0 --target main --generate-notes`. The notes group pull
+   requests by label ([`.github/release.yml`](.github/release.yml)).
+3. **Check test**: _Deploy (Vercel)_ builds the release once and stages it as a production deployment without the domain
+   (`vercel deploy --prebuilt --prod --skip-domain`); the run summary and the `test` environment link to its URL.
+4. **Deploy production**: Actions → _Deploy (Vercel)_ → _Run workflow_ from `main`, version `vX.Y.Z`, or
+   `gh workflow run deploy-vercel.yaml --ref main -f version=v1.2.0`. It promotes that staged build to the production
+   domain without rebuilding. Running it with an older tag rolls back.
+
+One-time setup per project: run `vercel link`, then add the repository variables `VERCEL_ORG_ID` and `VERCEL_PROJECT_ID`
+(from `.vercel/project.json`) and the secret `VERCEL_TOKEN` (Vercel → Account Settings → Tokens). Environment variables
+live in the Vercel project; the workflow pulls the production ones.
+
 ## Commands for linting/fixing files
 
 - `npm run lint`: runs the shared Oxlint and Oxfmt checks

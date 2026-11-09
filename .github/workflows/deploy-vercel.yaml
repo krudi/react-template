@@ -1,0 +1,108 @@
+name: Deploy (Vercel)
+
+on:
+    release:
+        types: [published]
+    workflow_dispatch:
+        inputs:
+            version:
+                description: Release tag to run in production, e.g. v1.2.3 — an older tag rolls back
+                required: true
+                type: string
+
+concurrency:
+    group: deploy-vercel
+    cancel-in-progress: false
+
+permissions:
+    contents: read
+
+env:
+    VERCEL_ORG_ID: ${{ vars.VERCEL_ORG_ID }}
+    VERCEL_PROJECT_ID: ${{ vars.VERCEL_PROJECT_ID }}
+    VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+    VERCEL_CLI_VERSION: 65.11.0
+
+jobs:
+    stage:
+        if: github.event_name == 'release'
+        name: Stage ${{ github.event.release.tag_name }}
+        runs-on: ubuntu-latest
+        timeout-minutes: 20
+        environment:
+            name: test
+            url: ${{ steps.deploy.outputs.url }}
+
+        steps:
+            - name: Checkout release
+              uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10
+              with:
+                  ref: ${{ github.event.release.tag_name }}
+                  persist-credentials: false
+
+            - name: Set up Node.js
+              uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
+              with:
+                  cache: npm
+                  node-version-file: .nvmrc
+
+            - name: Set up npm and the Vercel CLI
+              run: |
+                  npm install --global "npm@$(node -p "require('./package.json').packageManager.split('@')[1]")"
+                  npm install --global "vercel@${VERCEL_CLI_VERSION}"
+
+            - name: Install dependencies
+              run: npm ci --no-audit --no-fund
+
+            - name: Pull production settings
+              run: vercel pull --yes --environment=production --token="$VERCEL_TOKEN"
+
+            - name: Build
+              run: vercel build --prod --token="$VERCEL_TOKEN"
+
+            - name: Deploy without assigning the production domain
+              id: deploy
+              env:
+                  VERSION: ${{ github.event.release.tag_name }}
+              run: |
+                  url="$(vercel deploy --prebuilt --prod --skip-domain --token="$VERCEL_TOKEN" \
+                    --meta release="$VERSION" --meta commit="$GITHUB_SHA")"
+                  echo "url=$url" >> "$GITHUB_OUTPUT"
+                  echo "Staged $VERSION at $url; promote it with the Deploy (Vercel) workflow." >> "$GITHUB_STEP_SUMMARY"
+
+    promote:
+        if: github.event_name == 'workflow_dispatch'
+        name: Promote ${{ inputs.version }}
+        runs-on: ubuntu-latest
+        timeout-minutes: 10
+        environment:
+            name: production
+            url: ${{ steps.find.outputs.url }}
+
+        steps:
+            - name: Find the staged deployment of the release
+              id: find
+              env:
+                  VERSION: ${{ inputs.version }}
+              run: |
+                  team=""
+                  if [[ "$VERCEL_ORG_ID" == team_* ]]; then
+                    team="&teamId=${VERCEL_ORG_ID}"
+                  fi
+                  url="$(curl -fsS -H "Authorization: Bearer ${VERCEL_TOKEN}" \
+                    "https://api.vercel.com/v7/deployments?projectId=${VERCEL_PROJECT_ID}&target=production&state=READY&limit=100${team}" |
+                    jq -r --arg version "$VERSION" 'first(.deployments[] | select(.meta.release == $version) | .url) // empty')"
+                  if [[ -z "$url" ]]; then
+                    echo "No ready deployment of $VERSION; publish the Release first." >&2
+                    exit 1
+                  fi
+                  echo "url=https://$url" >> "$GITHUB_OUTPUT"
+
+            - name: Promote to production
+              env:
+                  URL: ${{ steps.find.outputs.url }}
+                  VERSION: ${{ inputs.version }}
+              run: |
+                  npm install --global "vercel@${VERCEL_CLI_VERSION}"
+                  vercel promote "$URL" --yes --timeout=5m --token="$VERCEL_TOKEN"
+                  echo "Promoted $VERSION ($URL) to production." >> "$GITHUB_STEP_SUMMARY"

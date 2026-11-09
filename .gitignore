@@ -39,3 +39,6 @@ Thumbs.db
 *.der
 *.key
 *.pem
+
+# Vercel
+.vercel
