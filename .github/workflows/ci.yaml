@@ -1,4 +1,4 @@
-name: Knip
+name: CI
 
 on:
     push:
@@ -11,16 +11,16 @@ on:
             - reopened
 
 concurrency:
-    group: knip-${{ github.workflow }}-${{ github.ref }}
+    group: ci-${{ github.ref }}
     cancel-in-progress: true
 
 permissions:
     contents: read
 
 jobs:
-    knip:
+    ci:
         runs-on: ubuntu-latest
-        timeout-minutes: 10
+        timeout-minutes: 20
 
         steps:
             - name: Checkout repository
@@ -38,5 +38,24 @@ jobs:
             - name: Install dependencies
               run: npm ci --no-audit --no-fund
 
-            - name: Run knip
+            - name: Lint
+              run: npm run lint:ox
+
+            - name: Format
+              run: npm run format:ox:check
+
+            - name: Typecheck
+              run: |
+                  npm run typecheck:next
+                  npm run typecheck
+
+            - name: Knip
               run: npm run knip
+
+            - name: Build
+              run: npm run build
+              env:
+                  NEXT_PUBLIC_SITE_URL: http://localhost:3000
+                  BETTER_AUTH_URL: http://localhost:3000
+                  BETTER_AUTH_SECRET: ci-only-placeholder-secret-at-least-32-chars
+                  DATABASE_URL: postgres://postgres:postgres@react-template-db-not-configured.invalid:5432/app
