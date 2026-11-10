@@ -3,12 +3,6 @@ name: Deploy (Vercel)
 on:
     release:
         types: [published]
-    workflow_dispatch:
-        inputs:
-            version:
-                description: Release tag to run in production, e.g. v1.2.3 — an older tag rolls back
-                required: true
-                type: string
 
 concurrency:
     group: deploy-vercel
@@ -24,13 +18,12 @@ env:
     VERCEL_CLI_VERSION: 65.11.0
 
 jobs:
-    stage:
-        if: github.event_name == 'release'
-        name: Stage release
+    deploy:
+        name: Deploy to production
         runs-on: ubuntu-latest
         timeout-minutes: 20
         environment:
-            name: test
+            name: production
             url: ${{ steps.deploy.outputs.url }}
 
         steps:
@@ -60,49 +53,12 @@ jobs:
             - name: Build
               run: vercel build --prod --token="$VERCEL_TOKEN"
 
-            - name: Deploy without assigning the production domain
+            - name: Deploy
               id: deploy
               env:
                   VERSION: ${{ github.event.release.tag_name }}
               run: |
-                  url="$(vercel deploy --prebuilt --prod --skip-domain --token="$VERCEL_TOKEN" \
+                  url="$(vercel deploy --prebuilt --prod --token="$VERCEL_TOKEN" \
                     --meta release="$VERSION" --meta commit="$GITHUB_SHA")"
                   echo "url=$url" >> "$GITHUB_OUTPUT"
-                  echo "Staged $VERSION at $url; promote it with the Deploy (Vercel) workflow." >> "$GITHUB_STEP_SUMMARY"
-
-    promote:
-        if: github.event_name == 'workflow_dispatch'
-        name: Promote to production
-        runs-on: ubuntu-latest
-        timeout-minutes: 10
-        environment:
-            name: production
-            url: ${{ steps.find.outputs.url }}
-
-        steps:
-            - name: Find the staged deployment of the release
-              id: find
-              env:
-                  VERSION: ${{ inputs.version }}
-              run: |
-                  team=""
-                  if [[ "$VERCEL_ORG_ID" == team_* ]]; then
-                    team="&teamId=${VERCEL_ORG_ID}"
-                  fi
-                  url="$(curl -fsS -H "Authorization: Bearer ${VERCEL_TOKEN}" \
-                    "https://api.vercel.com/v7/deployments?projectId=${VERCEL_PROJECT_ID}&target=production&state=READY&limit=100${team}" |
-                    jq -r --arg version "$VERSION" 'first(.deployments[] | select(.meta.release == $version) | .url) // empty')"
-                  if [[ -z "$url" ]]; then
-                    echo "No ready deployment of $VERSION; publish the Release first." >&2
-                    exit 1
-                  fi
-                  echo "url=https://$url" >> "$GITHUB_OUTPUT"
-
-            - name: Promote to production
-              env:
-                  URL: ${{ steps.find.outputs.url }}
-                  VERSION: ${{ inputs.version }}
-              run: |
-                  npm install --global "vercel@${VERCEL_CLI_VERSION}"
-                  vercel promote "$URL" --yes --timeout=5m --token="$VERCEL_TOKEN"
-                  echo "Promoted $VERSION ($URL) to production." >> "$GITHUB_STEP_SUMMARY"
+                  echo "Deployed $VERSION to production ($url)." >> "$GITHUB_STEP_SUMMARY"
