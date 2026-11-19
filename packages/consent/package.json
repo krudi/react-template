@@ -1,7 +1,30 @@
 {
+    "$schema": "https://json.schemastore.org/package.json",
     "name": "@krudi/consent",
     "version": "0.1.0",
     "private": true,
+    "description": "Cookie consent banner, consent gate and Google Tag Manager with Google Consent Mode for Next.js.",
+    "keywords": [
+        "cookie-consent",
+        "gdpr",
+        "google-consent-mode",
+        "google-tag-manager",
+        "nextjs"
+    ],
+    "homepage": "https://github.com/krudi/react-template#readme",
+    "bugs": {
+        "url": "https://github.com/krudi/react-template/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/krudi/react-template.git"
+    },
+    "license": "MIT",
+    "author": {
+        "name": "krudi",
+        "email": "patryk.kudlik@gmail.com",
+        "url": "https://krudi.io"
+    },
     "type": "module",
     "exports": {
         ".": "./src/index.ts"
