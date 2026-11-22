@@ -18,7 +18,7 @@ import { siteUrl } from '@utils/site/site-url';
 import { betterAuth } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import { nextCookies } from 'better-auth/next-js';
-import { twoFactor } from 'better-auth/plugins';
+import { admin, organization, twoFactor } from 'better-auth/plugins';
 
 export const auth = betterAuth({
     secret: serverEnv.BETTER_AUTH_SECRET,
@@ -78,5 +78,5 @@ export const auth = betterAuth({
     hooks: {
         after: securityNotificationsHook,
     },
-    plugins: [twoFactor(), nextCookies()],
+    plugins: [twoFactor(), admin(), organization(), nextCookies()],
 });

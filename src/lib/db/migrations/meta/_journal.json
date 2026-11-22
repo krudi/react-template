@@ -15,6 +15,13 @@
       "when": 1791272741104,
       "tag": "0001_nebulous_ink",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1795345448097,
+      "tag": "0002_harsh_randall",
+      "breakpoints": true
     }
   ]
 }
