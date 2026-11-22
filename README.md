@@ -22,7 +22,9 @@ emails), a Mailpit SMTP server. Both are defined in `compose.yaml`.
 - `docker compose up -d --wait`: starts the `postgres` and `mailpit` containers
 - `npm run db:migrate`: applies pending Drizzle migrations (`drizzle-kit migrate`)
 - `npm run db:generate`: generates new Drizzle migrations from schema changes (`drizzle-kit generate`)
-- `NODE_ENV=development npm run db:seed`: creates the verified local account `user@mail.com`
+- `NODE_ENV=development npm run db:seed`: creates the verified local accounts `admin@mail.com` (platform admin),
+  `owner@mail.com` (owner of `acme` and of the empty `globex`) and `user@mail.com` (member of `acme`); passwords are in
+  `src/lib/db/seeders/user.ts`
 - `npm run auth:generate`: regenerates the Drizzle auth schema from the Better Auth config
 - `docker compose down`: stops the local containers
 

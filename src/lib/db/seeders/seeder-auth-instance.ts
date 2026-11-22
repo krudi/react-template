@@ -4,6 +4,7 @@ import { db } from '@lib/db';
 import * as schema from '@lib/db/schemas';
 import { betterAuth } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
+import { admin, organization } from 'better-auth/plugins';
 
 export const seederAuth = betterAuth({
     secret: serverEnv.BETTER_AUTH_SECRET,
@@ -21,4 +22,5 @@ export const seederAuth = betterAuth({
             },
         },
     },
+    plugins: [admin(), organization()],
 });
