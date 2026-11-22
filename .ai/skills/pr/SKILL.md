@@ -1,6 +1,8 @@
 ---
 name: pr
-description: Create a pull request for the current branch with a conventional title and structured React Template test plan.
+description:
+    Create a pull request for the current branch only when the user explicitly asks. Uses a conventional title and fills
+    the repository's pull request template.
 ---
 
 # Pull Request
@@ -11,18 +13,16 @@ description: Create a pull request for the current branch with a conventional ti
 2. Check if the branch tracks a remote: `git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null`
 3. Push if needed: `git push -u origin <branch>`
 4. Draft the PR:
-    - **Title**: `type(scope): description` — conventional commit format, <= 70 chars
-    - **Summary**: 2–3 bullets on what changed and why
-    - **Test plan**: checklist of the commands relevant to the change
+   - **Title**: `type(scope): description` — conventional commit format, ≤ 70 chars
+   - **Body**: follow `.github/PULL_REQUEST_TEMPLATE.md` section by section — tick the matching type, fill
+     **Problem** and **Solution** with what changed and why, list real related links or drop the placeholder
+     `Example link`, and tick the checklist only when true
+   - Add the commands from the AGENTS.md verification table rows that match the diff, with their results
 5. Create: `gh pr create --title "..." --body "$(cat <<'EOF' ... EOF)"`
-
-## Test plan options
-
-List the commands from the AGENTS.md verification table rows that match the diff.
 
 ## Never
 
-- Force-push unless explicitly asked
+- Force-push (`--force`)
 - Use a title that doesn't follow conventional commit format
 - Create a PR from `main` or `master`
-- Include secrets, `.env` contents, or local-only environment files
+- Include secrets, `.env` contents, credentials or client data
