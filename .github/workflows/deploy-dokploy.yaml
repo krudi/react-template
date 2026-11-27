@@ -1,0 +1,311 @@
+name: Deploy (Dokploy)
+
+run-name: Release ${{ github.event.release.tag_name }} to production
+
+on:
+    release:
+        types: [published]
+
+permissions:
+    contents: read
+
+jobs:
+    resolve:
+        name: Resolve version
+        runs-on: ubuntu-latest
+        timeout-minutes: 60
+        permissions:
+            contents: read
+            actions: read
+            deployments: read
+        outputs:
+            version: ${{ steps.release.outputs.version }}
+            sha: ${{ steps.release.outputs.sha }}
+            environment: ${{ steps.release.outputs.environment }}
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+              with:
+                  fetch-depth: 0
+
+            - name: Resolve the version, its commit and the environment
+              id: release
+              shell: bash
+              env:
+                  RELEASE_TAG: ${{ github.event.release.tag_name }}
+              run: |
+                  set -euo pipefail
+
+                  version="$RELEASE_TAG"
+                  environment="production"
+                  if [[ ! "$version" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]; then
+                    echo "::error::Version must be vX.Y.Z or vX.Y.Z-suffix (e.g. v1.2.3, v1.3.0-rc.1), got '$version'."
+                    exit 1
+                  fi
+                  git fetch --force origin "+refs/tags/$version:refs/tags/$version" 2>/dev/null || true
+                  if ! sha="$(git rev-parse --verify --quiet "refs/tags/$version^{commit}")"; then
+                    echo "::error::Tag $version does not exist."
+                    exit 1
+                  fi
+
+                  {
+                    echo "version=$version"
+                    echo "sha=$sha"
+                    echo "environment=$environment"
+                  } >> "$GITHUB_OUTPUT"
+                  echo "$version is $sha; environment: $environment."
+
+            - name: Verify the release commit is on main
+              shell: bash
+              env:
+                  SHA: ${{ steps.release.outputs.sha }}
+                  VERSION: ${{ steps.release.outputs.version }}
+              run: |
+                  set -euo pipefail
+                  git fetch origin '+refs/heads/main:refs/remotes/origin/main'
+
+                  if ! git merge-base --is-ancestor "$SHA" origin/main; then
+                    echo "::error::$VERSION points at $SHA, which is not on main. Publish the Release with target main."
+                    exit 1
+                  fi
+
+            - name: Verify the checks succeeded for the commit
+              shell: bash
+              env:
+                  GH_TOKEN: ${{ github.token }}
+                  SHA: ${{ steps.release.outputs.sha }}
+              run: |
+                  set -euo pipefail
+
+                  runs() {
+                    gh run list --repo "$GITHUB_REPOSITORY" --workflow ci.yaml --commit "$SHA" --limit 20 \
+                      --json databaseId,status,conclusion,workflowName
+                  }
+
+                  if [[ "$(runs | jq length)" -eq 0 ]]; then
+                    echo "::error::CI never ran for $SHA. Push it (or open a pull request) and wait for CI first."
+                    exit 1
+                  fi
+
+                  for id in $(runs | jq -r '.[] | select(.status != "completed") | .databaseId'); do
+                    echo "Check run $id for $SHA is still running; waiting for it."
+                    gh run watch "$id" --repo "$GITHUB_REPOSITORY" --interval 30 > /dev/null || true
+                  done
+
+                  failed="$(runs | jq -r '[.[] | select(.conclusion != "success" and .conclusion != "skipped") | .workflowName] | unique | join(", ")')"
+                  if [[ -n "$failed" ]]; then
+                    echo "::error::$SHA has failed checks: $failed."
+                    exit 1
+                  fi
+
+                  echo "Every check succeeded for $SHA."
+
+    image:
+        name: Build image
+        needs: resolve
+        runs-on: ubuntu-latest
+        timeout-minutes: 30
+        environment:
+            name: ${{ needs.resolve.outputs.environment }}
+            deployment: false
+        permissions:
+            contents: read
+            packages: write
+        steps:
+            - name: Checkout the release
+              uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+              with:
+                  ref: ${{ needs.resolve.outputs.sha }}
+
+            - name: Set up Docker Buildx
+              uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f
+
+            - name: Log in to GHCR
+              shell: bash
+              env:
+                  GH_TOKEN: ${{ github.token }}
+              run: printf '%s' "$GH_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+
+            - name: Resolve image name
+              id: image
+              shell: bash
+              env:
+                  SHA: ${{ needs.resolve.outputs.sha }}
+                  APP_URL: ${{ vars.APP_URL }}
+                  NEXT_PUBLIC_GTM_ID: ${{ vars.NEXT_PUBLIC_GTM_ID }}
+              run: |
+                  set -euo pipefail
+
+                  if [[ ! "$APP_URL" =~ ^https?:// ]]; then
+                    echo "::error::Environment variable APP_URL must be the public base URL, got '${APP_URL}'."
+                    exit 1
+                  fi
+
+                  public="$(printf '%s|%s' "$APP_URL" "$NEXT_PUBLIC_GTM_ID" | sha256sum | cut -c1-12)"
+                  name="ghcr.io/${GITHUB_REPOSITORY,,}:$SHA-$public"
+                  echo "name=$name" >> "$GITHUB_OUTPUT"
+                  if docker buildx imagetools inspect "$name" > /dev/null 2>&1; then
+                    echo "exists=true" >> "$GITHUB_OUTPUT"
+                    echo "$name already exists; skipping the build."
+                  fi
+
+            - name: Build and push the image
+              if: steps.image.outputs.exists != 'true'
+              uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8
+              with:
+                  context: .
+                  file: infrastructure/Dockerfile
+                  cache-from: type=gha
+                  cache-to: type=gha,mode=max
+                  build-args: |
+                      RELEASE_SHA=${{ needs.resolve.outputs.sha }}
+                      NEXT_PUBLIC_SITE_URL=${{ vars.APP_URL }}
+                      NEXT_PUBLIC_GTM_ID=${{ vars.NEXT_PUBLIC_GTM_ID }}
+                  push: true
+                  tags: ${{ steps.image.outputs.name }}
+
+    deploy:
+        name: Deploy
+        needs: [resolve, image]
+        runs-on: ubuntu-latest
+        timeout-minutes: 30
+        concurrency:
+            group: deploy-${{ needs.resolve.outputs.environment }}
+            cancel-in-progress: false
+        environment:
+            name: ${{ needs.resolve.outputs.environment }}
+            deployment: false
+        permissions:
+            contents: read
+            packages: write
+            deployments: write
+        env:
+            ENVIRONMENT: ${{ needs.resolve.outputs.environment }}
+            VERSION: ${{ needs.resolve.outputs.version }}
+            SHA: ${{ needs.resolve.outputs.sha }}
+            GH_TOKEN: ${{ github.token }}
+            APP_URL: ${{ vars.APP_URL }}
+            NEXT_PUBLIC_GTM_ID: ${{ vars.NEXT_PUBLIC_GTM_ID }}
+            READY_TIMEOUT_SECONDS: 600
+        steps:
+            - name: Check the environment configuration
+              shell: bash
+              run: |
+                  set -euo pipefail
+
+                  if [[ -z "$APP_URL" ]]; then
+                    echo "::error::Environment variable APP_URL is not set; the deploy cannot verify the release."
+                    exit 1
+                  fi
+
+            - name: Record the deployment
+              id: record
+              shell: bash
+              run: |
+                  set -euo pipefail
+
+                  id="$(jq -n \
+                    --arg ref "$SHA" \
+                    --arg environment "$ENVIRONMENT" \
+                    --arg repository "${GITHUB_REPOSITORY##*/}" \
+                    '{ref: $ref, environment: $environment, auto_merge: false, required_contexts: [],
+                      description: "\($repository) \($ref)", production_environment: ($environment == "production")}' \
+                    | gh api "repos/$GITHUB_REPOSITORY/deployments" --input - --jq '.id')"
+
+                  gh api "repos/$GITHUB_REPOSITORY/deployments/$id/statuses" \
+                    -f state=in_progress \
+                    -f log_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" \
+                    > /dev/null
+
+                  echo "id=$id" >> "$GITHUB_OUTPUT"
+
+            - name: Point the environment tag at the release
+              shell: bash
+              run: |
+                  set -euo pipefail
+                  printf '%s' "$GH_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin > /dev/null
+
+                  image="ghcr.io/${GITHUB_REPOSITORY,,}"
+                  public="$(printf '%s|%s' "$APP_URL" "$NEXT_PUBLIC_GTM_ID" | sha256sum | cut -c1-12)"
+                  docker buildx imagetools create --tag "$image:$ENVIRONMENT" "$image:$SHA-$public"
+                  echo "Moved $image:$ENVIRONMENT to $SHA-$public ($VERSION)."
+
+            - name: Trigger Dokploy deployment
+              shell: bash
+              env:
+                  DOKPLOY_URL: ${{ secrets.DOKPLOY_URL }}
+                  DOKPLOY_API_KEY: ${{ secrets.DOKPLOY_API_KEY }}
+                  DOKPLOY_APPLICATION_ID: ${{ secrets.DOKPLOY_APPLICATION_ID }}
+              run: |
+                  set -euo pipefail
+
+                  for name in DOKPLOY_URL DOKPLOY_API_KEY DOKPLOY_APPLICATION_ID; do
+                    if [[ -z "${!name:-}" ]]; then
+                      echo "::error::Environment secret $name is required."
+                      exit 1
+                    fi
+                  done
+
+                  payload="$(jq -n --arg applicationId "$DOKPLOY_APPLICATION_ID" '{applicationId: $applicationId}')"
+
+                  status="$(curl -sS -o /tmp/dokploy-response.json -w '%{http_code}' \
+                    --connect-timeout 10 --max-time 60 --location \
+                    --retry 3 --retry-all-errors --retry-delay 5 \
+                    -X POST "${DOKPLOY_URL%/}/api/application.deploy" \
+                    -H "accept: application/json" \
+                    -H "x-api-key: ${DOKPLOY_API_KEY}" \
+                    -H "Content-Type: application/json" \
+                    -d "$payload")"
+
+                  if [[ "$status" -lt 200 || "$status" -ge 300 ]]; then
+                    echo "::error::Dokploy refused the deployment with HTTP $status."
+                    cat /tmp/dokploy-response.json
+                    exit 1
+                  fi
+
+                  echo "Dokploy accepted the $ENVIRONMENT deployment of $VERSION; waiting for the release to serve."
+
+            - name: Wait for the release to serve
+              shell: bash
+              run: |
+                  set -euo pipefail
+
+                  url="${APP_URL%/}/healthz"
+                  deadline=$((SECONDS + READY_TIMEOUT_SECONDS))
+                  release=""
+
+                  while (( SECONDS < deadline )); do
+                    release="$(curl -sS --max-time 10 "$url" 2> /dev/null | tr -d '[:space:]' || true)"
+
+                    if [[ "$release" == "$SHA" ]]; then
+                      echo "$url serves $SHA ($VERSION)."
+                      exit 0
+                    fi
+
+                    sleep 10
+                  done
+
+                  echo "::error::$url did not serve $SHA within ${READY_TIMEOUT_SECONDS}s (last: '${release:-none}'). Check the container logs."
+                  exit 1
+
+            - name: Report the deployment result
+              if: always() && steps.record.outputs.id != ''
+              shell: bash
+              env:
+                  DEPLOYMENT_ID: ${{ steps.record.outputs.id }}
+                  JOB_STATUS: ${{ job.status }}
+              run: |
+                  set -euo pipefail
+
+                  case "$JOB_STATUS" in
+                    success) state=success ;;
+                    failure) state=failure ;;
+                    *) state=error ;;
+                  esac
+
+                  gh api "repos/$GITHUB_REPOSITORY/deployments/$DEPLOYMENT_ID/statuses" \
+                    -f state="$state" \
+                    -f environment_url="$APP_URL" \
+                    -f log_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" \
+                    -f description="$VERSION ($SHA)" \
+                    > /dev/null

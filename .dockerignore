@@ -1,0 +1,35 @@
+# Docker files
+.git
+.github
+infrastructure
+compose.yaml
+README.md
+AGENTS.md
+CLAUDE.md
+
+# Agent tooling files
+.agents
+.ai
+.claude
+skills-lock.json
+
+# Environment files
+*.env
+.env*
+!.env*.example
+
+# Dependencies files
+node_modules
+packages/*/node_modules
+
+# Build output files
+.next
+next-env.d.ts
+
+# Tooling cache files
+.cache
+*.tsbuildinfo
+
+# OS files
+.DS_Store
+Thumbs.db

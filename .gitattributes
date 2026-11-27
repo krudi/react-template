@@ -60,7 +60,6 @@
 .env.*           export-ignore
 .next/           export-ignore
 .turbo/          export-ignore
-.vercel/         export-ignore
 node_modules/    export-ignore
 dist/            export-ignore
 build/           export-ignore
